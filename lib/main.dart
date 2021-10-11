@@ -3,10 +3,10 @@ import 'package:myfan/models/hexToColor_models.dart';
 import 'package:myfan/screen/home_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(Myfan());
 }
 
-class MyApp extends StatelessWidget {
+class Myfan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -1,7 +1,6 @@
 library globals;
 
 import 'package:flutter/material.dart';
-import 'package:myfan/models/hexToColor_models.dart';
 
 // ignore: non_constant_identifier_names
 class Palette {

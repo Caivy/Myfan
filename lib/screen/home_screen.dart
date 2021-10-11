@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myfan/global.dart';
+import 'package:myfan/widgets/all_widgets.dart';
 import 'package:myfan/widgets/bottomappbar_widgets.dart';
 
 // ignore: camel_case_types
@@ -17,7 +18,7 @@ class _homeScreenState extends State<homeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Palette.WHITE,
         title: Row(
           mainAxisAlignment:
               MainAxisAlignment.spaceBetween,
@@ -28,11 +29,11 @@ class _homeScreenState extends State<homeScreen> {
                   fontSize: 22.0,
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
-                  color: Colors.black),
+                  color: Palette.BLACK),
             ),
             IconButton(
               icon: Icon(Icons.search_outlined),
-              color: Colors.black,
+              color: Palette.BLACK,
               iconSize: 28,
               onPressed: () {},
             )
@@ -40,63 +41,7 @@ class _homeScreenState extends State<homeScreen> {
         ),
         elevation: 0.0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(14.0),
-        child: Row(
-          children: [
-            Row(
-              children: [
-                Container(
-                    height: 27,
-                    width: 40,
-                    decoration: BoxDecoration(
-                        color: Palette
-                            .secondaryColor,
-                        borderRadius:
-                            BorderRadius.circular(
-                                20.0)),
-                    child: Center(
-                      child: Text(
-                        "ALL",
-                        style: TextStyle(
-                            fontWeight:
-                                FontWeight.bold,
-                            fontFamily: "Roboto",
-                            color: Colors.black),
-                      ),
-                    )),
-                Padding(
-                    padding: EdgeInsets.all(8.0)),
-                Container(
-                  height: 28,
-                  width: 28,
-                  decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius:
-                          BorderRadius.circular(
-                              20.0)),
-                  child: IconButton(
-                    padding: EdgeInsets.zero,
-                    icon: Icon(Icons.edit),
-                    color: Colors.black,
-                    iconSize: 20,
-                    onPressed: () {},
-                  ),
-                ),
-                Padding(
-                    // NEED TO CHANGE IT
-                    padding: EdgeInsets.only(
-                        right: 250.0)),
-                SizedBox(
-                    child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                            Icons.menu_outlined)))
-              ],
-            ),
-          ],
-        ),
-      ),
+      body: allWidgets(),
       bottomNavigationBar: bottomAppBar(),
     );
   }
