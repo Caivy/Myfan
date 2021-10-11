@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myfan/global.dart';
+import 'package:myfan/config/global.dart';
 import 'package:myfan/widgets/all_widgets.dart';
 import 'package:myfan/widgets/bottomappbar_widgets.dart';
 

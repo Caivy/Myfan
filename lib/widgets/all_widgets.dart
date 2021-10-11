@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../global.dart';
+import '../config/global.dart';
 
 // ignore: camel_case_types
 class allWidgets extends StatelessWidget {
@@ -12,56 +12,48 @@ class allWidgets extends StatelessWidget {
       padding: const EdgeInsets.all(14.0),
       child: Row(
         children: [
-          Row(
-            children: [
-              Container(
-                  height: 27,
-                  width: 40,
-                  decoration: BoxDecoration(
-                      color:
-                          Palette.secondaryColor,
-                      borderRadius:
-                          BorderRadius.circular(
-                              20.0)),
-                  child: Center(
-                    child: Text(
-                      "ALL",
-                      style: TextStyle(
-                          fontWeight:
-                              FontWeight.bold,
-                          fontFamily: "Roboto",
-                          color: Colors.black),
-                    ),
-                  )),
-              Padding(
-                  padding: EdgeInsets.all(8.0)),
-              Container(
-                height: 28,
-                width: 28,
-                decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius:
-                        BorderRadius.circular(
-                            20.0)),
-                child: IconButton(
-                  padding: EdgeInsets.zero,
-                  icon: Icon(Icons.edit),
-                  color: Colors.black,
-                  iconSize: 20,
-                  onPressed: () {},
+          Container(
+              height: 27,
+              width: 40,
+              decoration: BoxDecoration(
+                  color: Palette.secondaryColor,
+                  borderRadius:
+                      BorderRadius.circular(
+                          20.0)),
+              child: Center(
+                child: Text(
+                  "ALL",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Roboto",
+                      color: Colors.black),
                 ),
-              ),
-              Padding(
-                  // NEED TO CHANGE IT
-                  padding: EdgeInsets.only(
-                      right: 250.0)),
-              SizedBox(
-                  child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                          Icons.menu_outlined)))
-            ],
+              )),
+          Padding(padding: EdgeInsets.all(8.0)),
+          Container(
+            height: 28,
+            width: 28,
+            decoration: BoxDecoration(
+                color: Colors.grey,
+                borderRadius:
+                    BorderRadius.circular(20.0)),
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              icon: Icon(Icons.edit),
+              color: Colors.black,
+              iconSize: 20,
+              onPressed: () {},
+            ),
           ),
+          Padding(
+              // NEED TO CHANGE IT
+              padding:
+                  EdgeInsets.only(right: 250.0)),
+          SizedBox(
+              child: IconButton(
+                  onPressed: () {},
+                  icon:
+                      Icon(Icons.menu_outlined)))
         ],
       ),
     );
