@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:myfan/models/hexToColor_models.dart';
 
 // ignore: non_constant_identifier_names
-Color PRIMARY_COLOR =
-    Color(hexStringToColor("#09333F"));
-// ignore: non_constant_identifier_names
-Color SECONDARY_COLOR = Color(0xFF26F7B2);
+class Palette {
+  static const Color PrimaryColor =
+      Color(0xFF09333f);
+  static const Color secondaryColor =
+      Color(0xFF26f7b2);
+  static const Color BLACK = Color(0xFF000000);
+  static const Color WHITE = Color(0xFFffffff);
+}

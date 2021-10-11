@@ -50,7 +50,8 @@ class _homeScreenState extends State<homeScreen> {
                     height: 27,
                     width: 40,
                     decoration: BoxDecoration(
-                        color: SECONDARY_COLOR,
+                        color: Palette
+                            .secondaryColor,
                         borderRadius:
                             BorderRadius.circular(
                                 20.0)),
