@@ -12,9 +12,6 @@ class Myfan extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Myfan',
-      theme: ThemeData(
-          primaryColor:
-              hexStringToColor("#09333f")),
       home: homeScreen(),
     );
   }

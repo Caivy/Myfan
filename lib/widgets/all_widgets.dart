@@ -11,44 +11,54 @@ class allWidgets extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(14.0),
       child: Row(
+        mainAxisAlignment:
+            MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-              height: 27,
-              width: 40,
-              decoration: BoxDecoration(
-                  color: Palette.secondaryColor,
-                  borderRadius:
-                      BorderRadius.circular(
-                          20.0)),
-              child: Center(
-                child: Text(
-                  "ALL",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "Roboto",
-                      color: Colors.black),
+          Row(
+            children: [
+              Container(
+                  height: 27,
+                  width: 40,
+                  decoration: BoxDecoration(
+                      color:
+                          Palette.secondaryColor,
+                      borderRadius:
+                          BorderRadius.circular(
+                              20.0)),
+                  child: Center(
+                    child: Text(
+                      "ALL",
+                      style: TextStyle(
+                          fontWeight:
+                              FontWeight.bold,
+                          fontFamily: "Roboto",
+                          color: Colors.black),
+                    ),
+                  )),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 8.0),
+                child: Container(
+                  height: 28,
+                  width: 28,
+                  decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius:
+                          BorderRadius.circular(
+                              20.0)),
+                  child: IconButton(
+                    padding: EdgeInsets.zero,
+                    icon: Icon(Icons.edit),
+                    color: Colors.black,
+                    iconSize: 20,
+                    onPressed: () {},
+                  ),
                 ),
-              )),
-          Padding(padding: EdgeInsets.all(8.0)),
-          Container(
-            height: 28,
-            width: 28,
-            decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius:
-                    BorderRadius.circular(20.0)),
-            child: IconButton(
-              padding: EdgeInsets.zero,
-              icon: Icon(Icons.edit),
-              color: Colors.black,
-              iconSize: 20,
-              onPressed: () {},
-            ),
+              ),
+            ],
           ),
-          Padding(
-              // NEED TO CHANGE IT
-              padding:
-                  EdgeInsets.only(right: 250.0)),
+          // Padding(padding: EdgeInsets.all(8.0)),
+
           SizedBox(
               child: IconButton(
                   onPressed: () {},
