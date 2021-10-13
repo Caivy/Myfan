@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:myfan/models/hexToColor_models.dart';
 import 'package:myfan/screen/home_screen.dart';
+import 'package:myfan/screen/splash_screen.dart';
 
 void main() {
   runApp(Myfan());
@@ -13,7 +14,7 @@ class Myfan extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Myfan',
-      home: homeScreen(),
+      home: Splash(),
     );
   }
 }
