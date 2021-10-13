@@ -1,13 +1,11 @@
 import 'package:meta/meta.dart';
 
 class User {
-  String name;
-  int age;
-  String imageUrl;
+  final String name;
+  final String imageUrl;
 
   User({
     required this.name,
-    required this.age,
     required this.imageUrl,
   });
 }

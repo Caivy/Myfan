@@ -9,6 +9,7 @@ class Post {
   final String imageUrl;
   final int likes;
   final int comments;
+
   Post({
     required this.user,
     required this.caption,

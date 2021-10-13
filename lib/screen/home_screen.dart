@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myfan/config/global.dart';
 import 'package:myfan/widgets/all_widgets.dart';
 import 'package:myfan/widgets/bottomappbar_widgets.dart';
+import 'package:myfan/widgets/create_post_widgets.dart';
 
 // ignore: camel_case_types
 class homeScreen extends StatefulWidget {
@@ -41,7 +42,12 @@ class _homeScreenState extends State<homeScreen> {
         ),
         elevation: 0.0,
       ),
-      body: allWidgets(),
+      body: Column(
+        children: [
+          createPost(),
+          allWidgets(),
+        ],
+      ),
       bottomNavigationBar: bottomAppBar(),
     );
   }
