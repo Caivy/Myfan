@@ -11,9 +11,7 @@ class _PostsState extends State<Posts> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[
-        Container(height: ,)
-      ],
+      children: <Widget>[Container()],
     );
   }
 }
