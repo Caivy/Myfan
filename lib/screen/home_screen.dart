@@ -46,6 +46,7 @@ class _homeScreenState extends State<homeScreen> {
         children: [
           createPost(),
           allWidgets(),
+          
         ],
       ),
       bottomNavigationBar: bottomAppBar(),

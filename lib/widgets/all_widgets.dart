@@ -58,7 +58,6 @@ class allWidgets extends StatelessWidget {
             ],
           ),
           // Padding(padding: EdgeInsets.all(8.0)),
-
           SizedBox(
               child: IconButton(
                   onPressed: () {},
