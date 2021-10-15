@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "182750268963",
+    "project_id": "myfan-app",
+    "storage_bucket": "myfan-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182750268963:android:ae93ca94357774b3d6eb96",
+        "android_client_info": {
+          "package_name": "com.econoapps.myfan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182750268963-3feo0t3v3h8gbt46r18it26jjun7uk46.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.econoapps.myfan",
+            "certificate_hash": "5e4304b632fb5d57aeafdf4f66d744f88423c1dc"
+          }
+        },
+        {
+          "client_id": "182750268963-9selaja6jjjgvffi7k5r11a9fn193rjq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANT5m8pMGyP3MELy0YRopy7l8EpkAgMJA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182750268963-9selaja6jjjgvffi7k5r11a9fn193rjq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

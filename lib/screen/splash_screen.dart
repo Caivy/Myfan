@@ -17,10 +17,13 @@ class _SplashState extends State<Splash> {
         children: [
           Align(
             alignment: Alignment.topCenter,
-            heightFactor: 10.0,
-            child: Image.asset(
-                "assets/images/Logo1.png"),
-          )
+            child: Padding(
+              padding:
+                  const EdgeInsets.only(top: 10),
+              child: Image.asset(
+                  "assets/images/Logo1.png"),
+            ),
+          ),
         ],
       ),
     );

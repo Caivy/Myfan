@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-// ignore: unused_import
+import 'package:firebase_core/firebase_core.dart';
+import 'package:myfan/config/global.dart';
 import 'package:myfan/models/hexToColor_models.dart';
 import 'package:myfan/screen/home_screen.dart';
 import 'package:myfan/screen/splash_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(Myfan());
 }
 
@@ -14,7 +17,7 @@ class Myfan extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Myfan',
-      home: Splash(),
+      home: homeScreen(),
     );
   }
 }
