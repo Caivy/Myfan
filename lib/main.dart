@@ -5,9 +5,9 @@ import 'package:myfan/models/hexToColor_models.dart';
 import 'package:myfan/screen/home_screen.dart';
 import 'package:myfan/screen/splash_screen.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+void main() {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
   runApp(Myfan());
 }
 
@@ -17,7 +17,7 @@ class Myfan extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Myfan',
-      home: homeScreen(),
+      home: Splash(),
     );
   }
 }
