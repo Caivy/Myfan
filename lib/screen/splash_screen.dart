@@ -11,20 +11,33 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
+    final deviceHeight =
+        MediaQuery.of(context).size.height;
+    final deviceWidth =
+        MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Palette.PrimaryColor,
-      body: Column(
-        children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding:
-                  const EdgeInsets.only(top: 10),
-              child: Image.asset(
-                  "assets/images/Logo1.png"),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Container(
+              height: deviceHeight * 0.30,
+              width: double.infinity,
+              alignment: Alignment.center,
+              child: FittedBox(
+                child: Image.asset(
+                  'assets/Logo1.png',
+                  // width: 760,
+                  // height: 742,
+                ),
+              ),
             ),
-          ),
-        ],
+            Container(
+              height: deviceHeight * 0.65,
+              width: double.infinity,
+            ),
+          ],
+        ),
       ),
     );
   }
