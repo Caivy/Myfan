@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myfan/config/global.dart';
 import 'package:myfan/models/beziercontainer.dart';
 import 'package:myfan/screen/login_screen.dart';
 
@@ -15,33 +16,6 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  Widget _backButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Container(
-        padding:
-            EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(
-                  left: 0, top: 10, bottom: 10),
-              child: Icon(
-                  Icons.keyboard_arrow_left,
-                  color: Colors.black),
-            ),
-            Text('Back',
-                style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500))
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget _entryField(String title,
       {bool isPassword = false}) {
     return Container(
@@ -50,18 +24,22 @@ class _SignUpPageState extends State<SignUpPage> {
         crossAxisAlignment:
             CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            title,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15),
-          ),
+          Text(title,
+              style: GoogleFonts.roboto(
+                  fontWeight: FontWeight.bold,
+                  color: Palette.WHITE,
+                  fontSize: 15)),
           SizedBox(
             height: 10,
           ),
           TextField(
               obscureText: isPassword,
               decoration: InputDecoration(
+                  // border: OutlineInputBorder(
+                  //     borderRadius:
+                  //         BorderRadius.all(
+                  //             Radius.circular(
+                  //                 2))),
                   border: InputBorder.none,
                   fillColor: Color(0xfff3f3f4),
                   filled: true))
@@ -78,20 +56,7 @@ class _SignUpPageState extends State<SignUpPage> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(
               Radius.circular(5)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.grey.shade200,
-                offset: Offset(2, 4),
-                blurRadius: 5,
-                spreadRadius: 2)
-          ],
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-                Color(0xfffbb448),
-                Color(0xfff7892b)
-              ])),
+          color: Palette.secondaryColor),
       child: Text(
         'Register Now',
         style: TextStyle(
@@ -120,19 +85,18 @@ class _SignUpPageState extends State<SignUpPage> {
           children: <Widget>[
             Text(
               'Already have an account ?',
-              style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600),
+              style: GoogleFonts.roboto(
+                  color: Palette.WHITE,
+                  fontSize: 13),
             ),
             SizedBox(
               width: 10,
             ),
             Text(
               'Login',
-              style: TextStyle(
-                  color: Color(0xfff79c4f),
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600),
+              style: GoogleFonts.roboto(
+                  color: Palette.secondaryColor,
+                  fontSize: 13),
             ),
           ],
         ),
@@ -144,22 +108,16 @@ class _SignUpPageState extends State<SignUpPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'd',
+          text: 'MY',
           style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.w700,
               color: Color(0xffe46b10)),
           children: [
             TextSpan(
-              text: 'ev',
+              text: 'FAN',
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 30),
-            ),
-            TextSpan(
-              text: 'rnz',
-              style: TextStyle(
-                  color: Color(0xffe46b10),
                   fontSize: 30),
             ),
           ]),
@@ -170,7 +128,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Column(
       children: <Widget>[
         _entryField("Username"),
-        _entryField("Email id"),
+        _entryField("Phone Number"),
         _entryField("Password", isPassword: true),
       ],
     );
@@ -181,6 +139,7 @@ class _SignUpPageState extends State<SignUpPage> {
     final height =
         MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Palette.PrimaryColor,
       body: Container(
         height: height,
         child: Stack(
@@ -207,7 +166,12 @@ class _SignUpPageState extends State<SignUpPage> {
                       MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: height * .2),
-                    _title(),
+                    Text("REGISTER",
+                        style: GoogleFonts.ubuntu(
+                            color: Palette.WHITE,
+                            fontSize: 24,
+                            fontWeight:
+                                FontWeight.bold)),
                     SizedBox(
                       height: 50,
                     ),
@@ -223,10 +187,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
             ),
-            Positioned(
-                top: 40,
-                left: 0,
-                child: _backButton()),
           ],
         ),
       ),

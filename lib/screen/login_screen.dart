@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myfan/config/global.dart';
 import 'package:myfan/models/beziercontainer.dart';
-import 'package:myfan/screen/home_screen.dart';
+// import 'package:myfan/screen/home_screen.dart';
 import 'package:myfan/screen/register_screen.dart';
 
 class LoginPage extends StatefulWidget {
@@ -84,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
               Radius.circular(5)),
           color: Palette.secondaryColor),
       child: Text(
-        'Login',
+        'LOGIN',
         style: GoogleFonts.roboto(
             color: Palette.WHITE, fontSize: 24),
       ),
@@ -206,19 +205,18 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             Text(
               'Don\'t have an account ?',
-              style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600),
+              style: GoogleFonts.roboto(
+                  color: Palette.WHITE,
+                  fontSize: 13),
             ),
             SizedBox(
               width: 10,
             ),
             Text(
               'Register',
-              style: TextStyle(
-                  color: Color(0xfff79c4f),
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600),
+              style: GoogleFonts.roboto(
+                  color: Palette.secondaryColor,
+                  fontSize: 13),
             ),
           ],
         ),
@@ -255,7 +253,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField("Email id"),
+        _entryField("Phone Number"),
         _entryField("Password", isPassword: true),
       ],
     );
