@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:myfan/config/global.dart';
-import 'package:myfan/models/hexToColor_models.dart';
 import 'package:myfan/screen/home_screen.dart';
-import 'package:myfan/screen/splash_screen.dart';
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:myfan/config/global.dart';
+// import 'package:myfan/models/hexToColor_models.dart';
+// import 'package:myfan/screen/home_screen.dart';
+import 'package:myfan/screen/login_screen.dart';
 
 void main() {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +18,7 @@ class Myfan extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Myfan',
-      home: Splash(),
+      home: LoginPage(),
     );
   }
 }
