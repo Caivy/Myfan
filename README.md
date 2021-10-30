@@ -1,4 +1,4 @@
-# myfan_app
+# Myfan
 
 A new Flutter project.
 
