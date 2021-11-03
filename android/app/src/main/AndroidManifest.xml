@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.myfan_app">
+    package="com.example.myfan">
    <application
-        android:label="myfan_app"
+        android:label="myfan"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

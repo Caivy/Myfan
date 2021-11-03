@@ -4,6 +4,7 @@ import 'package:myfan/config/global.dart';
 import 'package:myfan/models/beziercontainer.dart';
 // import 'package:myfan/screen/home_screen.dart';
 import 'package:myfan/screen/register_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key, this.title})
@@ -17,61 +18,40 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // Widget _backButton() {
-  //   return InkWell(
-  //     onTap: () {
-  //       Navigator.pop(context);
-  //     },
-  //     child: Container(
-  //       padding:
-  //           EdgeInsets.symmetric(horizontal: 10),
-  //       child: Row(
-  //         children: <Widget>[
-  //           Container(
-  //             padding: EdgeInsets.only(
-  //                 left: 0, top: 10, bottom: 10),
-  //             child: Icon(
-  //                 Icons.keyboard_arrow_left,
-  //                 color: Colors.black),
-  //           ),
-  //           Text('Back',
-  //               style: TextStyle(
-  //                   fontSize: 12,
-  //                   fontWeight: FontWeight.w500))
-  //         ],
-  //       ),
+  String value = '';
+
+  // Widget _entryField(String title, String input,
+  //     {bool isPassword = false}) {
+  //   return Container(
+  //     margin: EdgeInsets.symmetric(vertical: 10),
+  //     child: Column(
+  //       crossAxisAlignment:
+  //           CrossAxisAlignment.start,
+  //       children: <Widget>[
+  //         Text(
+  //           title,
+  //           style: TextStyle(
+  //               fontWeight: FontWeight.bold,
+  //               color: Palette.WHITE,
+  //               fontSize: 15),
+  //         ),
+  //         SizedBox(
+  //           height: 10,
+  //         ),
+  //         TextField(
+  //             obscureText: isPassword,
+  //             decoration: InputDecoration(
+  //                 border: InputBorder.none,
+  //                 fillColor: Color(0xfff3f3f4),
+  //                 filled: true),
+  //             onChanged: (val) => setState(() {
+  //                   input = val;
+  //                   print(input);
+  //                 }))
+  //       ],
   //     ),
   //   );
   // }
-
-  Widget _entryField(String title,
-      {bool isPassword = false}) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        crossAxisAlignment:
-            CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            title,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Palette.WHITE,
-                fontSize: 15),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          TextField(
-              obscureText: isPassword,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  fillColor: Color(0xfff3f3f4),
-                  filled: true))
-        ],
-      ),
-    );
-  }
 
   Widget _submitButton() {
     return Container(
@@ -224,45 +204,28 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  // Widget _title() {
-  //   return RichText(
-  //     textAlign: TextAlign.center,
-  //     text: TextSpan(
-  //         text: 'd',
-  //         style: TextStyle(
-  //             fontSize: 30,
-  //             fontWeight: FontWeight.w700,
-  //             color: Color(0xffe46b10)),
-  //         children: [
-  //           TextSpan(
-  //             text: 'ev',
-  //             style: TextStyle(
-  //                 color: Colors.black,
-  //                 fontSize: 30),
-  //           ),
-  //           TextSpan(
-  //             text: 'rnz',
-  //             style: TextStyle(
-  //                 color: Color(0xffe46b10),
-  //                 fontSize: 30),
-  //           ),
-  //         ]),
+  // Widget _emailPasswordWidget() {
+  //   String phoneNumber = '';
+  //   String password = '';
+  //   print(phoneNumber);
+  //   print(password);
+  //   return Column(
+  //     children: <Widget>[
+  //       _entryField("Phone Number", phoneNumber),
+  //       _entryField("Password", password,
+  //           isPassword: true),
+  //     ],
   //   );
   // }
-
-  Widget _emailPasswordWidget() {
-    return Column(
-      children: <Widget>[
-        _entryField("Phone Number"),
-        _entryField("Password", isPassword: true),
-      ],
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     final height =
         MediaQuery.of(context).size.height;
+    bool isPassword = false;
+    String phoneNumber = '';
+    String password = '';
+
     return Scaffold(
         backgroundColor: Palette.PrimaryColor,
         body: Container(
@@ -299,7 +262,86 @@ class _LoginPageState extends State<LoginPage> {
                                       FontWeight
                                           .bold)),
                       SizedBox(height: 50),
-                      _emailPasswordWidget(),
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            margin: EdgeInsets
+                                .symmetric(
+                                    vertical: 10),
+                            child: Column(
+                              crossAxisAlignment:
+                                  CrossAxisAlignment
+                                      .start,
+                              children: <Widget>[
+                                Text(
+                                  "Phone Number",
+                                  style: TextStyle(
+                                      fontWeight:
+                                          FontWeight
+                                              .bold,
+                                      color: Palette
+                                          .WHITE,
+                                      fontSize:
+                                          15),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                TextField(
+                                    decoration: InputDecoration(
+                                        border: InputBorder
+                                            .none,
+                                        fillColor:
+                                            Color(
+                                                0xfff3f3f4),
+                                        filled:
+                                            true),
+                                    onChanged:
+                                        (val) =>
+                                            setState(
+                                                () {
+                                              phoneNumber =
+                                                  val;
+                                              print(phoneNumber);
+                                            })),
+                                SizedBox(
+                                    height: 10),
+                                Text(
+                                  "Password",
+                                  style: TextStyle(
+                                      fontWeight:
+                                          FontWeight
+                                              .bold,
+                                      color: Palette
+                                          .WHITE,
+                                      fontSize:
+                                          15),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                TextField(
+                                    obscureText:
+                                        true,
+                                    decoration: InputDecoration(
+                                        border: InputBorder
+                                            .none,
+                                        fillColor:
+                                            Color(
+                                                0xfff3f3f4),
+                                        filled:
+                                            true),
+                                    onChanged: (val) =>
+                                        setState(
+                                            () {
+                                          password =
+                                              val;
+                                        }))
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                       SizedBox(height: 20),
                       _submitButton(),
                       Container(

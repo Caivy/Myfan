@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myfan/config/global.dart';
 import 'package:myfan/models/beziercontainer.dart';
 import 'package:myfan/screen/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
+// import 'package:cloud_firestore/cloud_firestore.dart';
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key? key, this.title})
       : super(key: key);
@@ -16,51 +19,28 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  Widget _entryField(String title,
-      {bool isPassword = false}) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        crossAxisAlignment:
-            CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(title,
-              style: GoogleFonts.roboto(
-                  fontWeight: FontWeight.bold,
-                  color: Palette.WHITE,
-                  fontSize: 15)),
-          SizedBox(
-            height: 10,
-          ),
-          TextField(
-              obscureText: isPassword,
-              decoration: InputDecoration(
-                  // border: OutlineInputBorder(
-                  //     borderRadius:
-                  //         BorderRadius.all(
-                  //             Radius.circular(
-                  //                 2))),
-                  border: InputBorder.none,
-                  fillColor: Color(0xfff3f3f4),
-                  filled: true))
-        ],
-      ),
-    );
-  }
-
+  FirebaseAuth auth = FirebaseAuth.instance;
+  // UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndpassword(email: email, password: password)
+  String username = '';
+  String phoneNumber = '';
+  String password = "";
   Widget _submitButton() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 15),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(
-              Radius.circular(5)),
-          color: Palette.secondaryColor),
-      child: Text(
-        'Register Now',
-        style: TextStyle(
-            fontSize: 20, color: Colors.white),
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        padding:
+            EdgeInsets.symmetric(vertical: 15),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(
+                Radius.circular(5)),
+            color: Palette.secondaryColor),
+        child: Text(
+          'Register Now',
+          style: TextStyle(
+              fontSize: 20, color: Colors.white),
+        ),
       ),
     );
   }
@@ -104,40 +84,11 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _title() {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-          text: 'MY',
-          style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w700,
-              color: Color(0xffe46b10)),
-          children: [
-            TextSpan(
-              text: 'FAN',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 30),
-            ),
-          ]),
-    );
-  }
-
-  Widget _emailPasswordWidget() {
-    return Column(
-      children: <Widget>[
-        _entryField("Username"),
-        _entryField("Phone Number"),
-        _entryField("Password", isPassword: true),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final height =
         MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: Palette.PrimaryColor,
       body: Container(
@@ -175,7 +126,121 @@ class _SignUpPageState extends State<SignUpPage> {
                     SizedBox(
                       height: 50,
                     ),
-                    _emailPasswordWidget(),
+                    Column(
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets
+                              .symmetric(
+                                  vertical: 10),
+                          child: Column(
+                            crossAxisAlignment:
+                                CrossAxisAlignment
+                                    .start,
+                            children: <Widget>[
+                              Text(
+                                "Username",
+                                style: TextStyle(
+                                    fontWeight:
+                                        FontWeight
+                                            .bold,
+                                    color: Palette
+                                        .WHITE,
+                                    fontSize: 15),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                  decoration: InputDecoration(
+                                      border:
+                                          InputBorder
+                                              .none,
+                                      fillColor:
+                                          Color(
+                                              0xfff3f3f4),
+                                      filled:
+                                          true),
+                                  onChanged:
+                                      (val) =>
+                                          setState(
+                                              () {
+                                            username =
+                                                val;
+                                          })),
+                              SizedBox(
+                                  height: 15),
+                              Text(
+                                "Phone Number",
+                                style: TextStyle(
+                                    fontWeight:
+                                        FontWeight
+                                            .bold,
+                                    color: Palette
+                                        .WHITE,
+                                    fontSize: 15),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                  obscureText:
+                                      true,
+                                  decoration: InputDecoration(
+                                      border:
+                                          InputBorder
+                                              .none,
+                                      fillColor:
+                                          Color(
+                                              0xfff3f3f4),
+                                      filled:
+                                          true),
+                                  onChanged:
+                                      (val) =>
+                                          setState(
+                                              () {
+                                            phoneNumber =
+                                                val;
+                                          })),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                "password",
+                                style: TextStyle(
+                                    fontWeight:
+                                        FontWeight
+                                            .bold,
+                                    color: Palette
+                                        .WHITE,
+                                    fontSize: 15),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                  obscureText:
+                                      true,
+                                  decoration: InputDecoration(
+                                      border:
+                                          InputBorder
+                                              .none,
+                                      fillColor:
+                                          Color(
+                                              0xfff3f3f4),
+                                      filled:
+                                          true),
+                                  onChanged:
+                                      (val) =>
+                                          setState(
+                                              () {
+                                            password =
+                                                val;
+                                          }))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                     SizedBox(
                       height: 20,
                     ),

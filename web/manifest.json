@@ -1,6 +1,6 @@
 {
-    "name": "myfan_app",
-    "short_name": "myfan_app",
+    "name": "myfan",
+    "short_name": "myfan",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -5,10 +5,11 @@ import 'package:myfan/screen/home_screen.dart';
 // import 'package:myfan/models/hexToColor_models.dart';
 // import 'package:myfan/screen/home_screen.dart';
 import 'package:myfan/screen/login_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(Myfan());
 }
 
