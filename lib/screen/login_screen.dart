@@ -5,6 +5,7 @@ import 'package:myfan/models/beziercontainer.dart';
 // import 'package:myfan/screen/home_screen.dart';
 import 'package:myfan/screen/register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key, this.title})
@@ -19,39 +20,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   String value = '';
-
-  // Widget _entryField(String title, String input,
-  //     {bool isPassword = false}) {
-  //   return Container(
-  //     margin: EdgeInsets.symmetric(vertical: 10),
-  //     child: Column(
-  //       crossAxisAlignment:
-  //           CrossAxisAlignment.start,
-  //       children: <Widget>[
-  //         Text(
-  //           title,
-  //           style: TextStyle(
-  //               fontWeight: FontWeight.bold,
-  //               color: Palette.WHITE,
-  //               fontSize: 15),
-  //         ),
-  //         SizedBox(
-  //           height: 10,
-  //         ),
-  //         TextField(
-  //             obscureText: isPassword,
-  //             decoration: InputDecoration(
-  //                 border: InputBorder.none,
-  //                 fillColor: Color(0xfff3f3f4),
-  //                 filled: true),
-  //             onChanged: (val) => setState(() {
-  //                   input = val;
-  //                   print(input);
-  //                 }))
-  //       ],
-  //     ),
-  //   );
-  // }
 
   Widget _submitButton() {
     return Container(
@@ -203,20 +171,6 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
-  // Widget _emailPasswordWidget() {
-  //   String phoneNumber = '';
-  //   String password = '';
-  //   print(phoneNumber);
-  //   print(password);
-  //   return Column(
-  //     children: <Widget>[
-  //       _entryField("Phone Number", phoneNumber),
-  //       _entryField("Password", password,
-  //           isPassword: true),
-  //     ],
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
