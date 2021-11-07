@@ -30,20 +30,19 @@ class _SignUpPageState extends State<SignUpPage> {
   final _formKeyOTP = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final TextEditingController nameController =
+  TextEditingController nameController =
       new TextEditingController();
-  final TextEditingController
-      phoneNumberController =
+  TextEditingController phoneNumberController =
       new TextEditingController();
-  final TextEditingController passwordController =
+  TextEditingController passwordController =
       new TextEditingController();
-  final TextEditingController otpController =
+  TextEditingController otpController =
       new TextEditingController();
 
   var isLoading = false;
   var isResend = false;
   var isRegister = true;
-  var isOTPScreen = true;
+  var isOTPScreen = false;
   var verificationCode = '';
 
   //Form controllers
@@ -62,20 +61,14 @@ class _SignUpPageState extends State<SignUpPage> {
     super.dispose();
   }
 
-  var username = '';
-  var phoneNumber = '';
-  var password = '';
-
   Widget _submitButton() {
     return InkWell(
       onTap: () {
-        // var _firebaseauth = await auth.verifyPhoneNumber(
-        // phoneNumber: phoneNumber,
-        // verificationCompleted: verificationCompleted,
-        // verificationFailed: verificationFailed,
-        // codeSent: codeSent,
-        // codeAutoRetrievalTimeout: codeAutoRetrievalTimeout)
-        singIn();
+        setState(() {
+          isRegister = false;
+          isOTPScreen = true;
+          signUp();
+        });
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -93,15 +86,6 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
-  }
-
-  void singIn() {
-    // var _firebaseauth = await auth.verifyPhoneNumber(
-    // phoneNumber: phoneNumber,
-    // verificationCompleted: verificationCompleted,
-    // verificationFailed: verificationFailed,
-    // codeSent: codeSent,
-    // codeAutoRetrievalTimeout: codeAutoRetrievalTimeout)
   }
 
   Widget _loginAccountLabel() {
@@ -145,8 +129,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return returnOTPScreen();
-    // return isOTPScreen ? returnOTPScreen() : registerScreen();
+    return isOTPScreen
+        ? returnOTPScreen()
+        : registerScreen();
   }
 
   Widget registerScreen() {
@@ -241,7 +226,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                 height: 10,
                               ),
                               TextField(
-                                obscureText: true,
                                 decoration: InputDecoration(
                                     border:
                                         InputBorder
@@ -284,13 +268,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                     fillColor: Color(
                                         0xfff3f3f4),
                                     filled: true),
-                                // onChanged:
-                                //     (val) =>
-                                //         setState(
-                                //             () {
-                                //           password =
-                                //               val;
-                                //         })
                                 controller:
                                     passwordController,
                               )
@@ -302,6 +279,45 @@ class _SignUpPageState extends State<SignUpPage> {
                     SizedBox(
                       height: 20,
                     ),
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     setState(() {
+                    //       signUp();
+                    //       isRegister = false;
+                    //       isOTPScreen = true;
+                    //     });
+                    //   },
+                    //   child: Container(
+                    //     width:
+                    //         MediaQuery.of(context)
+                    //             .size
+                    //             .width,
+                    //     padding:
+                    //         EdgeInsets.symmetric(
+                    //             vertical: 15),
+                    //     alignment:
+                    //         Alignment.center,
+                    //     decoration: BoxDecoration(
+                    //         borderRadius:
+                    //             BorderRadius.all(
+                    //                 Radius
+                    //                     .circular(
+                    //                         5)),
+                    //         color: Palette
+                    //             .secondaryColor),
+                    //     child: Text(
+                    //       'Register',
+                    //       style: TextStyle(
+                    //           fontSize: 20,
+                    //           color:
+                    //               Colors.white),
+                    //     ),
+                    //   ),
+                    //   style: ElevatedButton
+                    //       .styleFrom(
+                    //           primary: Palette
+                    //               .secondaryColor),
+                    // ),
                     _submitButton(),
                     SizedBox(
                         height: height * .14),
@@ -317,6 +333,8 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget returnOTPScreen() {
+    CollectionReference users =
+        _firestore.collection('users');
     return Scaffold(
         key: _scaffoldKey,
         appBar: new AppBar(
@@ -390,89 +408,60 @@ class _SignUpPageState extends State<SignUpPage> {
                                 new ElevatedButton(
                               onPressed:
                                   () async {
-                                if (_formKeyOTP
-                                    .currentState!
-                                    .validate()) {
-                                  // If the form is valid, we want to show a loading Snackbar
-                                  // If the form is valid, we want to do firebase signup...
-                                  setState(() {
-                                    isResend =
-                                        false;
-                                    isLoading =
-                                        true;
-                                  });
-                                  try {
-                                    await _auth
-                                        .signInWithCredential(PhoneAuthProvider.credential(
-                                            verificationId:
-                                                verificationCode,
-                                            smsCode: otpController
-                                                .text
-                                                .toString()))
-                                        .then(
-                                            (user) async =>
-                                                {
-                                                  //sign in was success
-                                                  // ignore: unnecessary_null_comparison
-                                                  if (user != null)
-                                                    {
-                                                      //store registration details in firestore database
-                                                      await _firestore.collection('users').doc(_auth.currentUser!.uid).set({
-                                                        'name': nameController.text.trim(),
-                                                        'phonenumber': phoneNumberController.text.trim(),
-                                                        'password': passwordController
-                                                      }, SetOptions(merge: true)).then((value) => {
-                                                            //then move to authorised area
-                                                            setState(() {
-                                                              isLoading = false;
-                                                              isResend = false;
-                                                            })
-                                                          }),
+                                try {
+                                  await _auth
+                                      .signInWithCredential(PhoneAuthProvider.credential(
+                                          verificationId:
+                                              verificationCode,
+                                          smsCode: otpController
+                                              .text
+                                              .toString()))
+                                      .then(
+                                          (user) async =>
+                                              {
+                                                //sign in was success
+                                                if (user != null)
+                                                  {
+                                                    //store registration details in firestore database
+                                                    await _firestore.collection('users').doc(_auth.currentUser!.uid).set({
+                                                      'username': nameController.text.trim(),
+                                                      'phoneNumber': phoneNumberController.text.trim(),
+                                                      'password': passwordController.text.trim(),
+                                                    }, SetOptions(merge: true)).then((value) => {
+                                                          //then move to authorised area
+                                                          setState(() {
+                                                            isLoading = false;
+                                                            isResend = false;
+                                                          })
+                                                        }),
 
-                                                      setState(() {
-                                                        isLoading = false;
-                                                        isResend = false;
-                                                      }),
-                                                      Navigator.pushAndRemoveUntil(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (BuildContext context) => homeScreen(),
-                                                        ),
-                                                        (route) => false,
-                                                      )
-                                                    }
-                                                })
-                                        .catchError(
-                                            (error) =>
-                                                // ignore: invalid_return_type_for_catch_error
-                                                {
-                                                  setState(() {
-                                                    isLoading = false;
-                                                    isResend = true;
-                                                  }),
-                                                });
-                                    setState(() {
-                                      isLoading =
-                                          true;
-                                    });
-                                  } catch (e) {
-                                    setState(() {
-                                      isLoading =
-                                          false;
-                                    });
-                                  }
+                                                    setState(() {
+                                                      isLoading = false;
+                                                      isResend = false;
+                                                    }),
+                                                    Navigator.pushAndRemoveUntil(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (BuildContext context) => homeScreen(),
+                                                      ),
+                                                      (route) => false,
+                                                    )
+                                                  }
+                                              });
+                                } catch (e) {
+                                  setState(() {
+                                    isLoading =
+                                        false;
+                                  });
                                 }
                               },
                               child:
                                   new Container(
-                                color: Palette
-                                    .PrimaryColor,
                                 padding:
                                     const EdgeInsets
                                         .symmetric(
                                   vertical: 15.0,
-                                  horizontal:
-                                      15.0,
+                                  horizontal: 10,
                                 ),
                                 child: new Row(
                                   mainAxisAlignment:
@@ -508,9 +497,8 @@ class _SignUpPageState extends State<SignUpPage> {
                               children: <Widget>[
                                 CircularProgressIndicator(
                                   backgroundColor:
-                                      Theme.of(
-                                              context)
-                                          .primaryColor,
+                                      Palette
+                                          .PrimaryColor,
                                 )
                               ]
                                   .where((c) =>
@@ -520,6 +508,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           ]),
                 isResend
                     ? Container(
+                        color:
+                            Palette.PrimaryColor,
                         margin: EdgeInsets.only(
                             top: 40, bottom: 5),
                         child: Padding(
@@ -538,10 +528,12 @@ class _SignUpPageState extends State<SignUpPage> {
                                   isLoading =
                                       true;
                                 });
-                                // await signUp();
+                                await signUp();
                               },
                               child:
                                   new Container(
+                                color: Palette
+                                    .PrimaryColor,
                                 padding:
                                     const EdgeInsets
                                         .symmetric(
@@ -572,5 +564,108 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           )
         ]));
+  }
+
+  Future signUp() async {
+    setState(() {
+      isLoading = true;
+    });
+    var phoneNumber = '+855 ' +
+        phoneNumberController.text.toString();
+    var verifyPhoneNumber =
+        _auth.verifyPhoneNumber(
+            phoneNumber: phoneNumber,
+            verificationCompleted:
+                (phoneAuthCredential) {
+              //auto code complete (not manually)
+              _auth
+                  .signInWithCredential(
+                      phoneAuthCredential)
+                  .then((user) async => {
+                        if (user != null)
+                          {
+                            //store registration details in firestore database
+                            await _firestore
+                                .collection(
+                                    'users')
+                                .doc(_auth
+                                    .currentUser!
+                                    .uid)
+                                .set(
+                                    {
+                                      'username':
+                                          nameController
+                                              .text
+                                              .trim(),
+                                      'phoneNumber':
+                                          phoneNumberController
+                                              .text
+                                              .trim(),
+                                      'password':
+                                          passwordController
+                                              .text
+                                              .trim(),
+                                    },
+                                    SetOptions(
+                                        merge:
+                                            true))
+                                .then((value) => {
+                                      //then move to authorised area
+                                      setState(
+                                          () {
+                                        isLoading =
+                                            false;
+                                        isRegister =
+                                            false;
+                                        isOTPScreen =
+                                            false;
+
+                                        //navigate to is
+                                        Navigator
+                                            .pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                homeScreen(),
+                                          ),
+                                          (route) =>
+                                              false,
+                                        );
+                                      })
+                                    })
+                                .catchError(
+                                    (onError) => {
+                                          debugPrint('Error saving user to db.' +
+                                              onError.toString())
+                                        })
+                          }
+                      });
+              print("Logined");
+            },
+            verificationFailed:
+                (FirebaseAuthException error) {
+              debugPrint('Erorr logging in: ' +
+                  error.toString());
+              setState(() {
+                isLoading = false;
+              });
+            },
+            codeSent: (String verificationId,
+                int? resendToken) async {
+              // Update the UI - wait for the user to enter the SMS code
+              setState(() {
+                isLoading = false;
+                verificationCode = verificationId;
+              });
+              print("code send");
+            },
+            codeAutoRetrievalTimeout:
+                (String verificationId) {
+              verificationCode = verificationId;
+              print("Timed Out");
+            },
+            timeout: Duration(seconds: 60));
+
+    await verifyPhoneNumber;
   }
 }

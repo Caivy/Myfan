@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myfan/config/global.dart';
 import 'package:myfan/models/beziercontainer.dart';
+import 'package:myfan/screen/home_screen.dart';
 // import 'package:myfan/screen/home_screen.dart';
 import 'package:myfan/screen/register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
+final FirebaseFirestore _firestore =
+    FirebaseFirestore.instance;
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key, this.title})
@@ -19,21 +24,32 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String value = '';
+  TextEditingController nameController =
+      new TextEditingController();
+  TextEditingController phoneNumberController =
+      new TextEditingController();
+  TextEditingController passwordController =
+      new TextEditingController();
 
   Widget _submitButton() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 15),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(
-              Radius.circular(5)),
-          color: Palette.secondaryColor),
-      child: Text(
-        'LOGIN',
-        style: GoogleFonts.roboto(
-            color: Palette.WHITE, fontSize: 24),
+    return GestureDetector(
+      onTap: () {
+        login();
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        padding:
+            EdgeInsets.symmetric(vertical: 15),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(
+                Radius.circular(5)),
+            color: Palette.secondaryColor),
+        child: Text(
+          'LOGIN',
+          style: GoogleFonts.roboto(
+              color: Palette.WHITE, fontSize: 24),
+        ),
       ),
     );
   }
@@ -177,8 +193,6 @@ class _LoginPageState extends State<LoginPage> {
     final height =
         MediaQuery.of(context).size.height;
     bool isPassword = false;
-    String phoneNumber = '';
-    String password = '';
 
     return Scaffold(
         backgroundColor: Palette.PrimaryColor,
@@ -242,22 +256,18 @@ class _LoginPageState extends State<LoginPage> {
                                   height: 10,
                                 ),
                                 TextField(
-                                    decoration: InputDecoration(
-                                        border: InputBorder
-                                            .none,
-                                        fillColor:
-                                            Color(
-                                                0xfff3f3f4),
-                                        filled:
-                                            true),
-                                    onChanged:
-                                        (val) =>
-                                            setState(
-                                                () {
-                                              phoneNumber =
-                                                  val;
-                                              print(phoneNumber);
-                                            })),
+                                  decoration: InputDecoration(
+                                      border:
+                                          InputBorder
+                                              .none,
+                                      fillColor:
+                                          Color(
+                                              0xfff3f3f4),
+                                      filled:
+                                          true),
+                                  controller:
+                                      phoneNumberController,
+                                ),
                                 SizedBox(
                                     height: 10),
                                 Text(
@@ -275,22 +285,20 @@ class _LoginPageState extends State<LoginPage> {
                                   height: 10,
                                 ),
                                 TextField(
-                                    obscureText:
-                                        true,
-                                    decoration: InputDecoration(
-                                        border: InputBorder
-                                            .none,
-                                        fillColor:
-                                            Color(
-                                                0xfff3f3f4),
-                                        filled:
-                                            true),
-                                    onChanged: (val) =>
-                                        setState(
-                                            () {
-                                          password =
-                                              val;
-                                        }))
+                                  obscureText:
+                                      true,
+                                  decoration: InputDecoration(
+                                      border:
+                                          InputBorder
+                                              .none,
+                                      fillColor:
+                                          Color(
+                                              0xfff3f3f4),
+                                      filled:
+                                          true),
+                                  controller:
+                                      passwordController,
+                                )
                               ],
                             ),
                           )
@@ -330,5 +338,50 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ));
+  }
+
+  Future login() async {
+    var invalidCredentials = false;
+    var phoneNumber =
+        phoneNumberController.text.trim();
+    var password = passwordController.text.trim();
+    var isNumber = false;
+    var isPassword = false;
+    await _firestore
+        .collection('users')
+        .where('phoneNumber',
+            isEqualTo: phoneNumber)
+        .get()
+        .then((result) {
+      isNumber = true;
+      print("number is true");
+    });
+    await _firestore
+        .collection('users')
+        .where('password', isEqualTo: password)
+        .get()
+        .then((result) {
+      if (result.docs.length > 0) {
+        isPassword = true;
+        print("password is true");
+      }
+    });
+    if (isNumber == true) {
+      if (isPassword == true) {
+        print(
+            "phoneNumber and Password is correct");
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) =>
+                homeScreen(),
+          ),
+          (route) => false,
+        );
+      }
+    } else {
+      print("Wrong phonenumber or password");
+      var invalidCredentials = true;
+    }
   }
 }
