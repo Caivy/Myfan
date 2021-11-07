@@ -434,7 +434,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                                             isResend = false;
                                                           })
                                                         }),
-
                                                     setState(() {
                                                       isLoading = false;
                                                       isResend = false;
