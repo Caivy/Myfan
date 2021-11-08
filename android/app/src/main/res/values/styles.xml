@@ -15,4 +15,7 @@
     <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="android:windowBackground">?android:colorBackground</item>
     </style>
+    <!-- <string name="myfan"></string>
+    <string name="facebook_app_id">{584762832734166}</string>
+    <string name="fb_login_protocol_scheme">fb{584762832734166}</string> -->
 </resources>
