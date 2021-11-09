@@ -31,6 +31,9 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController passwordController =
       new TextEditingController();
 
+  var wrongNumber;
+  var wrongPassword;
+
   Widget _submitButton() {
     return GestureDetector(
       onTap: () {
@@ -258,15 +261,15 @@ class _LoginPageState extends State<LoginPage> {
                                   height: 10,
                                 ),
                                 TextField(
-                                  decoration: InputDecoration(
-                                      border:
-                                          InputBorder
-                                              .none,
-                                      fillColor:
-                                          Color(
-                                              0xfff3f3f4),
-                                      filled:
-                                          true),
+                                  decoration:
+                                      InputDecoration(
+                                    border:
+                                        InputBorder
+                                            .none,
+                                    fillColor: Color(
+                                        0xfff3f3f4),
+                                    filled: true,
+                                  ),
                                   controller:
                                       phoneNumberController,
                                 ),
@@ -343,7 +346,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future login() async {
-    var invalidCredentials = false;
     var phoneNumber =
         phoneNumberController.text.trim();
     var password = passwordController.text.trim();
@@ -355,8 +357,14 @@ class _LoginPageState extends State<LoginPage> {
             isEqualTo: phoneNumber)
         .get()
         .then((result) {
-      isNumber = true;
-      print("number is true");
+      if (result.docs.length > 0) {
+        isNumber = true;
+        print("number is true");
+      } else {
+        setState(() {
+          wrongNumber = true;
+        });
+      }
     });
     await _firestore
         .collection('users')
@@ -366,6 +374,10 @@ class _LoginPageState extends State<LoginPage> {
       if (result.docs.length > 0) {
         isPassword = true;
         print("password is true");
+      } else {
+        setState(() {
+          wrongPassword = true;
+        });
       }
     });
     if (isNumber == true) {
@@ -381,9 +393,6 @@ class _LoginPageState extends State<LoginPage> {
           (route) => false,
         );
       }
-    } else {
-      print("Wrong phonenumber or password");
-      var invalidCredentials = true;
     }
   }
 }
