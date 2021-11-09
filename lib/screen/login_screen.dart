@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myfan/config/global.dart';
 import 'package:myfan/models/beziercontainer.dart';
+import 'package:myfan/screen/forgot_password_screen.dart';
 import 'package:myfan/screen/home_screen.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:myfan/screen/register_screen.dart';
@@ -317,15 +318,25 @@ class _LoginPageState extends State<LoginPage> {
                                 vertical: 10),
                         alignment:
                             Alignment.centerRight,
-                        child: Text(
-                            'Forgot Password ?',
-                            style: TextStyle(
-                                fontSize: 14,
-                                color:
-                                    Palette.WHITE,
-                                fontWeight:
-                                    FontWeight
-                                        .w500)),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder:
+                                        (context) =>
+                                            forgetPass()));
+                          },
+                          child: Text(
+                              'Forgot Password ?',
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  color: Palette
+                                      .WHITE,
+                                  fontWeight:
+                                      FontWeight
+                                          .w500)),
+                        ),
                       ),
                       _divider(),
                       _facebookButton(),
