@@ -6,6 +6,7 @@ import 'package:myfan/config/global.dart';
 // import 'package:myfan/screen/home_screen.dart';
 import 'package:myfan/screen/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:myfan/screen/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +23,7 @@ class Myfan extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Palette.PrimaryColor,
       ),
-      home: LoginPage(),
+      home: splashScreen(),
     );
   }
 }

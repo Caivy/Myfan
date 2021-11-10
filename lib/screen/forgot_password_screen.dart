@@ -292,6 +292,11 @@ class forgetPass extends StatelessWidget {
                 passwordNewController.text.trim()
           });
           print("add");
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      homeScreen()));
         });
       } catch (e) {
         print(e);
