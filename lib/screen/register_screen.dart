@@ -44,11 +44,22 @@ class _SignUpPageState extends State<SignUpPage> {
   var isRegister = true;
   var isOTPScreen = false;
   var verificationCode = '';
+  var isPassword = true;
 
   //Form controllers
   @override
   void initState() {
     super.initState();
+
+    nameController.addListener(() {
+      setState(() {});
+    });
+    phoneNumberController.addListener(() {
+      setState(() {});
+    });
+    passwordController.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -62,7 +73,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget _submitButton() {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         setState(() {
           isRegister = false;
@@ -200,13 +211,32 @@ class _SignUpPageState extends State<SignUpPage> {
                                 height: 10,
                               ),
                               TextField(
-                                decoration: InputDecoration(
-                                    border:
-                                        InputBorder
+                                decoration:
+                                    InputDecoration(
+                                        prefixIcon:
+                                            Icon(Icons
+                                                .person),
+                                        suffixIcon: nameController
+                                                .text
+                                                .isEmpty
+                                            ? Container(
+                                                width: 0,
+                                              )
+                                            : IconButton(
+                                                onPressed: () => passwordController
+                                                    .clear(),
+                                                icon: Icon(Icons
+                                                    .close)),
+                                        border: InputBorder
                                             .none,
-                                    fillColor: Color(
-                                        0xfff3f3f4),
-                                    filled: true),
+                                        fillColor:
+                                            Color(
+                                                0xfff3f3f4),
+                                        filled:
+                                            true),
+                                keyboardType:
+                                    TextInputType
+                                        .name,
                                 controller:
                                     nameController,
                               ),
@@ -226,20 +256,34 @@ class _SignUpPageState extends State<SignUpPage> {
                                 height: 10,
                               ),
                               TextField(
-                                decoration: InputDecoration(
-                                    border:
-                                        InputBorder
+                                decoration:
+                                    InputDecoration(
+                                        prefixIcon:
+                                            Icon(Icons
+                                                .phone),
+                                        hintText:
+                                            "12345678",
+                                        suffixIcon: phoneNumberController
+                                                .text
+                                                .isEmpty
+                                            ? Container(
+                                                width: 0,
+                                              )
+                                            : IconButton(
+                                                onPressed: () => passwordController
+                                                    .clear(),
+                                                icon: Icon(Icons
+                                                    .close)),
+                                        border: InputBorder
                                             .none,
-                                    fillColor: Color(
-                                        0xfff3f3f4),
-                                    filled: true),
-                                // onChanged:
-                                //     (val) =>
-                                //         setState(
-                                //             () {
-                                //           phoneNumber =
-                                //               val;
-                                //         })
+                                        fillColor:
+                                            Color(
+                                                0xfff3f3f4),
+                                        filled:
+                                            true),
+                                keyboardType:
+                                    TextInputType
+                                        .phone,
                                 controller:
                                     phoneNumberController,
                               ),
@@ -261,13 +305,30 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                               TextField(
                                 obscureText: true,
-                                decoration: InputDecoration(
-                                    border:
-                                        InputBorder
+                                decoration:
+                                    InputDecoration(
+                                        prefixIcon:
+                                            Icon(Icons
+                                                .password),
+                                        border: InputBorder
                                             .none,
-                                    fillColor: Color(
-                                        0xfff3f3f4),
-                                    filled: true),
+                                        suffixIcon:
+                                            IconButton(
+                                          icon: isPassword
+                                              ? Icon(Icons.visibility_off)
+                                              : Icon(Icons.visibility),
+                                          onPressed:
+                                              () =>
+                                                  setState(() => isPassword = !isPassword),
+                                        ),
+                                        fillColor:
+                                            Color(
+                                                0xfff3f3f4),
+                                        filled:
+                                            true),
+                                keyboardType:
+                                    TextInputType
+                                        .visiblePassword,
                                 controller:
                                     passwordController,
                               )
@@ -279,45 +340,6 @@ class _SignUpPageState extends State<SignUpPage> {
                     SizedBox(
                       height: 20,
                     ),
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     setState(() {
-                    //       signUp();
-                    //       isRegister = false;
-                    //       isOTPScreen = true;
-                    //     });
-                    //   },
-                    //   child: Container(
-                    //     width:
-                    //         MediaQuery.of(context)
-                    //             .size
-                    //             .width,
-                    //     padding:
-                    //         EdgeInsets.symmetric(
-                    //             vertical: 15),
-                    //     alignment:
-                    //         Alignment.center,
-                    //     decoration: BoxDecoration(
-                    //         borderRadius:
-                    //             BorderRadius.all(
-                    //                 Radius
-                    //                     .circular(
-                    //                         5)),
-                    //         color: Palette
-                    //             .secondaryColor),
-                    //     child: Text(
-                    //       'Register',
-                    //       style: TextStyle(
-                    //           fontSize: 20,
-                    //           color:
-                    //               Colors.white),
-                    //     ),
-                    //   ),
-                    //   style: ElevatedButton
-                    //       .styleFrom(
-                    //           primary: Palette
-                    //               .secondaryColor),
-                    // ),
                     _submitButton(),
                     SizedBox(
                         height: height * .14),

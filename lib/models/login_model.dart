@@ -13,13 +13,10 @@ Future login(
     var passwords,
     bool isNumberCorrects,
     bool isPasswordCorrects) async {
-  var invalidCredentials = false;
   var phoneNumber = number.toString();
   var password = passwords.toString();
   var isNumber = false;
   var isPassword = false;
-  var isNumberCorrect = isNumberCorrects;
-  var isPasswordCorrect = isPasswordCorrects;
   await _firestore
       .collection('users')
       .where('phoneNumber',

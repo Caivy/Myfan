@@ -34,6 +34,18 @@ class _LoginPageState extends State<LoginPage> {
 
   var wrongNumber;
   var wrongPassword;
+  bool isPassword = true;
+  @override
+  void initState() {
+    super.initState();
+
+    phoneNumberController.addListener(() {
+      setState(() {});
+    });
+    passwordController.addListener(() {
+      setState(() {});
+    });
+  }
 
   Widget _submitButton() {
     return GestureDetector(
@@ -198,7 +210,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final height =
         MediaQuery.of(context).size.height;
-    bool isPassword = false;
 
     return Scaffold(
         backgroundColor: Palette.PrimaryColor,
@@ -264,6 +275,23 @@ class _LoginPageState extends State<LoginPage> {
                                 TextField(
                                   decoration:
                                       InputDecoration(
+                                    prefixIcon:
+                                        Icon(Icons
+                                            .phone),
+                                    hintText:
+                                        "12345678",
+                                    suffixIcon: phoneNumberController
+                                            .text
+                                            .isEmpty
+                                        ? Container(
+                                            width:
+                                                0,
+                                          )
+                                        : IconButton(
+                                            onPressed: () => phoneNumberController
+                                                .clear(),
+                                            icon:
+                                                Icon(Icons.close)),
                                     border:
                                         InputBorder
                                             .none,
@@ -271,6 +299,9 @@ class _LoginPageState extends State<LoginPage> {
                                         0xfff3f3f4),
                                     filled: true,
                                   ),
+                                  keyboardType:
+                                      TextInputType
+                                          .phone,
                                   controller:
                                       phoneNumberController,
                                 ),
@@ -291,19 +322,33 @@ class _LoginPageState extends State<LoginPage> {
                                   height: 10,
                                 ),
                                 TextField(
-                                  obscureText:
-                                      true,
-                                  decoration: InputDecoration(
-                                      border:
-                                          InputBorder
+                                  decoration:
+                                      InputDecoration(
+                                          prefixIcon:
+                                              Icon(Icons
+                                                  .password),
+                                          border: InputBorder
                                               .none,
-                                      fillColor:
-                                          Color(
-                                              0xfff3f3f4),
-                                      filled:
-                                          true),
+                                          suffixIcon:
+                                              IconButton(
+                                            icon: isPassword
+                                                ? Icon(Icons.visibility_off)
+                                                : Icon(Icons.visibility),
+                                            onPressed: () =>
+                                                setState(() => isPassword = !isPassword),
+                                          ),
+                                          fillColor:
+                                              Color(
+                                                  0xfff3f3f4),
+                                          filled:
+                                              true),
+                                  keyboardType:
+                                      TextInputType
+                                          .visiblePassword,
                                   controller:
                                       passwordController,
+                                  obscureText:
+                                      isPassword,
                                 )
                               ],
                             ),

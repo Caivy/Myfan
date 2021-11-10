@@ -273,10 +273,6 @@ class forgetPass extends StatelessWidget {
   Future login(BuildContext context) async {
     var oldPassword =
         passwordOldController.text.trim();
-    // var newPassword =
-    //     passwordNewController.text.trim();
-    // var phoneNumber =
-    //     phoneNumberController.text.trim();
     await _firestore
         .collection('users')
         .where('password', isEqualTo: oldPassword)
