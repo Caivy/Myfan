@@ -304,6 +304,14 @@ class _LoginPageState extends State<LoginPage> {
                                             .none,
                                     errorText:
                                         wrongNum,
+                                    errorStyle:
+                                        GoogleFonts
+                                            .roboto(
+                                      fontSize:
+                                          16,
+                                      color: Colors
+                                          .red,
+                                    ),
                                     fillColor: Color(
                                         0xfff3f3f4),
                                     filled: true,
@@ -348,6 +356,14 @@ class _LoginPageState extends State<LoginPage> {
                                           ),
                                           errorText:
                                               wrongPass,
+                                          errorStyle:
+                                              GoogleFonts
+                                                  .roboto(
+                                            fontSize:
+                                                16,
+                                            color:
+                                                Colors.red,
+                                          ),
                                           fillColor:
                                               Color(
                                                   0xfff3f3f4),
@@ -463,6 +479,7 @@ class _LoginPageState extends State<LoginPage> {
         );
         setState(() {
           wrongPass = '';
+          wrongNum = '';
         });
       }
     }

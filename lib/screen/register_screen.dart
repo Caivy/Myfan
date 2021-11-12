@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myfan/config/global.dart';
 import 'package:myfan/models/beziercontainer.dart';
+
 import 'package:myfan/screen/home_screen.dart';
 import 'package:myfan/screen/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -49,7 +50,6 @@ class _SignUpPageState extends State<SignUpPage> {
   var sUsername = '';
   var sNumber = '';
   var sPass = '';
-  var goOn = true;
 
   //Form controllers
   @override
@@ -80,11 +80,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _submitButton() {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          isRegister = false;
-          isOTPScreen = true;
-          checkCredentials();
-        });
+        checkCredentials();
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -236,6 +232,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                             .none,
                                         errorText:
                                             sUsername,
+                                        errorStyle:
+                                            GoogleFonts
+                                                .roboto(
+                                          fontSize:
+                                              16,
+                                          color: Colors
+                                              .red,
+                                        ),
                                         fillColor:
                                             Color(
                                                 0xfff3f3f4),
@@ -285,6 +289,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                             .none,
                                         errorText:
                                             sNumber,
+                                        errorStyle:
+                                            GoogleFonts
+                                                .roboto(
+                                          fontSize:
+                                              16,
+                                          color: Colors
+                                              .red,
+                                        ),
                                         fillColor:
                                             Color(
                                                 0xfff3f3f4),
@@ -335,6 +347,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                                 0xfff3f3f4),
                                         errorText:
                                             sPass,
+                                        errorStyle:
+                                            GoogleFonts
+                                                .roboto(
+                                          fontSize:
+                                              16,
+                                          color: Colors
+                                              .red,
+                                        ),
                                         filled:
                                             true),
                                 keyboardType:
@@ -600,10 +620,10 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Future checkCredentials() async {
     var username = nameController.text.trim();
+    // ignore: non_constant_identifier_names
     var Number =
         phoneNumberController.text.trim();
     var pass = passwordController.text.trim();
-
     await _firestore
         .collection('users')
         .where('phoneNumber', isEqualTo: Number)
@@ -613,9 +633,12 @@ class _SignUpPageState extends State<SignUpPage> {
         setState(() {
           sNumber =
               "Phonenumber is already registered.";
-          goOn = false;
         });
       } else {
+        setState(() {
+          isRegister = false;
+          isOTPScreen = true;
+        });
         signUp();
       }
     });
@@ -627,8 +650,11 @@ class _SignUpPageState extends State<SignUpPage> {
       if (result.docs.length > 0) {
         sUsername =
             "Username is already taken. Please choose another name";
-        goOn = false;
       } else {
+        setState(() {
+          isRegister = false;
+          isOTPScreen = true;
+        });
         signUp();
       }
     });
