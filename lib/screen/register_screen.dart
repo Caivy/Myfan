@@ -46,6 +46,11 @@ class _SignUpPageState extends State<SignUpPage> {
   var verificationCode = '';
   var isPassword = true;
 
+  var sUsername = '';
+  var sNumber = '';
+  var sPass = '';
+  var goOn = true;
+
   //Form controllers
   @override
   void initState() {
@@ -78,7 +83,7 @@ class _SignUpPageState extends State<SignUpPage> {
         setState(() {
           isRegister = false;
           isOTPScreen = true;
-          signUp();
+          checkCredentials();
         });
       },
       child: Container(
@@ -229,6 +234,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                                     .close)),
                                         border: InputBorder
                                             .none,
+                                        errorText:
+                                            sUsername,
                                         fillColor:
                                             Color(
                                                 0xfff3f3f4),
@@ -276,6 +283,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                                     .close)),
                                         border: InputBorder
                                             .none,
+                                        errorText:
+                                            sNumber,
                                         fillColor:
                                             Color(
                                                 0xfff3f3f4),
@@ -324,6 +333,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                         fillColor:
                                             Color(
                                                 0xfff3f3f4),
+                                        errorText:
+                                            sPass,
                                         filled:
                                             true),
                                 keyboardType:
@@ -449,7 +460,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                       'username': nameController.text.trim(),
                                                       'phoneNumber': phoneNumberController.text.trim(),
                                                       'password': passwordController.text.trim(),
-                                                    }, SetOptions(merge: true)).then((value) => {
+                                                    }, SetOptions(merge: false)).then((value) => {
                                                           //then move to authorised area
                                                           setState(() {
                                                             isLoading = false;
@@ -585,6 +596,42 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           )
         ]));
+  }
+
+  Future checkCredentials() async {
+    var username = nameController.text.trim();
+    var Number =
+        phoneNumberController.text.trim();
+    var pass = passwordController.text.trim();
+
+    await _firestore
+        .collection('users')
+        .where('phoneNumber', isEqualTo: Number)
+        .get()
+        .then((result) {
+      if (result.docs.length > 0) {
+        setState(() {
+          sNumber =
+              "Phonenumber is already registered.";
+          goOn = false;
+        });
+      } else {
+        signUp();
+      }
+    });
+    await _firestore
+        .collection('users')
+        .where('username', isEqualTo: username)
+        .get()
+        .then((result) {
+      if (result.docs.length > 0) {
+        sUsername =
+            "Username is already taken. Please choose another name";
+        goOn = false;
+      } else {
+        signUp();
+      }
+    });
   }
 
   Future signUp() async {

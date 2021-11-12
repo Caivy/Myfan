@@ -8,9 +8,9 @@ import 'package:myfan/screen/home_screen.dart';
 
 TextEditingController phoneNumberController =
     new TextEditingController();
-TextEditingController passwordOldController =
+TextEditingController confirmPasswordController =
     new TextEditingController();
-TextEditingController passwordNewController =
+TextEditingController passwordController =
     new TextEditingController();
 final FirebaseFirestore _firestore =
     FirebaseFirestore.instance;
@@ -27,6 +27,8 @@ var verificationCode = '';
 var isLoading = false;
 var isResend = false;
 var isForgot = true;
+var passwordMatch = '';
+var wrongPass = '';
 
 @override
 void initState() {
@@ -134,12 +136,35 @@ class _forgetPassState
 
   Widget _submitButton(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          isForgot = false;
-          isOTPScreen = true;
+      onTap: () async {
+        // setState(() {
+        //   isForgot = false;
+        //   isOTPScreen = true;
+        // });
+        // next(context);
+        var phoneNumber =
+            phoneNumberController.text.trim();
+        await _firestore
+            .collection('users')
+            .where('phoneNumber',
+                isEqualTo: phoneNumber)
+            .get()
+            .then((result) {
+          if (result.docs.length > 0) {
+            // Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (context) =>
+            //             password(context)));
+            setState(() {
+              isForgot = false;
+              isOTPScreen = true;
+            });
+            OTP(context);
+          } else {
+            print("Error");
+          }
         });
-        next(context);
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -219,7 +244,7 @@ class _forgetPassState
                                   .start,
                           children: <Widget>[
                             Text(
-                              "Old Password",
+                              "Password",
                               style: TextStyle(
                                   fontWeight:
                                       FontWeight
@@ -242,13 +267,13 @@ class _forgetPassState
                                 filled: true,
                               ),
                               controller:
-                                  passwordOldController,
+                                  passwordController,
                             ),
                             SizedBox(
                               height: 10,
                             ),
                             Text(
-                              "New Password",
+                              "Confirm Password",
                               style: TextStyle(
                                   fontWeight:
                                       FontWeight
@@ -271,7 +296,7 @@ class _forgetPassState
                                 filled: true,
                               ),
                               controller:
-                                  passwordNewController,
+                                  confirmPasswordController,
                             ),
                           ],
                         ),
@@ -386,6 +411,10 @@ class _forgetPassState
                                                   }
                                                 else
                                                   {
+                                                    setState(() {
+                                                      isLoading = true;
+                                                      isResend = true;
+                                                    }),
                                                     print("error")
                                                   }
                                               });
@@ -506,31 +535,6 @@ class _forgetPassState
         ]));
   }
 
-  Future next(BuildContext context) async {
-    var phoneNumber =
-        phoneNumberController.text.trim();
-    await _firestore
-        .collection('users')
-        .where('phoneNumber',
-            isEqualTo: phoneNumber)
-        .get()
-        .then((result) {
-      if (result.docs.length > 0) {
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //         builder: (context) =>
-        //             password(context)));
-        setState(() {
-          isOTPScreen = true;
-        });
-        OTP(context);
-      } else {
-        print("Error");
-      }
-    });
-  }
-
   // ignore: non_constant_identifier_names
   Future OTP(BuildContext context) async {
     setState(() {
@@ -592,32 +596,38 @@ class _forgetPassState
   }
 
   Future login(BuildContext context) async {
-    var oldPassword =
-        passwordOldController.text.trim();
-    await _firestore
-        .collection('users')
-        .where('password', isEqualTo: oldPassword)
-        .get()
-        .then((v) {
-      try {
-        v.docs.forEach((v) {
-          _firestore
-              .collection('users')
-              .doc(v.id)
-              .update({
-            'password':
-                passwordNewController.text.trim()
+    if (passwordController.text.trim() ==
+        confirmPasswordController.text.trim()) {
+      await _firestore
+          .collection('users')
+          .where('phoneNumber',
+              isEqualTo: phoneNumberController
+                  .text
+                  .trim())
+          .get()
+          .then((v) {
+        try {
+          v.docs.forEach((v) {
+            _firestore
+                .collection('users')
+                .doc(v.id)
+                .update({
+              'password':
+                  passwordController.text.trim()
+            });
+            print("add");
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        homeScreen()));
           });
-          print("add");
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      homeScreen()));
-        });
-      } catch (e) {
-        print(e);
-      }
-    });
+        } catch (e) {
+          print(e);
+        }
+      });
+    } else {
+      print("Password does not match");
+    }
   }
 }

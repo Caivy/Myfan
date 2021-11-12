@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myfan/config/global.dart';
 import 'package:myfan/models/beziercontainer.dart';
+import 'package:myfan/models/facebook_login_model.dart';
 import 'package:myfan/screen/forgot_password_screen.dart';
 import 'package:myfan/screen/home_screen.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -36,6 +37,8 @@ class _LoginPageState extends State<LoginPage> {
   var wrongPassword;
   var isNumber;
   var isPassword;
+  var wrongPass = '';
+  var wrongNum = '';
 
   bool isPasswords = true;
 
@@ -112,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _facebookButton() {
     return GestureDetector(
       onTap: () async {
-        await FacebookAuth.instance.login();
+        signInWithFacebook(context);
       },
       child: Container(
         height: 50,
@@ -299,8 +302,8 @@ class _LoginPageState extends State<LoginPage> {
                                     border:
                                         InputBorder
                                             .none,
-                                    // errorText:
-                                    //     errorText(),
+                                    errorText:
+                                        wrongNum,
                                     fillColor: Color(
                                         0xfff3f3f4),
                                     filled: true,
@@ -343,8 +346,8 @@ class _LoginPageState extends State<LoginPage> {
                                             onPressed: () =>
                                                 setState(() => isPasswords = !isPasswords),
                                           ),
-                                          // errorText:
-                                          //     errorText(),
+                                          errorText:
+                                              wrongPass,
                                           fillColor:
                                               Color(
                                                   0xfff3f3f4),
@@ -426,7 +429,7 @@ class _LoginPageState extends State<LoginPage> {
         });
       } else {
         setState(() {
-          wrongNumber = true;
+          wrongNum = "Incorrect PhoneNumber";
         });
       }
     });
@@ -442,7 +445,7 @@ class _LoginPageState extends State<LoginPage> {
         });
       } else {
         setState(() {
-          wrongPassword = true;
+          wrongPass = "Incorrect Password";
         });
       }
     });
@@ -458,6 +461,9 @@ class _LoginPageState extends State<LoginPage> {
           ),
           (route) => false,
         );
+        setState(() {
+          wrongPass = '';
+        });
       }
     }
   }
