@@ -251,8 +251,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                 controller:
                                     nameController,
                               ),
-                              SizedBox(
-                                  height: 15),
+                              // SizedBox(
+                              //     height: 15),
                               Text(
                                 "Phone Number",
                                 style: TextStyle(
@@ -308,9 +308,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                 controller:
                                     phoneNumberController,
                               ),
-                              SizedBox(
-                                height: 15,
-                              ),
+                              // SizedBox(
+                              //   height: 15,
+                              // ),
                               Text(
                                 "Password",
                                 style: TextStyle(
@@ -368,9 +368,9 @@ class _SignUpPageState extends State<SignUpPage> {
                         )
                       ],
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
                     _submitButton(),
                     SizedBox(
                         height: height * .14),

@@ -322,8 +322,8 @@ class _LoginPageState extends State<LoginPage> {
                                   controller:
                                       phoneNumberController,
                                 ),
-                                SizedBox(
-                                    height: 10),
+                                // SizedBox(
+                                //     height: 10),
                                 Text(
                                   "Password",
                                   style: TextStyle(
@@ -382,7 +382,7 @@ class _LoginPageState extends State<LoginPage> {
                           )
                         ],
                       ),
-                      SizedBox(height: 20),
+                      // SizedBox(height: 20),
                       _submitButton(),
                       Container(
                         padding:

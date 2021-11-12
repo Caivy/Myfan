@@ -31,6 +31,7 @@ var isResend = false;
 var isForgot = true;
 var passwordMatch = '';
 var wrongPass = '';
+var test;
 
 @override
 void initState() {
@@ -116,6 +117,15 @@ class _forgetPassState
                                 fillColor: Color(
                                     0xfff3f3f4),
                                 filled: true,
+                                errorText:
+                                    passwordMatch,
+                                errorStyle:
+                                    GoogleFonts
+                                        .roboto(
+                                  fontSize: 16,
+                                  color:
+                                      Colors.red,
+                                ),
                               ),
                               controller:
                                   phoneNumberController,
@@ -125,9 +135,9 @@ class _forgetPassState
                       )
                     ],
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
                   _submitButton(context)
                 ],
               ),
@@ -164,7 +174,10 @@ class _forgetPassState
             });
             OTP(context);
           } else {
-            print("Error");
+            setState(() {
+              passwordMatch =
+                  "Incorrect Phonenumber";
+            });
           }
         });
       },
