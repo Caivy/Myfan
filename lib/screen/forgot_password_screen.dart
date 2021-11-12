@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myfan/config/global.dart';
 import 'package:myfan/screen/home_screen.dart';
@@ -12,13 +14,47 @@ TextEditingController passwordNewController =
     new TextEditingController();
 final FirebaseFirestore _firestore =
     FirebaseFirestore.instance;
+TextEditingController otpController =
+    new TextEditingController();
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
-// ignore: camel_case_types
-class forgetPass extends StatelessWidget {
-  const forgetPass({Key? key}) : super(key: key);
+final _formKey = GlobalKey<FormState>();
+final _formKeyOTP = GlobalKey<FormState>();
+final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+var isOTPScreen = false;
+var verificationCode = '';
+var isLoading = false;
+var isResend = false;
+var isForgot = true;
+
+@override
+void initState() {
+  initState();
+}
+
+class forgotPassPage extends StatefulWidget {
+  forgotPassPage({Key? key, this.title})
+      : super(key: key);
+
+  final String? title;
 
   @override
+  _forgetPassState createState() =>
+      _forgetPassState();
+}
+
+// ignore: camel_case_types
+class _forgetPassState
+    extends State<forgotPassPage> {
+  @override
   Widget build(BuildContext context) {
+    return isOTPScreen
+        ? returnOTPScreen()
+        : forgotPass(context);
+  }
+
+  Widget forgotPass(BuildContext context) {
     final height =
         MediaQuery.of(context).size.height;
     return Scaffold(
@@ -99,6 +135,10 @@ class forgetPass extends StatelessWidget {
   Widget _submitButton(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        setState(() {
+          isForgot = false;
+          isOTPScreen = true;
+        });
         next(context);
       },
       child: Container(
@@ -251,6 +291,221 @@ class forgetPass extends StatelessWidget {
     );
   }
 
+  Widget returnOTPScreen() {
+    return Scaffold(
+        key: _scaffoldKey,
+        appBar: new AppBar(
+          title: Text('Verify Your Phone Number'),
+          backgroundColor: Palette.PrimaryColor,
+        ),
+        body: ListView(children: [
+          Form(
+            key: _formKeyOTP,
+            child: Column(
+              crossAxisAlignment:
+                  CrossAxisAlignment.center,
+              children: [
+                Container(
+                    child: Padding(
+                        padding: const EdgeInsets
+                                .symmetric(
+                            vertical: 10.0,
+                            horizontal: 10.0),
+                        child: Text(
+                            !isLoading
+                                ? "Enter OTP from SMS"
+                                : "Sending OTP code SMS",
+                            textAlign: TextAlign
+                                .center))),
+                !isLoading
+                    ? Container(
+                        child: Padding(
+                        padding: const EdgeInsets
+                                .symmetric(
+                            vertical: 10.0,
+                            horizontal: 10.0),
+                        child: TextFormField(
+                          enabled: !isLoading,
+                          controller:
+                              otpController,
+                          keyboardType:
+                              TextInputType
+                                  .number,
+                          inputFormatters: <
+                              TextInputFormatter>[
+                            FilteringTextInputFormatter
+                                .digitsOnly
+                          ],
+                          initialValue: null,
+                          autofocus: true,
+                          decoration: InputDecoration(
+                              labelText: 'OTP',
+                              labelStyle: TextStyle(
+                                  color: Colors
+                                      .black)),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter OTP';
+                            }
+                          },
+                        ),
+                      ))
+                    : Container(),
+                !isLoading
+                    ? Container(
+                        margin: EdgeInsets.only(
+                            top: 40, bottom: 5),
+                        child: Padding(
+                            padding:
+                                const EdgeInsets
+                                        .symmetric(
+                                    horizontal:
+                                        10.0),
+                            child:
+                                new ElevatedButton(
+                              onPressed:
+                                  () async {
+                                try {
+                                  await _auth
+                                      .signInWithCredential(PhoneAuthProvider.credential(
+                                          verificationId:
+                                              verificationCode,
+                                          smsCode: otpController
+                                              .text
+                                              .toString()))
+                                      .then(
+                                          (user) =>
+                                              {
+                                                if (user != null)
+                                                  {
+                                                    setState(() {
+                                                      isLoading = false;
+                                                      isResend = false;
+                                                    }),
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => password(context)))
+                                                  }
+                                                else
+                                                  {
+                                                    print("error")
+                                                  }
+                                              });
+                                } catch (e) {
+                                  print(e
+                                      .toString());
+                                }
+                              },
+                              style: ElevatedButton
+                                  .styleFrom(
+                                      primary: Palette
+                                          .secondaryColor),
+                              child:
+                                  new Container(
+                                padding:
+                                    const EdgeInsets
+                                        .symmetric(
+                                  vertical: 15.0,
+                                  horizontal: 10,
+                                ),
+                                child: new Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment
+                                          .center,
+                                  children: <
+                                      Widget>[
+                                    new Expanded(
+                                      child: Text(
+                                        "Submit",
+                                        textAlign:
+                                            TextAlign
+                                                .center,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )))
+                    : Column(
+                        crossAxisAlignment:
+                            CrossAxisAlignment
+                                .start,
+                        children: <Widget>[
+                            Row(
+                              mainAxisAlignment:
+                                  MainAxisAlignment
+                                      .center,
+                              crossAxisAlignment:
+                                  CrossAxisAlignment
+                                      .center,
+                              children: <Widget>[
+                                CircularProgressIndicator(
+                                  backgroundColor:
+                                      Palette
+                                          .PrimaryColor,
+                                )
+                              ]
+                                  .where((c) =>
+                                      c != null)
+                                  .toList(),
+                            )
+                          ]),
+                isResend
+                    ? Container(
+                        color:
+                            Palette.PrimaryColor,
+                        margin: EdgeInsets.only(
+                            top: 40, bottom: 5),
+                        child: Padding(
+                            padding:
+                                const EdgeInsets
+                                        .symmetric(
+                                    horizontal:
+                                        10.0),
+                            child:
+                                new ElevatedButton(
+                              onPressed:
+                                  () async {
+                                // await signUp();
+                              },
+                              style: ElevatedButton
+                                  .styleFrom(
+                                      primary: Palette
+                                          .secondaryColor),
+                              child:
+                                  new Container(
+                                color: Palette
+                                    .PrimaryColor,
+                                padding:
+                                    const EdgeInsets
+                                        .symmetric(
+                                  vertical: 15.0,
+                                  horizontal:
+                                      15.0,
+                                ),
+                                child: new Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment
+                                          .center,
+                                  children: <
+                                      Widget>[
+                                    new Expanded(
+                                      child: Text(
+                                        "Resend Code",
+                                        textAlign:
+                                            TextAlign
+                                                .center,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )))
+                    : Column()
+              ],
+            ),
+          )
+        ]));
+  }
+
   Future next(BuildContext context) async {
     var phoneNumber =
         phoneNumberController.text.trim();
@@ -261,13 +516,79 @@ class forgetPass extends StatelessWidget {
         .get()
         .then((result) {
       if (result.docs.length > 0) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    password(context)));
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) =>
+        //             password(context)));
+        setState(() {
+          isOTPScreen = true;
+        });
+        OTP(context);
+      } else {
+        print("Error");
       }
     });
+  }
+
+  // ignore: non_constant_identifier_names
+  Future OTP(BuildContext context) async {
+    setState(() {
+      isLoading = true;
+    });
+    var phoneNumber = '+855 ' +
+        phoneNumberController.text.trim();
+    var verifyPhoneNumber =
+        _auth.verifyPhoneNumber(
+            phoneNumber: phoneNumber,
+            verificationCompleted:
+                (phoneAuthCredential) {
+              _auth
+                  .signInWithCredential(
+                      phoneAuthCredential)
+                  .then((user) async => {
+                        if (user != null)
+                          {
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) =>
+                            //             password(
+                            //                 context))),
+                            setState(() {
+                              isLoading = false;
+                              isForgot = false;
+                              isOTPScreen = false;
+                            })
+                          }
+                      });
+              print("Logined");
+            },
+            verificationFailed:
+                (FirebaseAuthException error) {
+              debugPrint('Erorr logging in: ' +
+                  error.toString());
+              setState(() {
+                isLoading = false;
+              });
+            },
+            codeSent: (String verificationId,
+                int? resendToken) async {
+              // Update the UI - wait for the user to enter the SMS code
+              setState(() {
+                isLoading = false;
+                verificationCode = verificationId;
+              });
+              print("code send");
+            },
+            codeAutoRetrievalTimeout:
+                (String verificationId) {
+              verificationCode = verificationId;
+              print("Timed Out");
+            },
+            timeout: Duration(seconds: 100));
+
+    await verifyPhoneNumber;
   }
 
   Future login(BuildContext context) async {

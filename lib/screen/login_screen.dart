@@ -34,7 +34,11 @@ class _LoginPageState extends State<LoginPage> {
 
   var wrongNumber;
   var wrongPassword;
-  bool isPassword = true;
+  var isNumber;
+  var isPassword;
+
+  bool isPasswords = true;
+
   @override
   void initState() {
     super.initState();
@@ -295,6 +299,8 @@ class _LoginPageState extends State<LoginPage> {
                                     border:
                                         InputBorder
                                             .none,
+                                    // errorText:
+                                    //     errorText(),
                                     fillColor: Color(
                                         0xfff3f3f4),
                                     filled: true,
@@ -331,12 +337,14 @@ class _LoginPageState extends State<LoginPage> {
                                               .none,
                                           suffixIcon:
                                               IconButton(
-                                            icon: isPassword
+                                            icon: isPasswords
                                                 ? Icon(Icons.visibility_off)
                                                 : Icon(Icons.visibility),
                                             onPressed: () =>
-                                                setState(() => isPassword = !isPassword),
+                                                setState(() => isPasswords = !isPasswords),
                                           ),
+                                          // errorText:
+                                          //     errorText(),
                                           fillColor:
                                               Color(
                                                   0xfff3f3f4),
@@ -348,7 +356,7 @@ class _LoginPageState extends State<LoginPage> {
                                   controller:
                                       passwordController,
                                   obscureText:
-                                      isPassword,
+                                      isPasswords,
                                 )
                               ],
                             ),
@@ -370,7 +378,7 @@ class _LoginPageState extends State<LoginPage> {
                                 MaterialPageRoute(
                                     builder:
                                         (context) =>
-                                            forgetPass()));
+                                            forgotPassPage()));
                           },
                           child: Text(
                               'Forgot Password ?',
@@ -405,8 +413,6 @@ class _LoginPageState extends State<LoginPage> {
     var phoneNumber =
         phoneNumberController.text.trim();
     var password = passwordController.text.trim();
-    var isNumber = false;
-    var isPassword = false;
     await _firestore
         .collection('users')
         .where('phoneNumber',
@@ -414,8 +420,10 @@ class _LoginPageState extends State<LoginPage> {
         .get()
         .then((result) {
       if (result.docs.length > 0) {
-        isNumber = true;
-        print("number is true");
+        setState(() {
+          isNumber = true;
+          print("number is true");
+        });
       } else {
         setState(() {
           wrongNumber = true;
@@ -428,8 +436,10 @@ class _LoginPageState extends State<LoginPage> {
         .get()
         .then((result) {
       if (result.docs.length > 0) {
-        isPassword = true;
-        print("password is true");
+        setState(() {
+          isPassword = true;
+          print("password is true");
+        });
       } else {
         setState(() {
           wrongPassword = true;
