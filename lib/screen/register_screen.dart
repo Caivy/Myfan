@@ -273,7 +273,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                             Icon(Icons
                                                 .phone),
                                         hintText:
-                                            "12345678",
+                                            "11222333",
                                         suffixIcon: phoneNumberController
                                                 .text
                                                 .isEmpty
