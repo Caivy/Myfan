@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myfan/config/global.dart';
 import 'package:myfan/models/beziercontainer.dart';
-import 'package:myfan/models/facebook_login_model.dart';
+import 'package:myfan/models/facebook_login.dart';
 import 'package:myfan/screen/forgot_password_screen.dart';
 import 'package:myfan/screen/home_screen.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:myfan/screen/register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -57,6 +56,14 @@ class _LoginPageState extends State<LoginPage> {
   Widget _submitButton() {
     return GestureDetector(
       onTap: () {
+        // _authservice.login(
+        //     context,
+        //     phoneNumberController.toString(),
+        //     passwordController.toString(),
+        //     isNumber,
+        //     wrongNum,
+        //     isPassword,
+        //     wrongPass);
         login();
       },
       child: Container(

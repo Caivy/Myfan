@@ -29,6 +29,7 @@ dependencies:
   cloud_firestore: "^2.5.3"
   flutter_facebook_auth: "^3.5.0"
   google_fonts: ^2.1.0
+  provider: ^6.0.1
   
 dev_dependencies:
   flutter_test:

@@ -16,7 +16,7 @@ final TextEditingController passwordController =
     new TextEditingController();
 final FirebaseFirestore _firestore =
     FirebaseFirestore.instance;
-TextEditingController otpController =
+final TextEditingController otpController =
     new TextEditingController();
 final FirebaseAuth _auth = FirebaseAuth.instance;
 

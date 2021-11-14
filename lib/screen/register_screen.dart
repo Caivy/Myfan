@@ -4,11 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myfan/config/global.dart';
 import 'package:myfan/models/beziercontainer.dart';
-
 import 'package:myfan/screen/home_screen.dart';
 import 'package:myfan/screen/login_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -31,13 +28,14 @@ class _SignUpPageState extends State<SignUpPage> {
   final _formKeyOTP = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  TextEditingController nameController =
+  final TextEditingController nameController =
       new TextEditingController();
-  TextEditingController phoneNumberController =
+  final TextEditingController
+      phoneNumberController =
       new TextEditingController();
-  TextEditingController passwordController =
+  final TextEditingController passwordController =
       new TextEditingController();
-  TextEditingController otpController =
+  final TextEditingController otpController =
       new TextEditingController();
 
   var isLoading = false;
@@ -639,6 +637,15 @@ class _SignUpPageState extends State<SignUpPage> {
           isRegister = false;
           isOTPScreen = true;
         });
+        // _authservice.signUp(
+        //     context,
+        //     phoneNumberController.toString(),
+        //     nameController.toString(),
+        //     passwordController.toString(),
+        //     isLoading,
+        //     isRegister,
+        //     isOTPScreen,
+        //     verificationCode);
         signUp();
       }
     });
@@ -655,6 +662,15 @@ class _SignUpPageState extends State<SignUpPage> {
           isRegister = false;
           isOTPScreen = true;
         });
+        // _authservice.signUp(
+        //     context,
+        //     phoneNumberController.toString(),
+        //     nameController.toString(),
+        //     passwordController.toString(),
+        //     isLoading,
+        //     isRegister,
+        //     isOTPScreen,
+        //     verificationCode);
         signUp();
       }
     });
@@ -671,7 +687,6 @@ class _SignUpPageState extends State<SignUpPage> {
             phoneNumber: phoneNumber,
             verificationCompleted:
                 (phoneAuthCredential) {
-              //auto code complete (not manually)
               _auth
                   .signInWithCredential(
                       phoneAuthCredential)
