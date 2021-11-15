@@ -72,6 +72,13 @@ class splashScreen extends StatelessWidget {
                                           .center,
                                   children: <
                                       Widget>[
+                                    Icon(
+                                      Icons
+                                          .person,
+                                      size: 30,
+                                      color: Palette
+                                          .BLACK,
+                                    ),
                                     new Expanded(
                                       child: Text(
                                         "LOGIN",
@@ -121,6 +128,16 @@ class splashScreen extends StatelessWidget {
                                           .center,
                                   children: <
                                       Widget>[
+                                    SizedBox(
+                                      width: 4,
+                                    ),
+                                    Icon(
+                                      Icons
+                                          .person_add_alt_1,
+                                      size: 30,
+                                      color: Palette
+                                          .BLACK,
+                                    ),
                                     new Expanded(
                                       child: Text(
                                         "REGISTER",

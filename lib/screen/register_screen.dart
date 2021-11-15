@@ -1,12 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myfan/config/global.dart';
 import 'package:myfan/models/beziercontainer.dart';
+import 'package:myfan/models/launch_model.dart';
 import 'package:myfan/screen/home_screen.dart';
 import 'package:myfan/screen/login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore =
@@ -120,7 +123,7 @@ class _SignUpPageState extends State<SignUpPage> {
               'Already have an account ?',
               style: GoogleFonts.roboto(
                   color: Palette.WHITE,
-                  fontSize: 13),
+                  fontSize: 14),
             ),
             SizedBox(
               width: 10,
@@ -129,7 +132,7 @@ class _SignUpPageState extends State<SignUpPage> {
               'Login',
               style: GoogleFonts.roboto(
                   color: Palette.secondaryColor,
-                  fontSize: 13),
+                  fontSize: 14),
             ),
           ],
         ),
@@ -183,7 +186,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             fontWeight:
                                 FontWeight.bold)),
                     SizedBox(
-                      height: 50,
+                      height: 30,
                     ),
                     Column(
                       children: <Widget>[
@@ -207,7 +210,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     fontSize: 15),
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 5,
                               ),
                               TextField(
                                 decoration:
@@ -262,7 +265,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     fontSize: 15),
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 5,
                               ),
                               TextField(
                                 decoration:
@@ -320,7 +323,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     fontSize: 15),
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 5,
                               ),
                               TextField(
                                 obscureText: true,
@@ -371,7 +374,85 @@ class _SignUpPageState extends State<SignUpPage> {
                     // ),
                     _submitButton(),
                     SizedBox(
-                        height: height * .14),
+                      height: 25,
+                    ),
+                    // Text(
+                    //     "By signing up you agree to our Terms of Service and confirm that you are at least 16 years old.",
+                    //     textAlign:
+                    //         TextAlign.center,
+                    //     style: GoogleFonts.roboto(
+                    //       color: Palette.WHITE,
+                    //       fontSize: 15,
+                    //       // fontStyle:
+                    //       //     FontStyle.italic,
+                    //     )),
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        style: GoogleFonts.roboto(
+                          color: Palette.WHITE,
+                          fontSize: 15,
+                          // fontStyle:
+                          //     FontStyle.italic,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text:
+                                'By signing up you agree to our ',
+                          ),
+                          TextSpan(
+                              text:
+                                  'Terms of Service',
+                              style: GoogleFonts
+                                  .roboto(
+                                color:
+                                    Colors.blue,
+                                fontSize: 15,
+                              ),
+                              recognizer:
+                                  TapGestureRecognizer()
+                                    ..onTap = () {
+                                      print(
+                                          'Terms of Service"');
+                                      urllauncher(
+                                          "https://econoapps.com/term-of-service");
+                                    }),
+                          TextSpan(
+                            text:
+                                ' and that you have read our ',
+                            // style: GoogleFonts
+                            //     .roboto(
+                            //   color:
+                            //       Palette.WHITE,
+                            //   fontSize: 15,
+                            //   // fontStyle:
+                            //   //     FontStyle.italic,
+                            // ),
+                          ),
+                          TextSpan(
+                              text:
+                                  'Privacy Policy',
+                              style: GoogleFonts
+                                  .roboto(
+                                color:
+                                    Colors.blue,
+                                fontSize: 15,
+                                // fontStyle:
+                                //     FontStyle.italic,
+                              ),
+                              recognizer:
+                                  TapGestureRecognizer()
+                                    ..onTap = () {
+                                      print(
+                                          'Privacy Policy');
+                                      urllauncher(
+                                          "https://econoapps.com/privacy-and-policy");
+                                    }),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                        height: height * .10),
                     _loginAccountLabel(),
                   ],
                 ),
@@ -478,7 +559,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                       'username': nameController.text.trim(),
                                                       'phoneNumber': phoneNumberController.text.trim(),
                                                       'password': passwordController.text.trim(),
-                                                    }, SetOptions(merge: false)).then((value) => {
+                                                    }, SetOptions(merge: true)).then((value) => {
                                                           //then move to authorised area
                                                           setState(() {
                                                             isLoading = false;
@@ -637,15 +718,6 @@ class _SignUpPageState extends State<SignUpPage> {
           isRegister = false;
           isOTPScreen = true;
         });
-        // _authservice.signUp(
-        //     context,
-        //     phoneNumberController.toString(),
-        //     nameController.toString(),
-        //     passwordController.toString(),
-        //     isLoading,
-        //     isRegister,
-        //     isOTPScreen,
-        //     verificationCode);
         signUp();
       }
     });
@@ -662,15 +734,6 @@ class _SignUpPageState extends State<SignUpPage> {
           isRegister = false;
           isOTPScreen = true;
         });
-        // _authservice.signUp(
-        //     context,
-        //     phoneNumberController.toString(),
-        //     nameController.toString(),
-        //     passwordController.toString(),
-        //     isLoading,
-        //     isRegister,
-        //     isOTPScreen,
-        //     verificationCode);
         signUp();
       }
     });

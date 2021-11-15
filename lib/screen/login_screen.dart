@@ -38,6 +38,8 @@ class _LoginPageState extends State<LoginPage> {
   var isPassword;
   var wrongPass = '';
   var wrongNum = '';
+  var doc_id_num;
+  var doc_id_pass;
 
   bool isPasswords = true;
 
@@ -448,7 +450,14 @@ class _LoginPageState extends State<LoginPage> {
       if (result.docs.length > 0) {
         setState(() {
           isNumber = true;
-          print("number is true");
+          wrongNum = "";
+        });
+        result.docs.forEach((v) {
+          {
+            setState(() {
+              doc_id_num = v.id;
+            });
+          }
         });
       } else {
         setState(() {
@@ -464,7 +473,14 @@ class _LoginPageState extends State<LoginPage> {
       if (result.docs.length > 0) {
         setState(() {
           isPassword = true;
-          print("password is true");
+          wrongPass = "";
+        });
+        result.docs.forEach((v) {
+          {
+            setState(() {
+              doc_id_pass = v.id;
+            });
+          }
         });
       } else {
         setState(() {
@@ -472,23 +488,30 @@ class _LoginPageState extends State<LoginPage> {
         });
       }
     });
-    if (isNumber == true) {
-      if (isPassword == true) {
-        print(
-            "phoneNumber and Password is correct");
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) =>
-                homeScreen(),
-          ),
-          (route) => false,
-        );
-        setState(() {
-          wrongPass = '';
-          wrongNum = '';
-        });
+    if (doc_id_num == doc_id_pass) {
+      if (isNumber == true) {
+        if (isPassword == true) {
+          print(
+              "phoneNumber and Password is correct");
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  homeScreen(),
+            ),
+            (route) => false,
+          );
+          setState(() {
+            wrongPass = '';
+            wrongNum = '';
+          });
+        }
       }
+    } else {
+      setState(() {
+        wrongPass = "Password does not match";
+        wrongNum = "Phone Number does not match";
+      });
     }
   }
 }
