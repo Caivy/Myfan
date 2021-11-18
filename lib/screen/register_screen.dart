@@ -573,7 +573,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                     Navigator.pushAndRemoveUntil(
                                                       context,
                                                       MaterialPageRoute(
-                                                        builder: (BuildContext context) => homeScreen(),
+                                                        builder: (BuildContext context) => homeScreen(_auth.currentUser!.uid),
                                                       ),
                                                       (route) => false,
                                                     )
@@ -797,8 +797,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                             .pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                homeScreen(),
+                                            builder: (BuildContext context) => homeScreen(_auth
+                                                .currentUser!
+                                                .uid),
                                           ),
                                           (route) =>
                                               false,
@@ -831,6 +832,7 @@ class _SignUpPageState extends State<SignUpPage> {
               });
               print("code send");
             },
+            // forceResendingToken: ,
             codeAutoRetrievalTimeout:
                 (String verificationId) {
               verificationCode = verificationId;

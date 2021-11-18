@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:myfan/config/global.dart';
+
 import 'package:myfan/widgets/all_widgets.dart';
 import 'package:myfan/widgets/bottomappbar_widgets.dart';
 import 'package:myfan/widgets/create_post_widgets.dart';
 
 // ignore: camel_case_types
 class homeScreen extends StatefulWidget {
-  homeScreen({Key? key}) : super(key: key);
+  homeScreen(this.docID, {Key? key})
+      : super(key: key);
+  final String docID;
 
   @override
   _homeScreenState createState() =>
-      _homeScreenState();
+      _homeScreenState(this.docID);
 }
 
 // ignore: camel_case_types
 class _homeScreenState extends State<homeScreen> {
+  String docID;
+  _homeScreenState(this.docID);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +42,9 @@ class _homeScreenState extends State<homeScreen> {
               icon: Icon(Icons.search_outlined),
               color: Palette.BLACK,
               iconSize: 28,
-              onPressed: () {},
+              onPressed: () {
+                print(docID);
+              },
             )
           ],
         ),
@@ -46,7 +54,6 @@ class _homeScreenState extends State<homeScreen> {
         children: [
           createPost(),
           allWidgets(),
-          
         ],
       ),
       bottomNavigationBar: bottomAppBar(),

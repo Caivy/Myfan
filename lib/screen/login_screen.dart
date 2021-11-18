@@ -449,7 +449,6 @@ class _LoginPageState extends State<LoginPage> {
         .then((result) {
       if (result.docs.length > 0) {
         setState(() {
-          isNumber = true;
           wrongNum = "";
         });
         result.docs.forEach((v) {
@@ -472,7 +471,6 @@ class _LoginPageState extends State<LoginPage> {
         .then((result) {
       if (result.docs.length > 0) {
         setState(() {
-          isPassword = true;
           wrongPass = "";
         });
         result.docs.forEach((v) {
@@ -489,28 +487,30 @@ class _LoginPageState extends State<LoginPage> {
       }
     });
     if (doc_id_num == doc_id_pass) {
-      if (isNumber == true) {
-        if (isPassword == true) {
-          print(
-              "phoneNumber and Password is correct");
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (BuildContext context) =>
-                  homeScreen(),
-            ),
-            (route) => false,
-          );
-          setState(() {
-            wrongPass = '';
-            wrongNum = '';
-          });
-        }
-      }
-    } else {
+      print(doc_id_num + " " + doc_id_pass);
+      print(
+          "phoneNumber and Password is correct");
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (BuildContext context) =>
+              homeScreen(doc_id_num),
+        ),
+        (route) => false,
+      );
       setState(() {
-        wrongPass = "Password does not match";
-        wrongNum = "Phone Number does not match";
+        wrongPass = '';
+        wrongNum = '';
+      });
+    } else if (doc_id_num != doc_id_pass) {
+      setState(() {
+        wrongNum =
+            "Phonenumber does not match password";
+      });
+    } else if (doc_id_pass != doc_id_num) {
+      setState(() {
+        wrongPass =
+            "Password does not match phonenumber";
       });
     }
   }

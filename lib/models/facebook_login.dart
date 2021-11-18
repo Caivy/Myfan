@@ -19,17 +19,18 @@ Future signInWithFacebook(
             FacebookAuthCredential);
     await FirebaseFirestore.instance
         .collection('users')
-        .add({
+        .doc(userData['id'])
+        .set({
       'email': userData['email'],
       'imageUrl': userData['picture']['data']
           ['url'],
-      'name': userData['name'],
+      'username': userData['name'],
     });
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
         builder: (BuildContext context) =>
-            homeScreen(),
+            homeScreen(userData['id']),
       ),
       (route) => false,
     );

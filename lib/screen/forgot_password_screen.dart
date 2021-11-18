@@ -32,6 +32,7 @@ var isForgot = true;
 var passwordMatch = '';
 var wrongPass = '';
 var test;
+var docid;
 
 @override
 void initState() {
@@ -280,6 +281,8 @@ class _forgetPassState
                                 fillColor: Color(
                                     0xfff3f3f4),
                                 filled: true,
+                                errorText:
+                                    passwordMatch,
                               ),
                               controller:
                                   passwordController,
@@ -309,6 +312,8 @@ class _forgetPassState
                                 fillColor: Color(
                                     0xfff3f3f4),
                                 filled: true,
+                                errorText:
+                                    passwordMatch,
                               ),
                               controller:
                                   confirmPasswordController,
@@ -623,6 +628,9 @@ class _forgetPassState
           .then((v) {
         try {
           v.docs.forEach((v) {
+            setState(() {
+              docid = v.id;
+            });
             _firestore
                 .collection('users')
                 .doc(v.id)
@@ -635,14 +643,16 @@ class _forgetPassState
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        homeScreen()));
+                        homeScreen(v.id)));
           });
         } catch (e) {
           print(e);
         }
       });
     } else {
-      print("Password does not match");
+      setState(() {
+        passwordMatch = "Password does not match";
+      });
     }
   }
 }
