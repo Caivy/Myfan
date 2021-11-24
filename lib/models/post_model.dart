@@ -1,7 +1,7 @@
 import 'models.dart';
 
 class Post {
-  final User user;
+  final UserModel user;
   final String caption;
   final String timeAgo;
   final String imageUrl;

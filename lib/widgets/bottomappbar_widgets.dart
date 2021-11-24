@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:myfan/models/hexToColor_models.dart';
+import 'package:myfan/config/global.dart';
 
 // ignore: camel_case_types
 class bottomAppBar extends StatelessWidget {
-  const bottomAppBar({Key? key})
-      : super(key: key);
+  const bottomAppBar({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-        color: hexStringToColor("#09333f"),
+        color: Palette.PrimaryColor,
         child: IconTheme(
-          data:
-              IconThemeData(color: Colors.white),
+          data: IconThemeData(color: Colors.white),
           child: Row(
             mainAxisAlignment:
                 MainAxisAlignment.spaceEvenly,
@@ -19,8 +17,8 @@ class bottomAppBar extends StatelessWidget {
               IconButton(
                 tooltip: 'Home',
                 iconSize: 24,
-                icon: const Icon(
-                    Icons.home_outlined),
+                icon:
+                    const Icon(Icons.home_outlined),
                 onPressed: () {},
               ),
               IconButton(
@@ -47,8 +45,7 @@ class bottomAppBar extends StatelessWidget {
               IconButton(
                 tooltip: 'Account',
                 iconSize: 24,
-                icon: const Icon(Icons
-                    .manage_accounts_outlined),
+                icon: const Icon(Icons.person),
                 onPressed: () {},
               ),
             ],

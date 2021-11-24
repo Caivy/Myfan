@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:myfan/config/global.dart';
-
 import 'package:myfan/widgets/all_widgets.dart';
 import 'package:myfan/widgets/bottomappbar_widgets.dart';
 import 'package:myfan/widgets/create_post_widgets.dart';
@@ -30,22 +29,26 @@ class _homeScreenState extends State<homeScreen> {
           mainAxisAlignment:
               MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "HOME",
-              style: TextStyle(
-                  fontSize: 22.0,
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.bold,
-                  color: Palette.BLACK),
-            ),
-            IconButton(
-              icon: Icon(Icons.search_outlined),
-              color: Palette.BLACK,
-              iconSize: 28,
-              onPressed: () {
-                print(docID);
-              },
-            )
+            Row(children: [
+              CircleAvatar(),
+              Text(
+                "HOME",
+                style: TextStyle(
+                    fontSize: 22.0,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.bold,
+                    color: Palette.BLACK),
+              ),
+            ]),
+
+            // IconButton(
+            //   icon: Icon(Icons.search_outlined),
+            //   color: Palette.BLACK,
+            //   iconSize: 28,
+            //   onPressed: () {
+            //     print(docID);
+            //   },
+            // )
           ],
         ),
         elevation: 0.0,
