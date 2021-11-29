@@ -1,27 +1,41 @@
 import 'package:flutter/material.dart';
 
 class App extends ChangeNotifier {
-  var _isLoading = false;
-  var _isRegister = true;
-  var _isOTPScreen = false;
-  var _VerificationCode = "";
-  var _wrongPass = "";
-  var _wrongNum = "";
-  var _doc_id_num = "";
-  var _doc_id_pass = "";
-  var _sNumber = "";
-  var _sUsername = "";
+  bool _isLoading = false;
+  bool _isRegister = true;
+  bool _isOTPScreen = false;
+  int _pageIndex = 0;
+  String _VerificationCode = "";
+  String _wrongPass = "";
+  String _wrongNum = "";
+  String _doc_id_num = "";
+  String _doc_id_pass = "";
+  String _sNumber = "";
+  String _sUsername = "";
+  String _username = "";
 
-  get isLoading => _isLoading;
-  get isRegister => _isRegister;
-  get isOTPScreen => _isOTPScreen;
-  get VerificationCode => _VerificationCode;
-  get wrongPass => _wrongPass;
-  get wrongNum => _wrongNum;
-  get docid_num => _doc_id_num;
-  get docid_pass => _doc_id_pass;
-  get sNumber => _sNumber;
-  get sUsername => _sUsername;
+  bool get isLoading => _isLoading;
+  bool get isRegister => _isRegister;
+  bool get isOTPScreen => _isOTPScreen;
+  String get VerificationCode => _VerificationCode;
+  String get wrongPass => _wrongPass;
+  String get wrongNum => _wrongNum;
+  String get docid_num => _doc_id_num;
+  String get docid_pass => _doc_id_pass;
+  String get sNumber => _sNumber;
+  String get sUsername => _sUsername;
+  String get usernmae => _username;
+  int get pageIndex => _pageIndex;
+
+  PageIndex(int value) {
+    _pageIndex = value;
+    notifyListeners();
+  }
+
+  username(String value) {
+    _username = value;
+    notifyListeners();
+  }
 
   Loading(bool value) {
     _isLoading = value;

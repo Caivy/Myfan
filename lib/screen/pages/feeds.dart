@@ -1,94 +1,91 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:myfan/config/global.dart';
-import 'package:myfan/screen/pages/feeds.dart';
-import 'package:myfan/screen/pages/notification.dart';
-import 'package:myfan/screen/pages/post_add.dart';
 import 'package:myfan/services/app.dart';
-
 import 'package:myfan/widgets/bottomappbar_widgets.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 
-var index = 3;
-var dummyImage =
-    "https://i.pinimg.com/736x/c6/66/46/c666460b3c607b32f6c03c38b01e6c4d.jpg";
-var dummyProfile =
-    "https://www.virlan.co/trends/wp-content/uploads/2021/08/anime-pfp-cool.jpg";
-String Caivy =
-    "https://cdn.myanimelist.net/images/userimages/7597522.jpg?t=1638014400";
+import '../home_screen.dart';
 
-final FirebaseFirestore _firestore =
-    FirebaseFirestore.instance;
-
-PageController pageController = PageController();
-
-CollectionReference<Map<String, dynamic>>
-    collection = _firestore.collection('user');
-String username = "";
-String atUsername = "";
-
-// ignore: camel_case_types
-class homeScreen extends StatefulWidget {
-  homeScreen(this.docID, {Key? key})
-      : super(key: key);
-  final String docID;
+class feed extends StatefulWidget {
+  feed({Key? key}) : super(key: key);
 
   @override
-  _homeScreenState createState() =>
-      _homeScreenState(this.docID);
+  _feedState createState() => _feedState();
 }
 
-// ignore: camel_case_types
-class _homeScreenState extends State<homeScreen> {
-  String docID;
-  _homeScreenState(this.docID);
-
-  @override
-  void initState() {
-    super.initState();
-    // PageController pageController =
-    //     PageController();
-  }
-
-  @override
-  void dispose() {
-    // Clean up the controller when the Widget is disposed
-    pageController.dispose();
-    super.dispose();
-  }
-
-  onPageChange(int pageIndex) {
-    App app =
-        Provider.of<App>(context, listen: false);
-    setState(() {
-      pageIndex = app.pageIndex;
-    });
-  }
-
+class _feedState extends State<feed> {
   @override
   Widget build(BuildContext context) {
     final height =
         MediaQuery.of(context).size.height;
     double avatarDia = 48;
-    return Consumer<App>(
-      builder: (context, app, child) => Scaffold(
-        body: PageView(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Palette.WHITE,
+        title: Row(
+          mainAxisAlignment:
+              MainAxisAlignment.spaceBetween,
           children: [
-            feed(),
-            notification(),
-            post_add(),
+            Row(children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: .10),
+                child: Container(
+                  width: avatarDia,
+                  height: avatarDia,
+                  decoration: BoxDecoration(
+                    color: Palette.secondaryColor,
+                    shape: BoxShape.circle,
+                  ),
+                  child: ClipRRect(
+                    borderRadius:
+                        BorderRadius.circular(
+                      avatarDia / 2,
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: Caivy,
+                      placeholder: (context, url) =>
+                          CircularProgressIndicator(),
+                      errorWidget:
+                          (context, url, error) =>
+                              Icon(Icons.error),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 17,
+              ),
+              Text(
+                "HOME",
+                style: TextStyle(
+                    fontSize: 22.0,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.bold,
+                    color: Palette.BLACK),
+              ),
+            ]),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: .10),
+              child: IconButton(
+                icon: Icon(Icons.search_outlined),
+                color: Palette.BLACK,
+                iconSize: 28,
+                onPressed: () {
+                  // print(docID);
+                },
+              ),
+            )
           ],
-          controller: pageController,
-          onPageChanged: onPageChange,
-          physics: NeverScrollableScrollPhysics(),
         ),
-        bottomNavigationBar: bottomAppBar(
-          pageController: pageController,
-        ),
+        elevation: 0.0,
       ),
+      body: _postListView(),
     );
   }
 
@@ -217,14 +214,13 @@ class _homeScreenState extends State<homeScreen> {
         Provider.of<App>(context, listen: false);
     var collection = FirebaseFirestore.instance
         .collection('users');
-    var docSnapshot =
-        await collection.doc(docID).get();
+    var docSnapshot = await collection.doc().get();
     if (docSnapshot.exists) {
       Map<String, dynamic>? data =
           docSnapshot.data();
       setState(() {
-        username = data?['displayName'];
-        atUsername = data?['userName'];
+        // username = data?['displayName'];
+        // atUsername = data?['userName'];
       });
       app.username(data?['displayName']);
     }

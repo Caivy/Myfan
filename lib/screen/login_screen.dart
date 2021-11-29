@@ -60,13 +60,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _submitButton() {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
-        // login();
-        auth.login(
-            context,
-            phoneNumberController.toString(),
-            passwordController.toString());
+        print("work");
+        login();
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -220,7 +217,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final height =
         MediaQuery.of(context).size.height;
-
     return Scaffold(
         backgroundColor: Palette.PrimaryColor,
         body: Consumer<App>(
@@ -258,7 +254,7 @@ class _LoginPageState extends State<LoginPage> {
                                     fontWeight:
                                         FontWeight
                                             .bold)),
-                        SizedBox(height: 50),
+                        SizedBox(height: 35),
                         Column(
                           children: <Widget>[
                             Container(
@@ -307,8 +303,8 @@ class _LoginPageState extends State<LoginPage> {
                                       border:
                                           InputBorder
                                               .none,
-                                      errorText: App
-                                          .wrongNum,
+                                      errorText:
+                                          wrongNum,
                                       errorStyle:
                                           GoogleFonts
                                               .roboto(
@@ -359,8 +355,8 @@ class _LoginPageState extends State<LoginPage> {
                                               onPressed: () =>
                                                   setState(() => isPasswords = !isPasswords),
                                             ),
-                                            errorText: App
-                                                .wrongPass,
+                                            errorText:
+                                                wrongPass,
                                             errorStyle:
                                                 GoogleFonts
                                                     .roboto(
@@ -387,38 +383,72 @@ class _LoginPageState extends State<LoginPage> {
                             )
                           ],
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 10),
                         _submitButton(),
-                        Container(
-                          padding:
-                              EdgeInsets.symmetric(
-                                  vertical: 10),
-                          alignment:
-                              Alignment.centerRight,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder:
-                                          (context) =>
-                                              forgotPassPage()));
-                            },
-                            child: Text(
-                                'Forgot Password ?',
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    color: Palette
-                                        .WHITE,
-                                    fontWeight:
-                                        FontWeight
-                                            .w500)),
-                          ),
-                        ),
+                        // InkWell(
+                        //   onTap: () {
+                        //     print("work");
+                        //     login();
+                        //   },
+                        //   child: Container(
+                        //     width: MediaQuery.of(
+                        //             context)
+                        //         .size
+                        //         .width,
+                        //     padding: EdgeInsets
+                        //         .symmetric(
+                        //             vertical: 15),
+                        //     alignment:
+                        //         Alignment.center,
+                        //     decoration: BoxDecoration(
+                        //         borderRadius:
+                        //             BorderRadius
+                        //                 .all(Radius
+                        //                     .circular(
+                        //                         5)),
+                        //         color: Palette
+                        //             .secondaryColor),
+                        //     child: Text(
+                        //       'LOGIN',
+                        //       style: GoogleFonts
+                        //           .roboto(
+                        //               color: Palette
+                        //                   .WHITE,
+                        //               fontSize: 24),
+                        //     ),
+                        //   ),
+                        // ),
+                        // Container(
+                        //   padding:
+                        //       EdgeInsets.symmetric(
+                        //           vertical: 10),
+                        //   alignment:
+                        //       Alignment.centerRight,
+                        //   child: GestureDetector(
+                        //     onTap: () {
+                        //       print("Hi");
+                        //       Navigator.push(
+                        //           context,
+                        //           MaterialPageRoute(
+                        //               builder:
+                        //                   (context) =>
+                        //                       forgotPassPage()));
+                        //     },
+                        //     child: Text(
+                        //         'Forgot Password ?',
+                        //         style: TextStyle(
+                        //             fontSize: 14,
+                        //             color: Palette
+                        //                 .WHITE,
+                        //             fontWeight:
+                        //                 FontWeight
+                        //                     .w500)),
+                        //   ),
+                        // ),
                         _divider(),
                         _facebookButton(),
                         SizedBox(
-                            height: height * .055),
+                            height: height * .044),
                         _createAccountLabel(),
                       ],
                     ),
@@ -438,6 +468,7 @@ class _LoginPageState extends State<LoginPage> {
     var phoneNumber =
         phoneNumberController.text.trim();
     var password = passwordController.text.trim();
+
     await _firestore
         .collection('users')
         .where('phoneNumber',
@@ -483,6 +514,7 @@ class _LoginPageState extends State<LoginPage> {
         });
       }
     });
+    print(doc_id_num);
     if (doc_id_num == doc_id_pass) {
       print(doc_id_num + " " + doc_id_pass);
       print("phoneNumber and Password is correct");

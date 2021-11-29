@@ -102,6 +102,7 @@ class Auth extends App {
 
   Future checkCredentials(
       BuildContext context,
+      // ignore: non_constant_identifier_names
       String Number,
       String username,
       GlobalKey<ScaffoldState>? scaffoldKey) async {
@@ -162,6 +163,8 @@ class Auth extends App {
 
   Future login(BuildContext context,
       String phoneNumber, String password) async {
+    App app =
+        Provider.of<App>(context, listen: false);
     await _firestore
         .collection('users')
         .where('phoneNumber',
@@ -169,8 +172,8 @@ class Auth extends App {
         .get()
         .then((result) {
       if (result.docs.length > 0) {
-        Provider.of<App>(context, listen: false)
-            .wrongNum("");
+        app.WrongNum("");
+        // .wrongNum("");
         result.docs.forEach((v) {
           {
             Provider.of<App>(context, listen: false)
@@ -179,8 +182,7 @@ class Auth extends App {
         });
       } else {
         // WrongNum("Incorrect PhoneNumber");
-        Provider.of<App>(context, listen: false)
-            .wrongNum("Incorrect PhoneNumber");
+        app.WrongNum("");
       }
     });
     await _firestore
@@ -190,7 +192,7 @@ class Auth extends App {
         .then((result) {
       if (result.docs.length > 0) {
         Provider.of<App>(context, listen: false)
-            .wrongPass("");
+            .WrongPass("");
         result.docs.forEach((v) {
           {
             // DocIdPass(v.id);
@@ -200,27 +202,28 @@ class Auth extends App {
         });
       } else {
         Provider.of<App>(context, listen: false)
-            .wrongPass("Incorrect Password");
+            .WrongPass("Incorrect Password");
       }
     });
-    if (docid_num == docid_pass) {
-      print(docid_num + " " + docid_pass);
+
+    if (app.docid_num == app.docid_pass) {
+      print(app.docid_num + " " + app.docid_pass);
       print("phoneNumber and Password is correct");
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
           builder: (BuildContext context) =>
-              homeScreen(docid_num),
+              homeScreen(app.docid_num),
         ),
         (route) => false,
       );
-      WrongPass("");
-      WrongNum("");
-    } else if (docid_num != docid_pass) {
-      WrongNum(
+      app.WrongPass("");
+      app.WrongNum("");
+    } else if (app.docid_num != app.docid_pass) {
+      app.WrongNum(
           "Phonenumber does not match password");
-    } else if (docid_pass != docid_num) {
-      WrongPass(
+    } else if (app.docid_pass != app.docid_num) {
+      app.WrongPass(
           "Password does not match phonenumber");
     }
   }

@@ -1,10 +1,8 @@
-
-
 part 'user_model.g.dart';
-
 
 class UserModel {
   String? phoneNumber;
+  String? password;
   String? email;
   String? userId;
   String? displayName;
@@ -24,6 +22,7 @@ class UserModel {
 
   UserModel({
     this.phoneNumber,
+    this.password,
     this.email,
     this.userId,
     this.displayName,

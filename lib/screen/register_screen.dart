@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -49,7 +50,7 @@ class _SignUpPageState extends State<SignUpPage> {
       new TextEditingController();
   final TextEditingController otpController =
       new TextEditingController();
-
+  Auth auth = Auth();
   var isLoading = false;
   var isResend = false;
   var isRegister = true;
@@ -96,7 +97,12 @@ class _SignUpPageState extends State<SignUpPage> {
           Apps.OTPScreen(true);
           Apps.Loading(true);
         });
-        checkCredentials();
+
+        auth.checkCredentials(
+            context,
+            phoneNumberController.text.trim(),
+            nameController.text.trim(),
+            _scaffoldKey);
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -478,13 +484,18 @@ class _SignUpPageState extends State<SignUpPage> {
         _firestore.collection('users');
     var phoneNumber = '+855 ' +
         phoneNumberController.text.toString();
+    Random random = new Random();
+    int randomNumber = random.nextInt(8);
+
     UserModel userModel = UserModel(
-      phoneNumber: phoneNumber,
-      userName: nameController.text.trim(),
+      phoneNumber:
+          phoneNumberController.text.trim(),
+      userName: "@" + nameController.text.trim(),
       bio: 'Edit profile to update bio',
       displayName: nameController.text.trim(),
       location: 'Somewhere in universe',
       isVerified: false,
+      password: passwordController.text.trim(),
     );
     return Consumer<App>(
         builder: (context, user, child) {
@@ -714,7 +725,8 @@ class _SignUpPageState extends State<SignUpPage> {
         '+855 ' + phoneNumberController.text.trim();
 
     UserModel userModel = UserModel(
-      phoneNumber: phoneNumber,
+      phoneNumber:
+          phoneNumberController.text.trim(),
       userName: nameController.text.trim(),
       bio: 'Edit profile to update bio',
       displayName: nameController.text.trim(),
