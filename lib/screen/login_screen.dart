@@ -118,6 +118,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _facebookButton() {
+    Auth Auths = Provider.of<Auth>(context);
+    Auth auth = Auth();
     return GestureDetector(
       onTap: () async {
         auth.signInWithFacebook(context);
@@ -385,66 +387,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         SizedBox(height: 10),
                         _submitButton(),
-                        // InkWell(
-                        //   onTap: () {
-                        //     print("work");
-                        //     login();
-                        //   },
-                        //   child: Container(
-                        //     width: MediaQuery.of(
-                        //             context)
-                        //         .size
-                        //         .width,
-                        //     padding: EdgeInsets
-                        //         .symmetric(
-                        //             vertical: 15),
-                        //     alignment:
-                        //         Alignment.center,
-                        //     decoration: BoxDecoration(
-                        //         borderRadius:
-                        //             BorderRadius
-                        //                 .all(Radius
-                        //                     .circular(
-                        //                         5)),
-                        //         color: Palette
-                        //             .secondaryColor),
-                        //     child: Text(
-                        //       'LOGIN',
-                        //       style: GoogleFonts
-                        //           .roboto(
-                        //               color: Palette
-                        //                   .WHITE,
-                        //               fontSize: 24),
-                        //     ),
-                        //   ),
-                        // ),
-                        // Container(
-                        //   padding:
-                        //       EdgeInsets.symmetric(
-                        //           vertical: 10),
-                        //   alignment:
-                        //       Alignment.centerRight,
-                        //   child: GestureDetector(
-                        //     onTap: () {
-                        //       print("Hi");
-                        //       Navigator.push(
-                        //           context,
-                        //           MaterialPageRoute(
-                        //               builder:
-                        //                   (context) =>
-                        //                       forgotPassPage()));
-                        //     },
-                        //     child: Text(
-                        //         'Forgot Password ?',
-                        //         style: TextStyle(
-                        //             fontSize: 14,
-                        //             color: Palette
-                        //                 .WHITE,
-                        //             fontWeight:
-                        //                 FontWeight
-                        //                     .w500)),
-                        //   ),
-                        // ),
+
                         _divider(),
                         _facebookButton(),
                         SizedBox(
@@ -465,6 +408,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future login() async {
+    App app = Provider.of<App>(context);
     var phoneNumber =
         phoneNumberController.text.trim();
     var password = passwordController.text.trim();
@@ -483,6 +427,7 @@ class _LoginPageState extends State<LoginPage> {
           {
             setState(() {
               doc_id_num = v.id;
+              app.DocIdNum(v.id);
             });
           }
         });
@@ -522,7 +467,7 @@ class _LoginPageState extends State<LoginPage> {
         context,
         MaterialPageRoute(
           builder: (BuildContext context) =>
-              homeScreen(doc_id_num),
+              homeScreen(),
         ),
         (route) => false,
       );

@@ -643,7 +643,7 @@ class _forgetPassState
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        homeScreen(v.id)));
+                        homeScreen()));
           });
         } catch (e) {
           print(e);

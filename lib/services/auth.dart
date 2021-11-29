@@ -58,9 +58,7 @@ class Auth extends App {
                                       MaterialPageRoute(
                                         builder: (BuildContext
                                                 context) =>
-                                            homeScreen(_firebaseAuth
-                                                .currentUser!
-                                                .uid),
+                                            homeScreen(),
                                       ),
                                       (route) =>
                                           false,
@@ -102,7 +100,6 @@ class Auth extends App {
 
   Future checkCredentials(
       BuildContext context,
-      // ignore: non_constant_identifier_names
       String Number,
       String username,
       GlobalKey<ScaffoldState>? scaffoldKey) async {
@@ -161,73 +158,6 @@ class Auth extends App {
     });
   }
 
-  Future login(BuildContext context,
-      String phoneNumber, String password) async {
-    App app =
-        Provider.of<App>(context, listen: false);
-    await _firestore
-        .collection('users')
-        .where('phoneNumber',
-            isEqualTo: phoneNumber)
-        .get()
-        .then((result) {
-      if (result.docs.length > 0) {
-        app.WrongNum("");
-        // .wrongNum("");
-        result.docs.forEach((v) {
-          {
-            Provider.of<App>(context, listen: false)
-                .DocIdNum(v.id);
-          }
-        });
-      } else {
-        // WrongNum("Incorrect PhoneNumber");
-        app.WrongNum("");
-      }
-    });
-    await _firestore
-        .collection('users')
-        .where('password', isEqualTo: password)
-        .get()
-        .then((result) {
-      if (result.docs.length > 0) {
-        Provider.of<App>(context, listen: false)
-            .WrongPass("");
-        result.docs.forEach((v) {
-          {
-            // DocIdPass(v.id);
-            Provider.of<App>(context, listen: false)
-                .DocIdPass(v.id);
-          }
-        });
-      } else {
-        Provider.of<App>(context, listen: false)
-            .WrongPass("Incorrect Password");
-      }
-    });
-
-    if (app.docid_num == app.docid_pass) {
-      print(app.docid_num + " " + app.docid_pass);
-      print("phoneNumber and Password is correct");
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) =>
-              homeScreen(app.docid_num),
-        ),
-        (route) => false,
-      );
-      app.WrongPass("");
-      app.WrongNum("");
-    } else if (app.docid_num != app.docid_pass) {
-      app.WrongNum(
-          "Phonenumber does not match password");
-    } else if (app.docid_pass != app.docid_num) {
-      app.WrongPass(
-          "Password does not match phonenumber");
-    }
-  }
-
   Future signInWithFacebook(
       BuildContext context) async {
     try {
@@ -242,7 +172,8 @@ class Auth extends App {
           .signInWithCredential(
               FacebookAuthCredential);
       UserModel _userModel = UserModel(
-          userName: userData['name'],
+          displayName: userData['name'],
+          userName: '@' + userData['name'],
           profilePic: userData['picture']['data'],
           email: userData['email'],
           userId: userData['id']);
@@ -254,7 +185,7 @@ class Auth extends App {
         context,
         MaterialPageRoute(
           builder: (BuildContext context) =>
-              homeScreen(userData['id']),
+              homeScreen(),
         ),
         (route) => false,
       );

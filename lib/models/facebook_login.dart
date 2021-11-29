@@ -25,12 +25,12 @@ Future signInWithFacebook(
       'imageUrl': userData['picture']['data']
           ['url'],
       'username': userData['name'],
-    }); 
+    });
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
         builder: (BuildContext context) =>
-            homeScreen(userData['id']),
+            homeScreen(),
       ),
       (route) => false,
     );

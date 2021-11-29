@@ -603,7 +603,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                                 Navigator.pushAndRemoveUntil(
                                                                   context,
                                                                   MaterialPageRoute(
-                                                                    builder: (BuildContext context) => homeScreen(_auth.currentUser!.uid),
+                                                                    builder: (BuildContext context) => homeScreen(),
                                                                   ),
                                                                   (route) => false,
                                                                 )
@@ -712,10 +712,8 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Future checkCredentials() async {
-    Auth Auths =
-        Provider.of<Auth>(context, listen: false);
-    App Apps =
-        Provider.of<App>(context, listen: false);
+    Auth Auths = Provider.of<Auth>(context);
+    App Apps = Provider.of<App>(context);
     Apps.OTPScreen(true);
     var username = nameController.text.trim();
     // ignore: non_constant_identifier_names

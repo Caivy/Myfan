@@ -10,6 +10,10 @@ class post_add extends StatefulWidget {
 class _post_addState extends State<post_add> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Center(
+        child: Text("Compose"),
+      ),
+    );
   }
 }

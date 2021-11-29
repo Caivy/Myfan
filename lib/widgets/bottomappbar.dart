@@ -1,38 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import 'package:myfan/config/global.dart';
+import 'package:provider/provider.dart';
 import 'package:myfan/services/app.dart';
 
-class bottomAppBar extends StatelessWidget {
-  const bottomAppBar({
-    Key? key,
-    required this.pageController,
-  }) : super(key: key);
-  final PageController pageController;
+class bottomAppBar extends StatefulWidget {
+  PageController pageController;
 
+  bottomAppBar(this.pageController, {Key? key})
+      : super(key: key);
+
+  @override
+  _bottomAppBarState createState() =>
+      _bottomAppBarState(this.pageController);
+}
+
+class _bottomAppBarState
+    extends State<bottomAppBar> {
+  _bottomAppBarState(PageController pageController);
+  PageController? pageController;
   @override
   Widget build(BuildContext context) {
     App app =
         Provider.of<App>(context, listen: false);
     return BottomNavigationBar(
       currentIndex: app.pageIndex,
-      onTap: onTap,
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Palette.PrimaryColor,
+      unselectedItemColor: Palette.secondaryColor,
+      selectedItemColor: Palette.WHITE,
+      onTap: (index) {
+        app.PageIndex(index);
+      },
       items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home_outlined),
+            icon: Icon(Icons.home),
+            label: "Home",
+            tooltip: "Home Feeds"),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.notifications),
+          label: "Notification",
+          tooltip: "Notifications",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.notifications_outlined),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.add_box_outlined),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.message_outlined),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: Icon(Icons.message),
+          label: "Messages",
+          tooltip: "Messages",
         ),
       ],
       elevation: 0.0,
@@ -80,12 +92,6 @@ class bottomAppBar extends StatelessWidget {
       //     ],
       //   ),
       // )
-    );
-  }
-
-  onTap(int index) {
-    pageController.jumpToPage(
-      index,
     );
   }
 }

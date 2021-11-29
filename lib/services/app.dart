@@ -9,7 +9,6 @@ class App extends ChangeNotifier {
   String _wrongPass = "";
   String _wrongNum = "";
   String _doc_id_num = "";
-  String _doc_id_pass = "";
   String _sNumber = "";
   String _sUsername = "";
   String _username = "";
@@ -21,7 +20,6 @@ class App extends ChangeNotifier {
   String get wrongPass => _wrongPass;
   String get wrongNum => _wrongNum;
   String get docid_num => _doc_id_num;
-  String get docid_pass => _doc_id_pass;
   String get sNumber => _sNumber;
   String get sUsername => _sUsername;
   String get usernmae => _username;
@@ -69,11 +67,6 @@ class App extends ChangeNotifier {
 
   DocIdNum(String value) {
     _doc_id_num = value;
-    notifyListeners();
-  }
-
-  DocIdPass(String value) {
-    _doc_id_pass = value;
     notifyListeners();
   }
 

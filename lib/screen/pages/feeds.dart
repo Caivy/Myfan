@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myfan/config/global.dart';
 import 'package:myfan/services/app.dart';
-import 'package:myfan/widgets/bottomappbar_widgets.dart';
+
 import 'package:provider/provider.dart';
+import 'package:line_icons/line_icons.dart';
 
 import '../home_screen.dart';
 
 class feed extends StatefulWidget {
-  feed({Key? key}) : super(key: key);
+  feed();
 
   @override
   _feedState createState() => _feedState();
@@ -134,7 +135,7 @@ class _feedState extends State<feed> {
               style: GoogleFonts.roboto(
                   color: Colors.black,
                   fontSize: 21,
-                  fontWeight: FontWeight.bold),
+                  fontWeight: FontWeight.w400),
             ),
             SizedBox(
               width: 5,
@@ -143,15 +144,22 @@ class _feedState extends State<feed> {
               atUsername,
               style: GoogleFonts.roboto(
                   color: Colors.black,
-                  fontSize: 15,
+                  fontSize: 16,
                   fontWeight: FontWeight.normal),
             ),
           ],
         ),
         Padding(
           padding: const EdgeInsets.symmetric(
-              horizontal: 25),
-          child: Icon(Icons.menu),
+              horizontal: 20),
+          child: IconButton(
+            padding:
+                EdgeInsets.symmetric(horizontal: 5),
+            iconSize: 28,
+            icon:
+                Icon(LineIcons.horizontalEllipsis),
+            onPressed: () {},
+          ),
         )
       ],
     );
@@ -180,6 +188,34 @@ class _feedState extends State<feed> {
     );
   }
 
+  Widget _PostEng() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            IconButton(
+              iconSize: 26,
+              icon: Icon(Icons.thumb_up),
+              color: Colors.black,
+              disabledColor: Colors.black,
+              onPressed: () {},
+            ),
+            IconButton(
+              iconSize: 26,
+              icon: Icon(Icons.mode_comment),
+              onPressed: () {},
+            ),
+            IconButton(
+              iconSize: 28,
+              icon: Icon(Icons.share_rounded),
+              onPressed: () {},
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
   Widget _postView() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,6 +229,12 @@ class _feedState extends State<feed> {
           height: 2,
         ),
         _postImage(),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 5,
+          ),
+          child: _PostEng(),
+        ),
       ],
     );
   }
@@ -214,13 +256,14 @@ class _feedState extends State<feed> {
         Provider.of<App>(context, listen: false);
     var collection = FirebaseFirestore.instance
         .collection('users');
-    var docSnapshot = await collection.doc().get();
+    var docSnapshot =
+        await collection.doc(app.docid_num).get();
     if (docSnapshot.exists) {
       Map<String, dynamic>? data =
           docSnapshot.data();
       setState(() {
-        // username = data?['displayName'];
-        // atUsername = data?['userName'];
+        username = data?['displayName'];
+        atUsername = data?['userName'];
       });
       app.username(data?['displayName']);
     }
