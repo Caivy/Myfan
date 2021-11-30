@@ -42,16 +42,11 @@ class _homeScreenState extends State<homeScreen> {
 
   @override
   void initState() {
-    App app =
-        Provider.of<App>(context, listen: false);
-
     super.initState();
   }
 
   @override
   void dispose() {
-    // Clean up the controller when the Widget is disposed
-
     super.dispose();
   }
 

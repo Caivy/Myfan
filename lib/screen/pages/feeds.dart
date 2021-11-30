@@ -2,8 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:line_icons/line_icon.dart';
 import 'package:myfan/config/global.dart';
 import 'package:myfan/services/app.dart';
+import 'package:myfan/services/post.dart';
 
 import 'package:provider/provider.dart';
 import 'package:line_icons/line_icons.dart';
@@ -189,66 +191,95 @@ class _feedState extends State<feed> {
   }
 
   Widget _PostEng() {
-    return Column(
-      children: [
-        Row(
-          children: [
-            IconButton(
-              iconSize: 26,
-              icon: Icon(Icons.thumb_up),
-              color: Colors.black,
-              disabledColor: Colors.black,
-              onPressed: () {},
-            ),
-            IconButton(
-              iconSize: 26,
-              icon: Icon(Icons.mode_comment),
-              onPressed: () {},
-            ),
-            IconButton(
-              iconSize: 28,
-              icon: Icon(Icons.share_rounded),
-              onPressed: () {},
-            ),
-          ],
-        )
-      ],
+    return Consumer<Post>(
+      builder: (context, post, child) => Column(
+        children: [
+          Row(
+            children: [
+              SizedBox(
+                width: 10,
+              ),
+              Text(post.heart.toString(),
+                  style: Text_Style.Normal),
+              IconButton(
+                iconSize: 27,
+                icon: Icon(
+                  LineIcons.heartAlt,
+                  // color: Colors.red,
+                ),
+                color: Colors.black,
+                disabledColor: Colors.black,
+                onPressed: () {},
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Text(post.comment.toString(),
+                  style: Text_Style.Normal),
+              IconButton(
+                iconSize: 26,
+                icon: Icon(Icons.mode_comment),
+                onPressed: () {},
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Text(post.share.toString(),
+                  style: Text_Style.Normal),
+              IconButton(
+                iconSize: 28,
+                icon: Icon(Icons.share_rounded),
+                onPressed: () {},
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 
   Widget _postView() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _postAuthorRow(),
-        SizedBox(
-          height: 2,
-        ),
-        _PostCaption(),
-        SizedBox(
-          height: 2,
-        ),
-        _postImage(),
-        Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 5,
+    return SafeArea(
+      bottom: true,
+      left: true,
+      right: true,
+      child: Column(
+        crossAxisAlignment:
+            CrossAxisAlignment.start,
+        children: [
+          _postAuthorRow(),
+          SizedBox(
+            height: 5,
           ),
-          child: _PostEng(),
-        ),
-      ],
+          _PostCaption(),
+          SizedBox(
+            height: 5,
+          ),
+          _postImage(),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 5,
+            ),
+            child: _PostEng(),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _postListView() {
-    return ListView.builder(
-        itemCount: index,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding:
-                const EdgeInsets.only(bottom: 10),
-            child: _postView(),
-          );
-        });
+    return Consumer<Post>(
+      builder: (context, post, child) =>
+          ListView.builder(
+              itemCount: post.postIndex,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(
+                      bottom: 10),
+                  child: _postView(),
+                );
+              }),
+    );
   }
 
   Future _getData() async {

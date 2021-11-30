@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myfan/config/global.dart';
 import 'package:myfan/models/beziercontainer.dart';
-import 'package:myfan/screen/forgot_password_screen.dart';
+
 import 'package:myfan/screen/home_screen.dart';
-import 'package:myfan/screen/register_screen.dart';
+
 import 'package:myfan/services/app.dart';
 import 'package:myfan/services/auth.dart';
 import 'package:provider/provider.dart';
+
+import 'register_screen.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore =
@@ -408,7 +410,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future login() async {
-    App app = Provider.of<App>(context);
+    App app =
+        Provider.of<App>(context, listen: false);
     var phoneNumber =
         phoneNumberController.text.trim();
     var password = passwordController.text.trim();

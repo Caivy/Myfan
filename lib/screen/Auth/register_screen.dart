@@ -12,7 +12,7 @@ import 'package:myfan/models/beziercontainer.dart';
 import 'package:myfan/models/launch_model.dart';
 import 'package:myfan/models/models.dart';
 import 'package:myfan/screen/home_screen.dart';
-import 'package:myfan/screen/login_screen.dart';
+import 'package:myfan/screen/Auth/login_screen.dart';
 import 'package:myfan/services/app.dart';
 import 'package:myfan/services/auth.dart';
 import 'package:provider/provider.dart';
@@ -160,12 +160,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    App apps =
-        Provider.of<App>(context, listen: false);
-
-    // return apps.isOTPScreen
-    //     ? returnOTPScreen()
-    //     : registerScreen();
     return Consumer<App>(
         builder: (context, App, child) =>
             App.isOTPScreen
@@ -229,13 +223,8 @@ class _SignUpPageState extends State<SignUpPage> {
                               children: <Widget>[
                                 Text(
                                   "Username",
-                                  style: TextStyle(
-                                      fontWeight:
-                                          FontWeight
-                                              .bold,
-                                      color: Palette
-                                          .WHITE,
-                                      fontSize: 15),
+                                  style: Text_Style
+                                      .text,
                                 ),
                                 SizedBox(
                                   height: 5,
@@ -285,13 +274,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                 //     height: 15),
                                 Text(
                                   "Phone Number",
-                                  style: TextStyle(
-                                      fontWeight:
-                                          FontWeight
-                                              .bold,
-                                      color: Palette
-                                          .WHITE,
-                                      fontSize: 15),
+                                  style: Text_Style
+                                      .text,
                                 ),
                                 SizedBox(
                                   height: 5,
@@ -343,13 +327,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                 // ),
                                 Text(
                                   "Password",
-                                  style: TextStyle(
-                                      fontWeight:
-                                          FontWeight
-                                              .bold,
-                                      color: Palette
-                                          .WHITE,
-                                      fontSize: 15),
+                                  style: Text_Style
+                                      .text,
                                 ),
                                 SizedBox(
                                   height: 5,
@@ -409,12 +388,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
-                          style: GoogleFonts.roboto(
-                            color: Palette.WHITE,
-                            fontSize: 15,
-                            // fontStyle:
-                            //     FontStyle.italic,
-                          ),
+                          style: Text_Style.text,
                           children: <TextSpan>[
                             TextSpan(
                               text:
@@ -528,6 +502,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                             !App.isLoading
                                                 ? "Enter OTP from SMS"
                                                 : "Sending OTP code SMS",
+                                            style: Text_Style
+                                                .Normal,
                                             textAlign:
                                                 TextAlign.center))),
                                 !App.isLoading
@@ -725,11 +701,12 @@ class _SignUpPageState extends State<SignUpPage> {
     UserModel userModel = UserModel(
       phoneNumber:
           phoneNumberController.text.trim(),
-      userName: nameController.text.trim(),
+      userName: "@" + nameController.text.trim(),
       bio: 'Edit profile to update bio',
       displayName: nameController.text.trim(),
       location: 'Somewhere in universe',
       isVerified: false,
+      password: passwordController.text.trim(),
     );
     await _firestore
         .collection('users')
