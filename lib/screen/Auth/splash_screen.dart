@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myfan/config/global.dart';
 import 'register_screen.dart';
 import 'login_screen.dart';
 
 class splashScreen extends StatelessWidget {
-  const splashScreen({Key? key})
-      : super(key: key);
+  const splashScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final height =
         MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Palette.PrimaryColor,
+      backgroundColor: Palette.WHITE,
       body: Stack(children: [
         Container(
           padding: EdgeInsets.symmetric(
@@ -26,140 +27,120 @@ class splashScreen extends StatelessWidget {
                 MainAxisAlignment.start,
             children: <Widget>[
               SizedBox(
-                height: height * 0.1,
+                height: 20,
               ),
-              Column(
-                children: [
-                  Container(
-                      margin:
-                          EdgeInsets.symmetric(
-                              vertical: .5),
-                      child: Column(
-                          crossAxisAlignment:
-                              CrossAxisAlignment
-                                  .start,
+              Container(
+                  child: Column(
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                      children: <Widget>[
+                    Center(
+                      child: SvgPicture.asset(
+                        'mlogo.svg',
+                        height: height * 0.5,
+                        width: width * 0.5,
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    LoginPage()));
+                      },
+                      style:
+                          ElevatedButton.styleFrom(
+                              primary: Palette
+                                  .PrimaryColor),
+                      child: new Container(
+                        padding: const EdgeInsets
+                            .symmetric(
+                          vertical: 10.0,
+                          horizontal: 10,
+                        ),
+                        child: new Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment
+                                  .center,
                           children: <Widget>[
-                            Image.asset(
-                              'assets/Logo1.png',
+                            Icon(
+                              Icons.person,
+                              size: 30,
+                              color: Palette.WHITE,
                             ),
-                            // SizedBox(
-                            //   height: 10,
-                            // ),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder:
-                                            (context) =>
-                                                LoginPage()));
-                              },
-                              style: ElevatedButton
-                                  .styleFrom(
-                                      primary: Palette
-                                          .secondaryColor),
-                              child:
-                                  new Container(
-                                padding:
-                                    const EdgeInsets
-                                        .symmetric(
-                                  vertical: 15.0,
-                                  horizontal: 10,
-                                ),
-                                child: new Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment
-                                          .center,
-                                  children: <
-                                      Widget>[
-                                    Icon(
-                                      Icons
-                                          .person,
-                                      size: 30,
-                                      color: Palette
-                                          .BLACK,
-                                    ),
-                                    new Expanded(
-                                      child: Text(
-                                        "LOGIN",
-                                        textAlign:
-                                            TextAlign
-                                                .center,
-                                        style: GoogleFonts.ubuntu(
-                                            color: Palette
-                                                .BLACK,
-                                            fontSize:
-                                                18,
-                                            fontWeight:
-                                                FontWeight.bold),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                            new Expanded(
+                              child: Text(
+                                "LOGIN",
+                                textAlign: TextAlign
+                                    .center,
+                                style: GoogleFonts.ubuntu(
+                                    color: Palette
+                                        .WHITE,
+                                    fontSize: 18,
+                                    fontWeight:
+                                        FontWeight
+                                            .bold),
                               ),
                             ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    SignUpPage()));
+                      },
+                      style:
+                          ElevatedButton.styleFrom(
+                              primary: Palette
+                                  .PrimaryColor),
+                      child: new Container(
+                        padding: const EdgeInsets
+                            .symmetric(
+                          vertical: 10.0,
+                          horizontal: 10,
+                        ),
+                        child: new Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment
+                                  .center,
+                          children: <Widget>[
                             SizedBox(
-                              height: 20,
+                              width: 2,
                             ),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder:
-                                            (context) =>
-                                                SignUpPage()));
-                              },
-                              style: ElevatedButton
-                                  .styleFrom(
-                                      primary: Palette
-                                          .secondaryColor),
-                              child:
-                                  new Container(
-                                padding:
-                                    const EdgeInsets
-                                        .symmetric(
-                                  vertical: 15.0,
-                                  horizontal: 10,
-                                ),
-                                child: new Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment
-                                          .center,
-                                  children: <
-                                      Widget>[
-                                    SizedBox(
-                                      width: 4,
-                                    ),
-                                    Icon(
-                                      Icons
-                                          .person_add_alt_1,
-                                      size: 30,
-                                      color: Palette
-                                          .BLACK,
-                                    ),
-                                    new Expanded(
-                                      child: Text(
-                                        "REGISTER",
-                                        textAlign:
-                                            TextAlign
-                                                .center,
-                                        style: GoogleFonts.ubuntu(
-                                            color: Palette
-                                                .BLACK,
-                                            fontSize:
-                                                18,
-                                            fontWeight:
-                                                FontWeight.bold),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                            Icon(
+                              Icons
+                                  .person_add_alt_1,
+                              size: 30,
+                              color: Palette.WHITE,
+                            ),
+                            new Expanded(
+                              child: Text(
+                                "REGISTER",
+                                textAlign: TextAlign
+                                    .center,
+                                style: GoogleFonts.ubuntu(
+                                    color: Palette
+                                        .WHITE,
+                                    fontSize: 18,
+                                    fontWeight:
+                                        FontWeight
+                                            .bold),
                               ),
-                            )
-                          ]))
-                ],
-              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ])),
             ],
           ),
         )

@@ -37,6 +37,11 @@ class _bottomAppBarState
             label: "Home",
             tooltip: "Home Feeds"),
         BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: "Explore",
+            tooltip:
+                "Find out what happen around you !"),
+        BottomNavigationBarItem(
           icon: Icon(Icons.notifications),
           label: "Notification",
           tooltip: "Notifications",
@@ -48,50 +53,6 @@ class _bottomAppBarState
         ),
       ],
       elevation: 0.0,
-      // color: Palette.PrimaryColor,
-      // child: IconTheme(
-      //   data: IconThemeData(color: Colors.white),
-      //   child: Row(
-      //     mainAxisAlignment:
-      //         MainAxisAlignment.spaceEvenly,
-      //     children: <Widget>[
-      //       IconButton(
-      //         tooltip: 'Home',
-      //         iconSize: 24,
-      //         icon:
-      //             const Icon(Icons.home_outlined),
-      //         onPressed: () {},
-      //       ),
-      //       IconButton(
-      //         tooltip: 'Notification',
-      //         iconSize: 24,
-      //         icon: const Icon(
-      //             Icons.notifications_outlined),
-      //         onPressed: () {},
-      //       ),
-      //       IconButton(
-      //         tooltip: 'Create Post',
-      //         iconSize: 24,
-      //         icon: const Icon(
-      //             Icons.add_box_outlined),
-      //         onPressed: () {},
-      //       ),
-      //       IconButton(
-      //         tooltip: 'Message',
-      //         iconSize: 24,
-      //         icon: const Icon(
-      //             Icons.message_outlined),
-      //         onPressed: () {},
-      //       ),
-      //       // IconButton(
-      //       //   tooltip: 'Account',
-      //       //   iconSize: 24,
-      //       //   icon: const Icon(Icons.person),
-      //       //   onPressed: () {},
-      //       // ),
-      //     ],
-      //   ),
-      // )
     );
   }
 }

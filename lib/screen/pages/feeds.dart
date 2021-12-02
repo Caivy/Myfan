@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:myfan/config/global.dart';
+import 'package:myfan/screen/profile_sidebar.dart';
 import 'package:myfan/services/app.dart';
 import 'package:myfan/services/post.dart';
 
@@ -11,6 +12,8 @@ import 'package:provider/provider.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../home_screen.dart';
+
+bool is_heart = true;
 
 class feed extends StatefulWidget {
   feed();
@@ -20,22 +23,31 @@ class feed extends StatefulWidget {
 }
 
 class _feedState extends State<feed> {
+  final GlobalKey<ScaffoldState> _scaffoldKey =
+      GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     final height =
         MediaQuery.of(context).size.height;
-    double avatarDia = 48;
+    final width = MediaQuery.of(context).size.width;
+    double avatarDia = 44;
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: profile_sidebar(),
+      endDrawerEnableOpenDragGesture: false,
       appBar: AppBar(
         backgroundColor: Palette.WHITE,
-        title: Row(
-          mainAxisAlignment:
-              MainAxisAlignment.spaceBetween,
-          children: [
-            Row(children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: .10),
+        leading: GestureDetector(
+          onTap: () {
+            _scaffoldKey.currentState!.openDrawer();
+          },
+          child: Row(
+            children: [
+              // SizedBox(
+              //   width: 23,
+              // ),
+              Flexible(
+                // fit: FlexFit.tight,
                 child: Container(
                   width: avatarDia,
                   height: avatarDia,
@@ -49,7 +61,7 @@ class _feedState extends State<feed> {
                       avatarDia / 2,
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: Caivy,
+                      imageUrl: dummyProfile,
                       placeholder: (context, url) =>
                           CircularProgressIndicator(),
                       errorWidget:
@@ -60,14 +72,26 @@ class _feedState extends State<feed> {
                   ),
                 ),
               ),
-              SizedBox(
-                width: 17,
-              ),
+            ],
+          ),
+        ),
+        title: Row(
+          mainAxisAlignment:
+              MainAxisAlignment.spaceBetween,
+          children: [
+            Row(children: [
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(
+              //       horizontal: .10),
+              //   child:
+              // ),
+              // SizedBox(
+              //   width: 17,
+              // ),
               Text(
                 "HOME",
-                style: TextStyle(
+                style: GoogleFonts.roboto(
                     fontSize: 22.0,
-                    fontFamily: 'Roboto',
                     fontWeight: FontWeight.bold,
                     color: Palette.BLACK),
               ),
@@ -102,7 +126,6 @@ class _feedState extends State<feed> {
         Row(
           children: [
             Padding(
-              // padding: EdgeInsets.all(8),
               padding: EdgeInsets.symmetric(
                   horizontal: 15, vertical: 10),
               child: Container(
@@ -132,22 +155,30 @@ class _feedState extends State<feed> {
             SizedBox(
               width: 0.10,
             ),
-            Text(
-              username,
-              style: GoogleFonts.roboto(
-                  color: Colors.black,
-                  fontSize: 21,
-                  fontWeight: FontWeight.w400),
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Text(
-              atUsername,
-              style: GoogleFonts.roboto(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.normal),
+            Column(
+              children: [
+                Text(
+                  username,
+                  style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontSize: 21,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 1),
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: .15,
+                  ),
+                  child: Text(
+                    atUsername,
+                    style: GoogleFonts.roboto(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight:
+                            FontWeight.normal),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -157,7 +188,7 @@ class _feedState extends State<feed> {
           child: IconButton(
             padding:
                 EdgeInsets.symmetric(horizontal: 5),
-            iconSize: 28,
+            iconSize: 30,
             icon:
                 Icon(LineIcons.horizontalEllipsis),
             onPressed: () {},
@@ -183,9 +214,7 @@ class _feedState extends State<feed> {
           horizontal: 15, vertical: 4),
       child: Text(
         "Yo this is a testing caption for posts",
-        style: GoogleFonts.roboto(
-          fontSize: 17,
-        ),
+        style: Text_Style.Normal,
       ),
     );
   }
@@ -205,11 +234,15 @@ class _feedState extends State<feed> {
                 iconSize: 27,
                 icon: Icon(
                   LineIcons.heartAlt,
-                  // color: Colors.red,
+                  color: is_heart
+                      ? Colors.black
+                      : Colors.red,
                 ),
-                color: Colors.black,
-                disabledColor: Colors.black,
-                onPressed: () {},
+                onPressed: () {
+                  is_heart = false;
+                  print("Hearted");
+                  post.Heart(1);
+                },
               ),
               SizedBox(
                 width: 10,
@@ -221,15 +254,14 @@ class _feedState extends State<feed> {
                 icon: Icon(Icons.mode_comment),
                 onPressed: () {},
               ),
-              SizedBox(
-                width: 10,
-              ),
-              Text(post.share.toString(),
-                  style: Text_Style.Normal),
               IconButton(
                 iconSize: 28,
-                icon: Icon(Icons.share_rounded),
+                icon: Icon(Icons.attach_money),
                 onPressed: () {},
+              ),
+              Text(
+                "Send a Tips",
+                style: Text_Style.Normal,
               ),
             ],
           )
@@ -249,11 +281,11 @@ class _feedState extends State<feed> {
         children: [
           _postAuthorRow(),
           SizedBox(
-            height: 5,
+            height: 3,
           ),
           _PostCaption(),
           SizedBox(
-            height: 5,
+            height: 3,
           ),
           _postImage(),
           Padding(
@@ -271,13 +303,9 @@ class _feedState extends State<feed> {
     return Consumer<Post>(
       builder: (context, post, child) =>
           ListView.builder(
-              itemCount: post.postIndex,
+              itemCount: 3,
               itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(
-                      bottom: 10),
-                  child: _postView(),
-                );
+                return _postView();
               }),
     );
   }

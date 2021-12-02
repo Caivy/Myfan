@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:myfan/screen/pages/explore.dart';
 
 import 'package:myfan/screen/pages/feeds.dart';
 import 'package:myfan/screen/pages/message.dart';
@@ -55,10 +56,11 @@ class _homeScreenState extends State<homeScreen> {
       case 0:
         return feed();
       case 1:
-        return notification();
+        return explore();
       case 2:
+        return notification();
+      case 3:
         return message();
-
       default:
         return feed();
     }
@@ -67,7 +69,6 @@ class _homeScreenState extends State<homeScreen> {
   @override
   Widget build(BuildContext context) {
     App app = Provider.of<App>(context);
-
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -77,21 +78,5 @@ class _homeScreenState extends State<homeScreen> {
       bottomNavigationBar:
           bottomAppBar(pageController),
     );
-    // return Consumer<App>(
-    //   builder: (context, app, child) => Scaffold(
-    //     body: PageView(
-    //       children: [
-    //         feed(),
-    //         notification(),
-    //         message(),
-    //       ],
-    //       controller: pageController,
-    //       onPageChanged: onPageChange,
-    //       physics: NeverScrollableScrollPhysics(),
-    //     ),
-    //     bottomNavigationBar:
-    //         bottomAppBar(pageController),
-    //   ),
-    // );
   }
 }

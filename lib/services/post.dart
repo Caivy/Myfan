@@ -5,7 +5,7 @@ class Post extends App {
   int _heart = 0;
   int _comment = 0;
   int _share = 0;
-  int _postIndex = 1;
+  int _postIndex = 0;
 
   int get heart => _heart;
   int get comment => _comment;
@@ -13,7 +13,7 @@ class Post extends App {
   int get postIndex => _postIndex;
 
   PostIndex(int value) {
-    _postIndex = value;
+    _postIndex = _postIndex + value;
     notifyListeners();
   }
 

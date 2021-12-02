@@ -208,7 +208,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               fontWeight:
                                   FontWeight.bold)),
                       SizedBox(
-                        height: 40,
+                        height: 20,
                       ),
                       Column(
                         children: <Widget>[
@@ -388,7 +388,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
-                          style: Text_Style.text,
+                          style: GoogleFonts.roboto(
+                              fontSize: 15,
+                              color: Palette.WHITE),
                           children: <TextSpan>[
                             TextSpan(
                               text:

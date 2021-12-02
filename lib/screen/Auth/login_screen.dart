@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
       child: Row(
         children: <Widget>[
           SizedBox(
-            width: 20,
+            width: 15,
           ),
           Expanded(
             child: Padding(
@@ -101,7 +101,11 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          Text('or'),
+          Text(
+            'or',
+            style: GoogleFonts.roboto(
+                color: Palette.WHITE),
+          ),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(
@@ -112,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           SizedBox(
-            width: 20,
+            width: 10,
           ),
         ],
       ),
@@ -247,7 +251,7 @@ class _LoginPageState extends State<LoginPage> {
                           MainAxisAlignment.center,
                       children: <Widget>[
                         SizedBox(
-                            height: height * .2),
+                            height: height * 0.2),
                         // Image.asset('assets/Logo1.png'),
                         Text('Login',
                             style:
@@ -258,7 +262,7 @@ class _LoginPageState extends State<LoginPage> {
                                     fontWeight:
                                         FontWeight
                                             .bold)),
-                        SizedBox(height: 35),
+                        SizedBox(height: 20),
                         Column(
                           children: <Widget>[
                             Container(
@@ -327,8 +331,8 @@ class _LoginPageState extends State<LoginPage> {
                                     controller:
                                         phoneNumberController,
                                   ),
-                                  SizedBox(
-                                      height: 10),
+                                  // SizedBox(
+                                  //     height: 10),
                                   Text(
                                     "Password",
                                     style: TextStyle(
@@ -387,13 +391,11 @@ class _LoginPageState extends State<LoginPage> {
                             )
                           ],
                         ),
-                        SizedBox(height: 10),
+                        // SizedBox(height: 10),
                         _submitButton(),
-
                         _divider(),
                         _facebookButton(),
-                        SizedBox(
-                            height: height * .044),
+
                         _createAccountLabel(),
                       ],
                     ),
