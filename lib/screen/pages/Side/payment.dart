@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myfan/services/usermodel.dart';
+import 'package:provider/provider.dart';
 
 class payment extends StatefulWidget {
   const payment({Key? key}) : super(key: key);
@@ -10,12 +12,13 @@ class payment extends StatefulWidget {
 class _paymentState extends State<payment> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-          child: Text(
-        "Payment",
-        style: TextStyle(fontSize: 22),
-      )),
-    );
+    return Consumer<usermodel>(
+        builder: (context, usermodel, child) {
+      return Scaffold(
+        appBar: AppBar(title: Text("Payment")),
+        body: Center(
+            child: Text(usermodel.displayName)),
+      );
+    });
   }
 }

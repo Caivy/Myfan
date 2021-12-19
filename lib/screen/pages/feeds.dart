@@ -37,57 +37,53 @@ class _feedState extends State<feed> {
       endDrawerEnableOpenDragGesture: false,
       appBar: AppBar(
         backgroundColor: Palette.WHITE,
-        leading: GestureDetector(
-          onTap: () {
-            _scaffoldKey.currentState!.openDrawer();
-          },
-          child: Row(
-            children: [
-              // SizedBox(
-              //   width: 23,
-              // ),
-              Flexible(
-                // fit: FlexFit.tight,
-                child: Container(
-                  width: avatarDia,
-                  height: avatarDia,
-                  decoration: BoxDecoration(
-                    color: Palette.secondaryColor,
-                    shape: BoxShape.circle,
-                  ),
-                  child: ClipRRect(
-                    borderRadius:
-                        BorderRadius.circular(
-                      avatarDia / 2,
+        leading: Row(
+          children: [
+            Expanded(
+              flex: 5,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 15.0),
+                child: GestureDetector(
+                  onTap: () {
+                    _scaffoldKey.currentState!
+                        .openDrawer();
+                  },
+                  child: Container(
+                    width: avatarDia,
+                    height: avatarDia,
+                    decoration: BoxDecoration(
+                      color: Palette.secondaryColor,
+                      shape: BoxShape.circle,
                     ),
-                    child: CachedNetworkImage(
-                      imageUrl: dummyProfile,
-                      placeholder: (context, url) =>
-                          CircularProgressIndicator(),
-                      errorWidget:
-                          (context, url, error) =>
-                              Icon(Icons.error),
-                      fit: BoxFit.cover,
+                    child: ClipRRect(
+                      borderRadius:
+                          BorderRadius.circular(
+                        avatarDia / 2,
+                      ),
+                      child: CachedNetworkImage(
+                        imageUrl: Caivy,
+                        placeholder: (context,
+                                url) =>
+                            CircularProgressIndicator(),
+                        errorWidget:
+                            (context, url, error) =>
+                                Icon(Icons.error),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         title: Row(
           mainAxisAlignment:
               MainAxisAlignment.spaceBetween,
           children: [
             Row(children: [
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(
-              //       horizontal: .10),
-              //   child:
-              // ),
-              // SizedBox(
-              //   width: 17,
-              // ),
+              SizedBox(width: 8),
               Text(
                 "HOME",
                 style: GoogleFonts.roboto(

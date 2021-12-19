@@ -193,4 +193,27 @@ class Auth extends App {
       throw e;
     }
   }
+
+  Future getUser(BuildContext context) async {
+    App app =
+        Provider.of<App>(context, listen: false);
+    var collection = FirebaseFirestore.instance
+        .collection('users');
+    var docSnapshot =
+        await collection.doc(app.docid_num).get();
+    if (docSnapshot.exists) {
+      Map<String, dynamic>? data =
+          docSnapshot.data();
+      UserModel _userModel = UserModel(
+        userName: data?['userName'],
+        displayName: data?['displayName'],
+        phoneNumber: data?['phoneNumber'],
+        profilePic: data?['profilePic'],
+        bio: data?['bio'],
+        createdAt: data?['createAt'],
+        followers: data?['followers'],
+        following: data?['following'],
+      );
+    }
+  }
 }
