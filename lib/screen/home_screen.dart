@@ -75,8 +75,7 @@ class _homeScreenState extends State<homeScreen> {
           child: _getPage(app.pageIndex),
         ),
       ),
-      bottomNavigationBar:
-          bottomAppBar(pageController),
+      bottomNavigationBar: bottomAppBar(),
     );
   }
 }

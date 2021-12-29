@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myfan/config/global.dart';
+import 'package:myfan/screen/home_screen.dart';
 import 'package:myfan/services/usermodel.dart';
 import 'package:provider/provider.dart';
 
@@ -116,12 +117,29 @@ class _notificationState
             // ),
             Column(
               children: [
-                Row(
-                  children: [],
-                )
+                user(
+                    Caivy,
+                    "Caivy",
+                    "Sunday at 3:46PM",
+                    "Likes your recent post")
               ],
             )
           ],
         ));
+  }
+
+  Widget user(
+    String url,
+    String displayName,
+    String date,
+    String post,
+  ) {
+    return ListTile(
+      leading: CircleAvatar(
+        foregroundImage: NetworkImage(url),
+      ),
+      title: Text(displayName),
+      subtitle: Text(date),
+    );
   }
 }

@@ -115,7 +115,7 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Text(
           'Register Now',
           style: TextStyle(
-              fontSize: 20, color: Colors.white),
+              fontSize: 20, color: Palette.WHITE),
         ),
       ),
     );
@@ -540,7 +540,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                               labelText:
                                                   'OTP',
                                               labelStyle:
-                                                  TextStyle(color: Colors.black)),
+                                                  TextStyle(color: Palette.BLACK)),
                                           validator:
                                               (value) {
                                             if (value!

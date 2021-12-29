@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:myfan/config/global.dart';
 
 import 'package:myfan/screen/home_screen.dart';
 import 'package:myfan/screen/pages/Side/myprofile.dart';
@@ -24,7 +25,7 @@ class profile_sidebar extends StatelessWidget {
         builder: (context, usermodel, child) {
       return Drawer(
         child: Material(
-          color: Colors.white,
+          color: Palette.WHITE,
           child: ListView(
             children: <Widget>[
               const SizedBox(
@@ -46,7 +47,7 @@ class profile_sidebar extends StatelessWidget {
                           width: 42,
                           height: 42,
                           decoration: BoxDecoration(
-                            color: Colors.black,
+                            color: Palette.BLACK,
                             shape: BoxShape.circle,
                           ),
                           child: ClipRRect(
@@ -91,7 +92,7 @@ class profile_sidebar extends StatelessWidget {
                               usermodel.displayName,
                               style: TextStyle(
                                   color:
-                                      Colors.black,
+                                      Palette.BLACK,
                                   fontWeight:
                                       FontWeight
                                           .bold,
@@ -123,7 +124,7 @@ class profile_sidebar extends StatelessWidget {
                         Text(
                           "5" + " Fans",
                           style: TextStyle(
-                              color: Colors.black,
+                              color: Palette.BLACK,
                               fontSize: 14,
                               fontWeight: FontWeight
                                   .normal),
@@ -134,7 +135,7 @@ class profile_sidebar extends StatelessWidget {
                         Text(
                           "20" + " Following",
                           style: TextStyle(
-                              color: Colors.black,
+                              color: Palette.BLACK,
                               fontSize: 14,
                               fontWeight: FontWeight
                                   .normal),
@@ -149,7 +150,7 @@ class profile_sidebar extends StatelessWidget {
               ),
               Divider(
                 height: 10,
-                color: Colors.black,
+                color: Palette.BLACK,
                 thickness: 1,
               ),
               buildMenuItem(
@@ -169,7 +170,7 @@ class profile_sidebar extends StatelessWidget {
               ),
               Divider(
                 height: 10,
-                color: Colors.black,
+                color: Palette.BLACK,
                 thickness: 1,
               ),
               buildMenuItem(
@@ -186,7 +187,7 @@ class profile_sidebar extends StatelessWidget {
               ),
               Divider(
                 height: 10,
-                color: Colors.black,
+                color: Palette.BLACK,
                 thickness: 1,
               ),
               buildMenuItem(
@@ -208,7 +209,7 @@ class profile_sidebar extends StatelessWidget {
                     onPressed: () {},
                     icon: Icon(
                       Icons.arrow_drop_down,
-                      color: Colors.black,
+                      color: Palette.BLACK,
                       size: 22,
                     )),
                 onClicked: () =>
@@ -216,7 +217,7 @@ class profile_sidebar extends StatelessWidget {
               ),
               Divider(
                 height: 10,
-                color: Colors.black,
+                color: Palette.BLACK,
                 thickness: 1,
               ),
               buildMenuItem(
@@ -255,7 +256,7 @@ class profile_sidebar extends StatelessWidget {
   Widget buildMenuItem(String text, IconData icon,
       {IconButton? dropdown,
       VoidCallback? onClicked}) {
-    final color = Colors.black;
+    final color = Palette.BLACK;
     final hoverColor = Colors.black12;
 
     return ListTile(

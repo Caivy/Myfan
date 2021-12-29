@@ -152,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                 alignment: Alignment.center,
                 child: Text('f',
                     style: TextStyle(
-                        color: Colors.white,
+                        color: Palette.WHITE,
                         fontSize: 25,
                         fontWeight:
                             FontWeight.w400)),
@@ -171,7 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                 alignment: Alignment.center,
                 child: Text('Log in with Facebook',
                     style: TextStyle(
-                        color: Colors.white,
+                        color: Palette.WHITE,
                         fontSize: 18,
                         fontWeight:
                             FontWeight.w400)),

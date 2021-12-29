@@ -20,8 +20,7 @@ class allWidgets extends StatelessWidget {
                   height: 27,
                   width: 40,
                   decoration: BoxDecoration(
-                      color:
-                          Palette.secondaryColor,
+                      color: Palette.secondaryColor,
                       borderRadius:
                           BorderRadius.circular(
                               20.0)),
@@ -32,7 +31,7 @@ class allWidgets extends StatelessWidget {
                           fontWeight:
                               FontWeight.bold,
                           fontFamily: "Roboto",
-                          color: Colors.black),
+                          color: Palette.BLACK),
                     ),
                   )),
               Padding(
@@ -49,7 +48,7 @@ class allWidgets extends StatelessWidget {
                   child: IconButton(
                     padding: EdgeInsets.zero,
                     icon: Icon(Icons.edit),
-                    color: Colors.black,
+                    color: Palette.BLACK,
                     iconSize: 20,
                     onPressed: () {},
                   ),
@@ -61,8 +60,7 @@ class allWidgets extends StatelessWidget {
           SizedBox(
               child: IconButton(
                   onPressed: () {},
-                  icon:
-                      Icon(Icons.menu_outlined)))
+                  icon: Icon(Icons.menu_outlined)))
         ],
       ),
     );

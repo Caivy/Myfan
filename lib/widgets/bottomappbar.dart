@@ -4,20 +4,17 @@ import 'package:provider/provider.dart';
 import 'package:myfan/services/app.dart';
 
 class bottomAppBar extends StatefulWidget {
-  PageController pageController;
-
-  bottomAppBar(this.pageController, {Key? key})
-      : super(key: key);
+  bottomAppBar({Key? key}) : super(key: key);
 
   @override
   _bottomAppBarState createState() =>
-      _bottomAppBarState(this.pageController);
+      _bottomAppBarState();
 }
 
 class _bottomAppBarState
     extends State<bottomAppBar> {
-  _bottomAppBarState(PageController pageController);
-  PageController? pageController;
+  _bottomAppBarState();
+
   @override
   Widget build(BuildContext context) {
     App app =

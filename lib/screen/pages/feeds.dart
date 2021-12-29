@@ -156,7 +156,7 @@ class _feedState extends State<feed> {
                 Text(
                   username,
                   style: GoogleFonts.roboto(
-                      color: Colors.black,
+                      color: Palette.BLACK,
                       fontSize: 21,
                       fontWeight: FontWeight.bold),
                 ),
@@ -168,7 +168,7 @@ class _feedState extends State<feed> {
                   child: Text(
                     atUsername,
                     style: GoogleFonts.roboto(
-                        color: Colors.black,
+                        color: Palette.BLACK,
                         fontSize: 16,
                         fontWeight:
                             FontWeight.normal),
@@ -231,7 +231,7 @@ class _feedState extends State<feed> {
                 icon: Icon(
                   LineIcons.heartAlt,
                   color: is_heart
-                      ? Colors.black
+                      ? Palette.BLACK
                       : Colors.red,
                 ),
                 onPressed: () {
