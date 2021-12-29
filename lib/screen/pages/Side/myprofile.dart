@@ -17,8 +17,11 @@ class _my_profileState extends State<my_profile> {
         builder: (context, usermodel, child) {
       return Scaffold(
         appBar: AppBar(title: Text("My Profile")),
-        body: Center(
-            child: Text(usermodel.displayName)),
+        body: ListView(
+          children: [
+            Row(),
+          ],
+        ),
       );
     });
   }
