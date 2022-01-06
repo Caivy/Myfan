@@ -49,8 +49,9 @@ class _settingState extends State<setting> {
                             builder: (context) =>
                                 profile()));
                   },
-                  icon: Icon(Icons
-                      .keyboard_arrow_right)),
+                  icon: Icon(
+                      Icons.keyboard_arrow_right,
+                      color: Palette.BLACK)),
               onTap: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(
@@ -77,8 +78,9 @@ class _settingState extends State<setting> {
                             builder: (context) =>
                                 account()));
                   },
-                  icon: Icon(Icons
-                      .keyboard_arrow_right)),
+                  icon: Icon(
+                      Icons.keyboard_arrow_right,
+                      color: Palette.BLACK)),
               onTap: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(
@@ -105,8 +107,9 @@ class _settingState extends State<setting> {
                             builder: (context) =>
                                 privacy_safety()));
                   },
-                  icon: Icon(Icons
-                      .keyboard_arrow_right)),
+                  icon: Icon(
+                      Icons.keyboard_arrow_right,
+                      color: Palette.BLACK)),
               onTap: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(
@@ -133,8 +136,9 @@ class _settingState extends State<setting> {
                             builder: (context) =>
                                 noti_setting()));
                   },
-                  icon: Icon(Icons
-                      .keyboard_arrow_right)),
+                  icon: Icon(
+                      Icons.keyboard_arrow_right,
+                      color: Palette.BLACK)),
               onTap: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(
@@ -161,8 +165,9 @@ class _settingState extends State<setting> {
                             builder: (context) =>
                                 display()));
                   },
-                  icon: Icon(Icons
-                      .keyboard_arrow_right)),
+                  icon: Icon(
+                      Icons.keyboard_arrow_right,
+                      color: Palette.BLACK)),
               onTap: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(

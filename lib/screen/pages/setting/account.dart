@@ -61,8 +61,10 @@ class account extends StatelessWidget {
                               builder: (context) =>
                                   change_username()));
                     },
-                    icon: Icon(Icons
-                        .keyboard_arrow_right)),
+                    icon: Icon(
+                        Icons
+                            .keyboard_arrow_right,
+                        color: Palette.BLACK)),
                 onTap: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(
@@ -90,8 +92,10 @@ class account extends StatelessWidget {
                               builder: (context) =>
                                   change_emails()));
                     },
-                    icon: Icon(Icons
-                        .keyboard_arrow_right)),
+                    icon: Icon(
+                        Icons
+                            .keyboard_arrow_right,
+                        color: Palette.BLACK)),
                 onTap: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(
@@ -119,8 +123,10 @@ class account extends StatelessWidget {
                               builder: (context) =>
                                   change_number()));
                     },
-                    icon: Icon(Icons
-                        .keyboard_arrow_right)),
+                    icon: Icon(
+                        Icons
+                            .keyboard_arrow_right,
+                        color: Palette.BLACK)),
                 onTap: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(
@@ -167,8 +173,10 @@ class account extends StatelessWidget {
                               builder: (context) =>
                                   facebook_account()));
                     },
-                    icon: Icon(Icons
-                        .keyboard_arrow_right)),
+                    icon: Icon(
+                        Icons
+                            .keyboard_arrow_right,
+                        color: Palette.BLACK)),
                 onTap: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(
@@ -196,8 +204,10 @@ class account extends StatelessWidget {
                               builder: (context) =>
                                   google_account()));
                     },
-                    icon: Icon(Icons
-                        .keyboard_arrow_right)),
+                    icon: Icon(
+                        Icons
+                            .keyboard_arrow_right,
+                        color: Palette.BLACK)),
                 onTap: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(
@@ -241,8 +251,10 @@ class account extends StatelessWidget {
                               builder: (context) =>
                                   change_password()));
                     },
-                    icon: Icon(Icons
-                        .keyboard_arrow_right)),
+                    icon: Icon(
+                        Icons
+                            .keyboard_arrow_right,
+                        color: Palette.BLACK)),
                 onTap: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(
@@ -270,8 +282,10 @@ class account extends StatelessWidget {
                               builder: (context) =>
                                   login_sessions()));
                     },
-                    icon: Icon(Icons
-                        .keyboard_arrow_right)),
+                    icon: Icon(
+                        Icons
+                            .keyboard_arrow_right,
+                        color: Palette.BLACK)),
                 onTap: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(
@@ -310,8 +324,10 @@ class account extends StatelessWidget {
                 ),
                 trailing: IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons
-                        .keyboard_arrow_right)),
+                    icon: Icon(
+                        Icons
+                            .keyboard_arrow_right,
+                        color: Palette.BLACK)),
                 onTap: () {},
               ),
             ]),
