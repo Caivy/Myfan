@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:myfan/config/global.dart';
 
 class change_emails extends StatefulWidget {
-  const change_emails({Key? key}) : super(key: key);
+  const change_emails({Key? key})
+      : super(key: key);
 
   @override
   _change_emailsState createState() =>
@@ -13,13 +15,14 @@ class _change_emailsState
     extends State<change_emails> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Palette.WHITE,
         foregroundColor: Palette.BLACK,
         title: Text(
-          "CHANGE USERNAME",
-          style: TextStyle(
+          "CHANGE EMAILS",
+          style: GoogleFonts.ubuntu(
               fontSize: 22,
               fontWeight: FontWeight.bold),
         ),
@@ -38,18 +41,18 @@ class _change_emailsState
           Container(
             alignment: Alignment.center,
             child: Container(
-              width: 400,
+              width: size.width - 50,
               decoration: BoxDecoration(
                   borderRadius:
                       BorderRadius.circular(10),
                   border: Border.all(
-                      width: 1,
+                      width: 2,
                       color: Palette.BLACK,
                       style: BorderStyle.solid)),
               child: TextField(
                 decoration: InputDecoration(
                     hintText:
-                        'Enter your new Emails Address',
+                        'Enter your new Email Address',
                     hintStyle: TextStyle(
                         color: Palette.BLACK,
                         fontWeight:
@@ -77,23 +80,27 @@ class _change_emailsState
             children: [
               Container(
                 alignment: Alignment.bottomRight,
-                padding: EdgeInsets.only(right: 20),
+                padding:
+                    EdgeInsets.only(right: 20),
                 child: Container(
                   height: 40,
                   width: 70,
                   decoration: BoxDecoration(
-                      color: Palette.BLACK,
+                      color:
+                          Palette.secondaryColor,
                       borderRadius:
-                          BorderRadius.circular(13),
+                          BorderRadius.circular(
+                              13),
                       border: Border.all(
-                          color: Palette.BLACK,
+                          color: Palette
+                              .secondaryColor,
                           style:
                               BorderStyle.solid)),
                   child: Center(
                     child: Text(
                       "SAVE",
-                      style: TextStyle(
-                          color: Palette.WHITE,
+                      style: GoogleFonts.roboto(
+                          color: Palette.BLACK,
                           fontSize: 18,
                           fontWeight:
                               FontWeight.bold),

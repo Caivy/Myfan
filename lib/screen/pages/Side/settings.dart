@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:myfan/config/global.dart';
 import 'package:myfan/screen/pages/setting/account.dart';
 import 'package:myfan/screen/pages/setting/display.dart';
 import 'package:myfan/screen/pages/setting/noti_setting.dart';
@@ -22,7 +24,13 @@ class _settingState extends State<setting> {
         builder: (context, usermodel, child) {
       return Scaffold(
         appBar: AppBar(
-          title: Text("Settings"),
+          backgroundColor: Palette.WHITE,
+          foregroundColor: Palette.BLACK,
+          title: Text("SETTINGS",
+              style: GoogleFonts.ubuntu(
+                  color: Palette.BLACK,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold)),
         ),
         body: Column(
           children: [
@@ -168,7 +176,6 @@ class _settingState extends State<setting> {
                 color: Colors.black),
           ],
         ),
-        bottomNavigationBar: bottomAppBar(),
       );
     });
   }

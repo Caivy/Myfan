@@ -32,8 +32,9 @@ class profile_sidebar extends StatelessWidget {
                 height: 30,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 15),
+                padding:
+                    const EdgeInsets.symmetric(
+                        horizontal: 15),
                 child: Column(
                   crossAxisAlignment:
                       CrossAxisAlignment.start,
@@ -46,9 +47,11 @@ class profile_sidebar extends StatelessWidget {
                         Container(
                           width: 42,
                           height: 42,
-                          decoration: BoxDecoration(
+                          decoration:
+                              BoxDecoration(
                             color: Palette.BLACK,
-                            shape: BoxShape.circle,
+                            shape:
+                                BoxShape.circle,
                           ),
                           child: ClipRRect(
                             borderRadius:
@@ -63,19 +66,23 @@ class profile_sidebar extends StatelessWidget {
                               placeholder: (context,
                                       url) =>
                                   CircularProgressIndicator(),
-                              errorWidget: (context,
-                                      url, error) =>
-                                  Icon(Icons.error),
+                              errorWidget:
+                                  (context, url,
+                                          error) =>
+                                      Icon(Icons
+                                          .error),
                               fit: BoxFit.cover,
                             ),
                           ),
                         ),
                         IconButton(
                             onPressed: () {
-                              Navigator.of(context)
+                              Navigator.of(
+                                      context)
                                   .pop();
                             },
-                            icon: Icon(Icons.close))
+                            icon:
+                                Icon(Icons.close))
                       ],
                     ),
                     SizedBox(
@@ -89,17 +96,18 @@ class profile_sidebar extends StatelessWidget {
                         Column(
                           children: [
                             Text(
-                              usermodel.displayName,
+                              usermodel
+                                  .displayName!,
                               style: TextStyle(
-                                  color:
-                                      Palette.BLACK,
+                                  color: Palette
+                                      .BLACK,
                                   fontWeight:
                                       FontWeight
                                           .bold,
                                   fontSize: 18),
                             ),
                             Text(
-                              usermodel.userName,
+                              usermodel.userName!,
                               style: TextStyle(
                                   color:
                                       Colors.grey,
@@ -124,10 +132,12 @@ class profile_sidebar extends StatelessWidget {
                         Text(
                           "5" + " Fans",
                           style: TextStyle(
-                              color: Palette.BLACK,
+                              color:
+                                  Palette.BLACK,
                               fontSize: 14,
-                              fontWeight: FontWeight
-                                  .normal),
+                              fontWeight:
+                                  FontWeight
+                                      .normal),
                         ),
                         SizedBox(
                           width: 5,
@@ -135,10 +145,12 @@ class profile_sidebar extends StatelessWidget {
                         Text(
                           "20" + " Following",
                           style: TextStyle(
-                              color: Palette.BLACK,
+                              color:
+                                  Palette.BLACK,
                               fontSize: 14,
-                              fontWeight: FontWeight
-                                  .normal),
+                              fontWeight:
+                                  FontWeight
+                                      .normal),
                         )
                       ],
                     )
@@ -236,7 +248,8 @@ class profile_sidebar extends StatelessWidget {
   getUser(BuildContext context) async {
     App app =
         Provider.of<App>(context, listen: false);
-    usermodel user = Provider.of<usermodel>(context,
+    usermodel user = Provider.of<usermodel>(
+        context,
         listen: false);
     var collection = FirebaseFirestore.instance
         .collection('users');
@@ -278,20 +291,25 @@ class profile_sidebar extends StatelessWidget {
 selectItem(BuildContext context, int i) {
   switch (i) {
     case 0:
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => my_profile()));
+      Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (context) =>
+                  my_profile()));
       break;
     case 1:
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => setting()));
+      Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (context) => setting()));
       break;
     case 2:
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => payment()));
+      Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (context) => payment()));
       break;
     case 3:
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => payment()));
+      Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (context) => payment()));
       break;
     case 4:
       print("Support");

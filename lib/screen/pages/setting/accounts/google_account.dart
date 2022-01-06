@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:myfan/config/global.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class change_number extends StatefulWidget {
-  const change_number({Key? key})
+class google_account extends StatefulWidget {
+  const google_account({Key? key})
       : super(key: key);
 
   @override
-  _change_numberState createState() =>
-      _change_numberState();
+  _google_accountState createState() =>
+      _google_accountState();
 }
 
-class _change_numberState
-    extends State<change_number> {
+class _google_accountState
+    extends State<google_account> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -21,7 +22,7 @@ class _change_numberState
         backgroundColor: Palette.WHITE,
         foregroundColor: Palette.BLACK,
         title: Text(
-          "CHANGE PHONENUMBER",
+          "Google Account",
           style: GoogleFonts.ubuntu(
               fontSize: 22,
               fontWeight: FontWeight.bold),
@@ -41,59 +42,41 @@ class _change_numberState
           Container(
             alignment: Alignment.center,
             child: Container(
-              width: size.width - 50,
-              decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.circular(10),
-                  border: Border.all(
-                      width: 2,
-                      color: Palette.BLACK,
-                      style: BorderStyle.solid)),
-              child: TextField(
-                decoration: InputDecoration(
-                    hintText:
-                        'Enter your old PhoneNumber',
-                    hintStyle: TextStyle(
-                        color: Palette.BLACK,
-                        fontWeight:
-                            FontWeight.normal,
-                        fontSize: 18),
-                    contentPadding:
-                        EdgeInsets.all(15),
-                    border: InputBorder.none),
-                onChanged: (value) {},
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            alignment: Alignment.center,
-            child: Container(
-              width: size.width - 50,
-              decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.circular(10),
-                  border: Border.all(
-                      width: 2,
-                      color: Palette.BLACK,
-                      style: BorderStyle.solid)),
-              child: TextField(
-                decoration: InputDecoration(
-                    hintText:
-                        'Enter your new PhoneNumber',
-                    hintStyle: TextStyle(
-                        color: Palette.BLACK,
-                        fontWeight:
-                            FontWeight.normal,
-                        fontSize: 18),
-                    contentPadding:
-                        EdgeInsets.all(15),
-                    border: InputBorder.none),
-                onChanged: (value) {},
-              ),
-            ),
+                width: size.width - 50,
+                height: 50,
+                decoration: BoxDecoration(
+                    color: Palette.PrimaryColor,
+                    borderRadius:
+                        BorderRadius.circular(10),
+                    border: Border.all(
+                        width: 1,
+                        color:
+                            Palette.PrimaryColor,
+                        style:
+                            BorderStyle.solid)),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Icon(
+                      LineIcons.googleLogo,
+                      size: 40,
+                      color: Palette.WHITE,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "khatit54@gmails.com",
+                      style: GoogleFonts.roboto(
+                          color: Palette.WHITE,
+                          fontWeight:
+                              FontWeight.normal,
+                          fontSize: 20),
+                    )
+                  ],
+                )),
           ),
           SizedBox(
             height: 10,
@@ -114,7 +97,7 @@ class _change_numberState
                     EdgeInsets.only(right: 20),
                 child: Container(
                   height: 40,
-                  width: 70,
+                  width: 125,
                   decoration: BoxDecoration(
                       color:
                           Palette.secondaryColor,
@@ -128,7 +111,7 @@ class _change_numberState
                               BorderStyle.solid)),
                   child: Center(
                     child: Text(
-                      "SAVE",
+                      "DISCONNECT",
                       style: GoogleFonts.roboto(
                           color: Palette.BLACK,
                           fontSize: 18,

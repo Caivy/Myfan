@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myfan/config/global.dart';
+import 'package:myfan/screen/pages/setting/accounts/facebook_account.dart';
+import 'package:myfan/screen/pages/setting/accounts/google_account.dart';
+import 'package:myfan/screen/pages/setting/accounts/login_sessions.dart';
 
 import 'accounts/chg_username.dart';
 import 'accounts/chg_password.dart';
@@ -30,27 +33,26 @@ class account extends StatelessWidget {
                 CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 15),
+                padding:
+                    const EdgeInsets.symmetric(
+                        horizontal: 15),
                 child: Text(
                   "Account info",
                   style: TextStyle(
                       fontSize: 18,
                       color: Palette.BLACK,
-                      fontWeight: FontWeight.bold),
+                      fontWeight:
+                          FontWeight.bold),
                 ),
               ),
-              Divider(
-                  height: 10,
-                  thickness: 1,
-                  color: Palette.BLACK),
               ListTile(
                 title: Text(
                   "Username",
                   style: TextStyle(
                       color: Palette.BLACK,
                       fontSize: 22,
-                      fontWeight: FontWeight.bold),
+                      fontWeight:
+                          FontWeight.bold),
                 ),
                 trailing: IconButton(
                     onPressed: () {
@@ -70,7 +72,7 @@ class account extends StatelessWidget {
               ),
               Divider(
                   height: 10,
-                  thickness: 1,
+                  thickness: 2,
                   color: Palette.BLACK),
               ListTile(
                 title: Text(
@@ -78,7 +80,8 @@ class account extends StatelessWidget {
                   style: TextStyle(
                       color: Palette.BLACK,
                       fontSize: 22,
-                      fontWeight: FontWeight.bold),
+                      fontWeight:
+                          FontWeight.bold),
                 ),
                 trailing: IconButton(
                     onPressed: () {
@@ -98,7 +101,7 @@ class account extends StatelessWidget {
               ),
               Divider(
                   height: 10,
-                  thickness: 1,
+                  thickness: 2,
                   color: Palette.BLACK),
               ListTile(
                 title: Text(
@@ -106,7 +109,8 @@ class account extends StatelessWidget {
                   style: TextStyle(
                       color: Palette.BLACK,
                       fontSize: 22,
-                      fontWeight: FontWeight.bold),
+                      fontWeight:
+                          FontWeight.bold),
                 ),
                 trailing: IconButton(
                     onPressed: () {
@@ -126,43 +130,55 @@ class account extends StatelessWidget {
               ),
               Divider(
                   height: 10,
-                  thickness: 1,
+                  thickness: 2,
                   color: Palette.BLACK),
               SizedBox(
                 height: 10,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 15),
+                padding:
+                    const EdgeInsets.symmetric(
+                        horizontal: 15),
                 child: Text(
                   "Linked accounts",
                   style: TextStyle(
                       fontSize: 18,
                       color: Palette.BLACK,
-                      fontWeight: FontWeight.bold),
+                      fontWeight:
+                          FontWeight.bold),
                 ),
               ),
-              Divider(
-                  height: 10,
-                  thickness: 1,
-                  color: Palette.BLACK),
+              SizedBox(
+                height: 10,
+              ),
               ListTile(
                 title: Text(
                   "Facebook Account",
                   style: TextStyle(
                       color: Palette.BLACK,
                       fontSize: 22,
-                      fontWeight: FontWeight.bold),
+                      fontWeight:
+                          FontWeight.bold),
                 ),
                 trailing: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  facebook_account()));
+                    },
                     icon: Icon(Icons
                         .keyboard_arrow_right)),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              facebook_account()));
+                },
               ),
               Divider(
                   height: 10,
-                  thickness: 1,
+                  thickness: 2,
                   color: Palette.BLACK),
               ListTile(
                 title: Text(
@@ -170,43 +186,53 @@ class account extends StatelessWidget {
                   style: TextStyle(
                       color: Palette.BLACK,
                       fontSize: 22,
-                      fontWeight: FontWeight.bold),
+                      fontWeight:
+                          FontWeight.bold),
                 ),
                 trailing: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  google_account()));
+                    },
                     icon: Icon(Icons
                         .keyboard_arrow_right)),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              google_account()));
+                },
               ),
               Divider(
                   height: 10,
-                  thickness: 1,
+                  thickness: 2,
                   color: Palette.BLACK),
               SizedBox(
                 height: 10,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 15),
+                padding:
+                    const EdgeInsets.symmetric(
+                        horizontal: 15),
                 child: Text(
                   "Security",
                   style: TextStyle(
                       fontSize: 18,
                       color: Palette.BLACK,
-                      fontWeight: FontWeight.bold),
+                      fontWeight:
+                          FontWeight.bold),
                 ),
               ),
-              Divider(
-                  height: 10,
-                  thickness: 1,
-                  color: Palette.BLACK),
               ListTile(
                 title: Text(
                   "Password",
                   style: TextStyle(
                       color: Palette.BLACK,
                       fontSize: 22,
-                      fontWeight: FontWeight.bold),
+                      fontWeight:
+                          FontWeight.bold),
                 ),
                 trailing: IconButton(
                     onPressed: () {
@@ -226,7 +252,7 @@ class account extends StatelessWidget {
               ),
               Divider(
                   height: 10,
-                  thickness: 1,
+                  thickness: 2,
                   color: Palette.BLACK),
               ListTile(
                 title: Text(
@@ -234,43 +260,53 @@ class account extends StatelessWidget {
                   style: TextStyle(
                       color: Palette.BLACK,
                       fontSize: 22,
-                      fontWeight: FontWeight.bold),
+                      fontWeight:
+                          FontWeight.bold),
                 ),
                 trailing: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  login_sessions()));
+                    },
                     icon: Icon(Icons
                         .keyboard_arrow_right)),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              login_sessions()));
+                },
               ),
               Divider(
                   height: 10,
-                  thickness: 1,
+                  thickness: 2,
                   color: Palette.BLACK),
               SizedBox(
                 height: 10,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 15),
+                padding:
+                    const EdgeInsets.symmetric(
+                        horizontal: 15),
                 child: Text(
                   "Account management",
                   style: TextStyle(
                       fontSize: 18,
                       color: Palette.BLACK,
-                      fontWeight: FontWeight.bold),
+                      fontWeight:
+                          FontWeight.bold),
                 ),
               ),
-              Divider(
-                  height: 10,
-                  thickness: 1,
-                  color: Palette.BLACK),
               ListTile(
                 title: Text(
                   "Delete account",
                   style: TextStyle(
                       color: Palette.BLACK,
                       fontSize: 22,
-                      fontWeight: FontWeight.bold),
+                      fontWeight:
+                          FontWeight.bold),
                 ),
                 trailing: IconButton(
                     onPressed: () {},

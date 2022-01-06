@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:myfan/config/global.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:line_icons/line_icon.dart';
+import 'package:line_icons/line_icons.dart';
+import 'package:myfan/config/global.dart';
 
-class change_username extends StatefulWidget {
-  const change_username({Key? key})
+class facebook_account extends StatefulWidget {
+  const facebook_account({Key? key})
       : super(key: key);
 
   @override
-  _change_usernameState createState() =>
-      _change_usernameState();
+  _facebook_accountState createState() =>
+      _facebook_accountState();
 }
 
-class _change_usernameState
-    extends State<change_username> {
+class _facebook_accountState
+    extends State<facebook_account> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -21,7 +23,7 @@ class _change_usernameState
         backgroundColor: Palette.WHITE,
         foregroundColor: Palette.BLACK,
         title: Text(
-          "CHANGE USERNAME",
+          "Facebook Account",
           style: GoogleFonts.ubuntu(
               fontSize: 22,
               fontWeight: FontWeight.bold),
@@ -41,29 +43,41 @@ class _change_usernameState
           Container(
             alignment: Alignment.center,
             child: Container(
-              width: size.width - 50,
-              decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.circular(10),
-                  border: Border.all(
-                      width: 2,
-                      color: Palette.BLACK,
-                      style: BorderStyle.solid)),
-              child: TextField(
-                decoration: InputDecoration(
-                    hintText:
-                        'Enter your new username',
-                    hintStyle: TextStyle(
-                        color: Palette.BLACK,
-                        fontWeight:
-                            FontWeight.normal,
-                        fontSize: 18),
-                    contentPadding:
-                        EdgeInsets.all(15),
-                    border: InputBorder.none),
-                onChanged: (value) {},
-              ),
-            ),
+                width: size.width - 50,
+                height: 50,
+                decoration: BoxDecoration(
+                    color: Palette.PrimaryColor,
+                    borderRadius:
+                        BorderRadius.circular(10),
+                    border: Border.all(
+                        width: 1,
+                        color:
+                            Palette.PrimaryColor,
+                        style:
+                            BorderStyle.solid)),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Icon(
+                      LineIcons.facebook,
+                      size: 40,
+                      color: Palette.WHITE,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "khatit54@gmails.com",
+                      style: GoogleFonts.roboto(
+                          color: Palette.WHITE,
+                          fontWeight:
+                              FontWeight.normal,
+                          fontSize: 20),
+                    )
+                  ],
+                )),
           ),
           SizedBox(
             height: 10,
@@ -84,7 +98,7 @@ class _change_usernameState
                     EdgeInsets.only(right: 20),
                 child: Container(
                   height: 40,
-                  width: 70,
+                  width: 125,
                   decoration: BoxDecoration(
                       color:
                           Palette.secondaryColor,
@@ -98,7 +112,7 @@ class _change_usernameState
                               BorderStyle.solid)),
                   child: Center(
                     child: Text(
-                      "SAVE",
+                      "DISCONNECT",
                       style: GoogleFonts.roboto(
                           color: Palette.BLACK,
                           fontSize: 18,
