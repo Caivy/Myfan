@@ -23,6 +23,11 @@ class privacy_safety extends StatelessWidget {
         crossAxisAlignment:
             CrossAxisAlignment.start,
         children: [
+          Divider(
+            height: 10,
+            thickness: 2,
+            color: Palette.BLACK,
+          ),
           SizedBox(
             height: 5,
           ),
@@ -74,6 +79,11 @@ class privacy_safety extends StatelessWidget {
                   Icons.toggle_off,
                   color: Palette.BLACK,
                 )),
+          ),
+          Divider(
+            height: 10,
+            thickness: 2,
+            color: Palette.BLACK,
           ),
         ],
       ),
