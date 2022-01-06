@@ -51,7 +51,7 @@ class privacy_safety extends StatelessWidget {
             trailing: IconButton(
                 onPressed: () {},
                 icon: Icon(
-                  Icons.keyboard_arrow_right,
+                  Icons.toggle_on,
                   color: Palette.BLACK,
                 )),
           ),
@@ -71,7 +71,7 @@ class privacy_safety extends StatelessWidget {
             trailing: IconButton(
                 onPressed: () {},
                 icon: Icon(
-                  Icons.keyboard_arrow_right,
+                  Icons.toggle_off,
                   color: Palette.BLACK,
                 )),
           ),
