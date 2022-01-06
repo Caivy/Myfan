@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:myfan/screen/pages/setting/account.dart';
+import 'package:myfan/screen/pages/setting/display.dart';
+import 'package:myfan/screen/pages/setting/noti_setting.dart';
+import 'package:myfan/screen/pages/setting/privacy.dart';
+import 'package:myfan/screen/pages/setting/profile.dart';
 import 'package:myfan/services/usermodel.dart';
 import 'package:myfan/widgets/bottomappbar.dart';
 import 'package:provider/provider.dart';
-
-import '../../display.dart';
-import '../../noti_setting.dart';
-import '../../privacy.dart';
-import '../../profile.dart';
 
 class setting extends StatefulWidget {
   const setting({Key? key}) : super(key: key);
@@ -42,8 +41,8 @@ class _settingState extends State<setting> {
                             builder: (context) =>
                                 profile()));
                   },
-                  icon: Icon(
-                      Icons.keyboard_arrow_right)),
+                  icon: Icon(Icons
+                      .keyboard_arrow_right)),
               onTap: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(
@@ -70,8 +69,8 @@ class _settingState extends State<setting> {
                             builder: (context) =>
                                 account()));
                   },
-                  icon: Icon(
-                      Icons.keyboard_arrow_right)),
+                  icon: Icon(Icons
+                      .keyboard_arrow_right)),
               onTap: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(
@@ -98,8 +97,8 @@ class _settingState extends State<setting> {
                             builder: (context) =>
                                 privacy_safety()));
                   },
-                  icon: Icon(
-                      Icons.keyboard_arrow_right)),
+                  icon: Icon(Icons
+                      .keyboard_arrow_right)),
               onTap: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(
@@ -126,8 +125,8 @@ class _settingState extends State<setting> {
                             builder: (context) =>
                                 noti_setting()));
                   },
-                  icon: Icon(
-                      Icons.keyboard_arrow_right)),
+                  icon: Icon(Icons
+                      .keyboard_arrow_right)),
               onTap: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(
@@ -154,8 +153,8 @@ class _settingState extends State<setting> {
                             builder: (context) =>
                                 display()));
                   },
-                  icon: Icon(
-                      Icons.keyboard_arrow_right)),
+                  icon: Icon(Icons
+                      .keyboard_arrow_right)),
               onTap: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(
