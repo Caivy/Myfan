@@ -39,3 +39,33 @@ Myfan is a subscription service like youtube that allows Content Creator /Teenag
 
  
 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 - token
+
+
+return Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(200),
+          child: AppBar(
+            leading: BackButton(),
+            title: Text("Caivy"),
+            backgroundColor: Colors.transparent,
+            flexibleSpace: CachedNetworkImage(
+              imageUrl: dummyImage,
+              colorBlendMode: BlendMode.darken,
+              color:
+                  Colors.black.withOpacity(0.3),
+              fit: BoxFit.fill,
+            ),
+            elevation: 5,
+          ),
+        ),
+        body: Column(
+          children: [
+            CircleAvatar(
+              radius: 44,
+              backgroundImage:
+                  CachedNetworkImageProvider(
+                dummyProfile,
+              ),
+            )
+          ],
+        ));

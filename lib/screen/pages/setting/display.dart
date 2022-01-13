@@ -67,7 +67,7 @@ class _displayState extends State<display> {
             trailing: IconButton(
                 onPressed: () {},
                 icon: Icon(
-                  Icons.toggle_on,
+                  Icons.keyboard_arrow_right,
                   color: Palette.BLACK,
                 )),
           ),

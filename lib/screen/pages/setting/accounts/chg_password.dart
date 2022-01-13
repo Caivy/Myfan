@@ -51,8 +51,7 @@ class _change_passwordState
                       style: BorderStyle.solid)),
               child: TextField(
                 decoration: InputDecoration(
-                    hintText:
-                        'Enter your old password',
+                    hintText: 'New password',
                     hintStyle: TextStyle(
                         color: Palette.BLACK,
                         fontWeight:
@@ -82,7 +81,7 @@ class _change_passwordState
               child: TextField(
                 decoration: InputDecoration(
                     hintText:
-                        'Enter your new password',
+                        'Confirm new password',
                     hintStyle: TextStyle(
                         color: Palette.BLACK,
                         fontWeight:
