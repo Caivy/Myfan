@@ -69,7 +69,8 @@ class _LoginPageState extends State<LoginPage> {
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 15),
+        padding:
+            EdgeInsets.symmetric(vertical: 15),
         alignment: Alignment.center,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(
@@ -132,10 +133,11 @@ class _LoginPageState extends State<LoginPage> {
       },
       child: Container(
         height: 50,
-        margin: EdgeInsets.symmetric(vertical: 20),
+        margin:
+            EdgeInsets.symmetric(vertical: 20),
         decoration: BoxDecoration(
-          borderRadius:
-              BorderRadius.all(Radius.circular(10)),
+          borderRadius: BorderRadius.all(
+              Radius.circular(10)),
         ),
         child: Row(
           children: <Widget>[
@@ -147,7 +149,8 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.only(
                       bottomLeft:
                           Radius.circular(5),
-                      topLeft: Radius.circular(5)),
+                      topLeft:
+                          Radius.circular(5)),
                 ),
                 alignment: Alignment.center,
                 child: Text('f',
@@ -166,10 +169,12 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.only(
                       bottomRight:
                           Radius.circular(5),
-                      topRight: Radius.circular(5)),
+                      topRight:
+                          Radius.circular(5)),
                 ),
                 alignment: Alignment.center,
-                child: Text('Log in with Facebook',
+                child: Text(
+                    'Log in with Facebook',
                     style: TextStyle(
                         color: Palette.WHITE,
                         fontSize: 18,
@@ -193,7 +198,8 @@ class _LoginPageState extends State<LoginPage> {
                     SignUpPage()));
       },
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 20),
+        margin:
+            EdgeInsets.symmetric(vertical: 20),
         padding: EdgeInsets.all(15),
         alignment: Alignment.bottomCenter,
         child: Row(
@@ -226,6 +232,16 @@ class _LoginPageState extends State<LoginPage> {
     final height =
         MediaQuery.of(context).size.height;
     return Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () =>
+                  Navigator.of(context)
+                      .pop(false),
+            )),
         backgroundColor: Palette.PrimaryColor,
         body: Consumer<App>(
           builder: (context, App, child) =>
@@ -246,16 +262,18 @@ class _LoginPageState extends State<LoginPage> {
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment:
-                          CrossAxisAlignment.center,
+                          CrossAxisAlignment
+                              .center,
                       mainAxisAlignment:
-                          MainAxisAlignment.center,
+                          MainAxisAlignment
+                              .center,
                       children: <Widget>[
                         SizedBox(
                             height: height * 0.2),
                         // Image.asset('assets/Logo1.png'),
                         Text('Login',
-                            style:
-                                GoogleFonts.ubuntu(
+                            style: GoogleFonts
+                                .ubuntu(
                                     color: Palette
                                         .WHITE,
                                     fontSize: 24,
@@ -268,12 +286,14 @@ class _LoginPageState extends State<LoginPage> {
                             Container(
                               margin: EdgeInsets
                                   .symmetric(
-                                      vertical: 10),
+                                      vertical:
+                                          10),
                               child: Column(
                                 crossAxisAlignment:
                                     CrossAxisAlignment
                                         .start,
-                                children: <Widget>[
+                                children: <
+                                    Widget>[
                                   Text(
                                     "Phone Number",
                                     style: TextStyle(
@@ -304,10 +324,9 @@ class _LoginPageState extends State<LoginPage> {
                                                   0,
                                             )
                                           : IconButton(
-                                              onPressed: () => phoneNumberController
-                                                  .clear(),
-                                              icon:
-                                                  Icon(Icons.close)),
+                                              onPressed: () =>
+                                                  phoneNumberController.clear(),
+                                              icon: Icon(Icons.close)),
                                       border:
                                           InputBorder
                                               .none,
@@ -321,9 +340,11 @@ class _LoginPageState extends State<LoginPage> {
                                         color: Colors
                                             .red,
                                       ),
-                                      fillColor: Color(
-                                          0xfff3f3f4),
-                                      filled: true,
+                                      fillColor:
+                                          Color(
+                                              0xfff3f3f4),
+                                      filled:
+                                          true,
                                     ),
                                     keyboardType:
                                         TextInputType
@@ -348,36 +369,26 @@ class _LoginPageState extends State<LoginPage> {
                                     height: 10,
                                   ),
                                   TextField(
-                                    decoration:
-                                        InputDecoration(
-                                            prefixIcon:
-                                                Icon(Icons
-                                                    .password),
-                                            border: InputBorder
-                                                .none,
-                                            suffixIcon:
-                                                IconButton(
-                                              icon: isPasswords
-                                                  ? Icon(Icons.visibility_off)
-                                                  : Icon(Icons.visibility),
-                                              onPressed: () =>
+                                    decoration: InputDecoration(
+                                        prefixIcon: Icon(Icons.password),
+                                        border: InputBorder.none,
+                                        suffixIcon: IconButton(
+                                          icon: isPasswords
+                                              ? Icon(Icons.visibility_off)
+                                              : Icon(Icons.visibility),
+                                          onPressed:
+                                              () =>
                                                   setState(() => isPasswords = !isPasswords),
-                                            ),
-                                            errorText:
-                                                wrongPass,
-                                            errorStyle:
-                                                GoogleFonts
-                                                    .roboto(
-                                              fontSize:
-                                                  16,
-                                              color:
-                                                  Colors.red,
-                                            ),
-                                            fillColor:
-                                                Color(
-                                                    0xfff3f3f4),
-                                            filled:
-                                                true),
+                                        ),
+                                        errorText: wrongPass,
+                                        errorStyle: GoogleFonts.roboto(
+                                          fontSize:
+                                              16,
+                                          color: Colors
+                                              .red,
+                                        ),
+                                        fillColor: Color(0xfff3f3f4),
+                                        filled: true),
                                     keyboardType:
                                         TextInputType
                                             .visiblePassword,
@@ -467,7 +478,8 @@ class _LoginPageState extends State<LoginPage> {
     print(doc_id_num);
     if (doc_id_num == doc_id_pass) {
       print(doc_id_num + " " + doc_id_pass);
-      print("phoneNumber and Password is correct");
+      print(
+          "phoneNumber and Password is correct");
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
