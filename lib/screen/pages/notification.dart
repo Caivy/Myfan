@@ -6,7 +6,8 @@ import 'package:myfan/services/usermodel.dart';
 import 'package:provider/provider.dart';
 
 class notification extends StatefulWidget {
-  const notification({Key? key}) : super(key: key);
+  const notification({Key? key})
+      : super(key: key);
 
   @override
   _notificationState createState() =>
@@ -52,11 +53,13 @@ class _notificationState
                       IconButton(
                           onPressed: () {},
                           icon: Icon(
-                            Icons.library_add_check,
+                            Icons
+                                .library_add_check,
                             size: 22,
                           )),
                       Text("All")
                     ]),
+                    Spacer(),
                     Column(children: [
                       IconButton(
                           onPressed: () {},
@@ -64,8 +67,14 @@ class _notificationState
                             Icons.mode_comment,
                             size: 22,
                           )),
-                      Text("Comment")
+                      Divider(
+                        height: 1,
+                        color: Palette.BLACK,
+                        thickness: 5,
+                      ),
+                      Text("Comment"),
                     ]),
+                    Spacer(),
                     Column(children: [
                       IconButton(
                           onPressed: () {},
@@ -75,6 +84,7 @@ class _notificationState
                           )),
                       Text("Likes")
                     ]),
+                    Spacer(),
                     Column(children: [
                       IconButton(
                           onPressed: () {},
@@ -85,6 +95,7 @@ class _notificationState
                           )),
                       Text("Subscribe")
                     ]),
+                    Spacer(),
                     Column(children: [
                       IconButton(
                           onPressed: () {},
@@ -94,6 +105,7 @@ class _notificationState
                           )),
                       Text("Tips")
                     ]),
+                    Spacer(),
                     Column(children: [
                       IconButton(
                           onPressed: () {},
@@ -103,6 +115,10 @@ class _notificationState
                           )),
                       Text("Messages")
                     ]),
+                    Spacer()
+                    // SizedBox(
+                    //   width: 15,
+                    // ),
                   ],
                 ),
               ],

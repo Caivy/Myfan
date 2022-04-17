@@ -163,7 +163,7 @@ class profile_sidebar extends StatelessWidget {
               Divider(
                 height: 10,
                 color: Palette.BLACK,
-                thickness: 1,
+                thickness: 2,
               ),
               buildMenuItem(
                 "My Profile",
@@ -183,7 +183,7 @@ class profile_sidebar extends StatelessWidget {
               Divider(
                 height: 10,
                 color: Palette.BLACK,
-                thickness: 1,
+                thickness: 2,
               ),
               buildMenuItem(
                 "Your Cards",
@@ -200,7 +200,7 @@ class profile_sidebar extends StatelessWidget {
               Divider(
                 height: 10,
                 color: Palette.BLACK,
-                thickness: 1,
+                thickness: 2,
               ),
               buildMenuItem(
                 "Help and Support",
@@ -230,7 +230,7 @@ class profile_sidebar extends StatelessWidget {
               Divider(
                 height: 10,
                 color: Palette.BLACK,
-                thickness: 1,
+                thickness: 2,
               ),
               buildMenuItem(
                 "Logout",
@@ -262,7 +262,7 @@ class profile_sidebar extends StatelessWidget {
       user.getUsername(data?['userName']);
       user.getDisplayName(data?['displayName']);
       user.getPhone(data?['phoneNumber']);
-      user.getProfilePic(data?['profilePic']);
+      // user.getProfilePic(data?['profilePic']);
     }
   }
 
