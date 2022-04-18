@@ -48,6 +48,8 @@ class _notificationState
                   mainAxisAlignment:
                       MainAxisAlignment
                           .spaceBetween,
+                  crossAxisAlignment:
+                      CrossAxisAlignment.start,
                   children: [
                     Column(children: [
                       IconButton(
@@ -67,11 +69,6 @@ class _notificationState
                             Icons.mode_comment,
                             size: 22,
                           )),
-                      Divider(
-                        height: 1,
-                        color: Palette.BLACK,
-                        thickness: 5,
-                      ),
                       Text("Comment"),
                     ]),
                     Spacer(),
@@ -126,23 +123,31 @@ class _notificationState
             SizedBox(
               height: 10,
             ),
-            // Divider(
-            //   height: 5,
-            //   thickness: 3,
-            //   color: Palette.BLACK,
-            // ),
+            // ListView.builder(itemBuilder: itemBuilder)
             Column(
               children: [
                 user(
                     Caivy,
                     "Caivy",
                     "Sunday at 3:46PM",
-                    "Likes your recent post")
+                    "Likes your recent post"),
+                user(
+                    Caivy,
+                    "Caivy",
+                    "Sunday at 3:46PM",
+                    "Likes your recent post"),
               ],
             )
           ],
         ));
   }
+
+  // var users = [
+  //   user(Caivy, "Caivy", "Sunday at 3:46PM",
+  //       "Likes your recent post"),
+  //   user(Caivy, "Caivy", "Sunday at 3:46PM",
+  //       "Likes your recent post"),
+  // ];
 
   Widget user(
     String url,
@@ -152,10 +157,19 @@ class _notificationState
   ) {
     return ListTile(
       leading: CircleAvatar(
+        radius: 25,
         foregroundImage: NetworkImage(url),
       ),
-      title: Text(displayName),
-      subtitle: Text(date),
+      title: Text(
+        displayName,
+        style: GoogleFonts.roboto(
+            color: Palette.BLACK, fontSize: 18),
+      ),
+      subtitle: Text(
+        date,
+        style: GoogleFonts.roboto(
+            color: Colors.grey, fontSize: 16),
+      ),
     );
   }
 }
