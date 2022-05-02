@@ -18,38 +18,29 @@ import 'package:myfan/services/auth.dart';
 import 'package:provider/provider.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
-final FirebaseFirestore _firestore =
-    FirebaseFirestore.instance;
+final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-StreamController<UserModel> streamController =
-    StreamController();
+StreamController<UserModel> streamController = StreamController();
 
 class SignUpPage extends StatefulWidget {
-  SignUpPage({Key? key, this.title})
-      : super(key: key);
+  SignUpPage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _SignUpPageState createState() =>
-      _SignUpPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   final _formKeyOTP = GlobalKey<FormState>();
-  final GlobalKey<ScaffoldState> _scaffoldKey =
-      new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  final TextEditingController nameController =
+  final TextEditingController nameController = new TextEditingController();
+  final TextEditingController phoneNumberController =
       new TextEditingController();
-  final TextEditingController
-      phoneNumberController =
-      new TextEditingController();
-  final TextEditingController passwordController =
-      new TextEditingController();
-  final TextEditingController otpController =
-      new TextEditingController();
+  final TextEditingController passwordController = new TextEditingController();
+  final TextEditingController otpController = new TextEditingController();
   Auth auth = Auth();
   var isLoading = false;
   var isResend = false;
@@ -89,8 +80,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget _submitButton() {
-    App Apps =
-        Provider.of<App>(context, listen: false);
+    App Apps = Provider.of<App>(context, listen: false);
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -98,25 +88,19 @@ class _SignUpPageState extends State<SignUpPage> {
           Apps.Loading(true);
         });
 
-        auth.checkCredentials(
-            context,
-            phoneNumberController.text.trim(),
-            nameController.text.trim(),
-            _scaffoldKey);
+        auth.checkCredentials(context, phoneNumberController.text.trim(),
+            nameController.text.trim(), _scaffoldKey);
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
-        padding:
-            EdgeInsets.symmetric(vertical: 15),
+        padding: EdgeInsets.symmetric(vertical: 15),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(
-                Radius.circular(5)),
+            borderRadius: BorderRadius.all(Radius.circular(5)),
             color: Palette.secondaryColor),
         child: Text(
           'Register Now',
-          style: TextStyle(
-              fontSize: 20, color: Palette.WHITE),
+          style: TextStyle(fontSize: 20, color: Palette.WHITE),
         ),
       ),
     );
@@ -126,25 +110,18 @@ class _SignUpPageState extends State<SignUpPage> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    LoginPage()));
+            context, MaterialPageRoute(builder: (context) => LoginPage()));
       },
       child: Container(
-        margin:
-            EdgeInsets.symmetric(vertical: 20),
+        margin: EdgeInsets.symmetric(vertical: 20),
         padding: EdgeInsets.all(15),
         alignment: Alignment.bottomCenter,
         child: Row(
-          mainAxisAlignment:
-              MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               'Already have an account ?',
-              style: GoogleFonts.roboto(
-                  color: Palette.WHITE,
-                  fontSize: 14),
+              style: GoogleFonts.roboto(color: Palette.WHITE, fontSize: 14),
             ),
             SizedBox(
               width: 10,
@@ -152,8 +129,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Text(
               'Login',
               style: GoogleFonts.roboto(
-                  color: Palette.secondaryColor,
-                  fontSize: 14),
+                  color: Palette.secondaryColor, fontSize: 14),
             ),
           ],
         ),
@@ -165,16 +141,12 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Consumer<App>(
         builder: (context, App, child) =>
-            App.isOTPScreen
-                ? returnOTPScreen()
-                : registerScreen());
+            App.isOTPScreen ? returnOTPScreen() : registerScreen());
   }
 
   Widget registerScreen() {
-    final height =
-        MediaQuery.of(context).size.height;
-    return Consumer<App>(
-        builder: (context, app, child) {
+    final height = MediaQuery.of(context).size.height;
+    return Consumer<App>(builder: (context, app, child) {
       return Scaffold(
         key: _scaffoldKey,
         backgroundColor: Palette.PrimaryColor,
@@ -184,65 +156,43 @@ class _SignUpPageState extends State<SignUpPage> {
             elevation: 0,
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
-              onPressed: () =>
-                  Navigator.of(context)
-                      .pop(false),
+              onPressed: () => Navigator.of(context).pop(false),
             )),
         body: Container(
           height: height,
           child: Stack(
             children: <Widget>[
               Positioned(
-                top: -MediaQuery.of(context)
-                        .size
-                        .height *
-                    .15,
-                right: -MediaQuery.of(context)
-                        .size
-                        .width *
-                    .4,
+                top: -MediaQuery.of(context).size.height * .15,
+                right: -MediaQuery.of(context).size.width * .4,
                 child: BezierContainer(),
               ),
               SingleChildScrollView(
                 child: Container(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 20),
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
-                    crossAxisAlignment:
-                        CrossAxisAlignment.center,
-                    mainAxisAlignment:
-                        MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(
-                          height: height * .2),
+                      SizedBox(height: height * .2),
                       Text("REGISTER",
-                          style:
-                              GoogleFonts.ubuntu(
-                                  color: Palette
-                                      .WHITE,
-                                  fontSize: 24,
-                                  fontWeight:
-                                      FontWeight
-                                          .bold)),
+                          style: GoogleFonts.ubuntu(
+                              color: Palette.WHITE,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold)),
                       SizedBox(
                         height: 20,
                       ),
                       Column(
                         children: <Widget>[
                           Container(
-                            margin: EdgeInsets
-                                .symmetric(
-                                    vertical: 10),
+                            margin: EdgeInsets.symmetric(vertical: 10),
                             child: Column(
-                              crossAxisAlignment:
-                                  CrossAxisAlignment
-                                      .start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
                                   "Username",
-                                  style:
-                                      Text_Style
-                                          .text,
+                                  style: Text_Style.text,
                                 ),
                                 SizedBox(
                                   height: 5,
@@ -252,34 +202,29 @@ class _SignUpPageState extends State<SignUpPage> {
                                       prefixIcon: Icon(Icons.person),
                                       suffixIcon: nameController.text.isEmpty
                                           ? Container(
-                                              width:
-                                                  0,
+                                              width: 0,
                                             )
-                                          : IconButton(onPressed: () => passwordController.clear(), icon: Icon(Icons.close)),
+                                          : IconButton(
+                                              onPressed: () =>
+                                                  passwordController.clear(),
+                                              icon: Icon(Icons.close)),
                                       border: InputBorder.none,
                                       errorText: app.sUsername,
                                       errorStyle: GoogleFonts.roboto(
-                                        fontSize:
-                                            16,
-                                        color: Colors
-                                            .red,
+                                        fontSize: 16,
+                                        color: Colors.red,
                                       ),
                                       fillColor: Color(0xfff3f3f4),
                                       filled: true),
-                                  keyboardType:
-                                      TextInputType
-                                          .name,
-                                  controller:
-                                      nameController,
+                                  keyboardType: TextInputType.name,
+                                  controller: nameController,
                                 ),
 
                                 // SizedBox(
                                 //     height: 15),
                                 Text(
                                   "Phone Number",
-                                  style:
-                                      Text_Style
-                                          .text,
+                                  style: Text_Style.text,
                                 ),
                                 SizedBox(
                                   height: 5,
@@ -288,78 +233,57 @@ class _SignUpPageState extends State<SignUpPage> {
                                   decoration: InputDecoration(
                                       prefixIcon: Icon(Icons.phone),
                                       hintText: "11222333",
-                                      suffixIcon: phoneNumberController.text.isEmpty
+                                      suffixIcon: phoneNumberController
+                                              .text.isEmpty
                                           ? Container(
-                                              width:
-                                                  0,
+                                              width: 0,
                                             )
-                                          : IconButton(onPressed: () => passwordController.clear(), icon: Icon(Icons.close)),
+                                          : IconButton(
+                                              onPressed: () =>
+                                                  passwordController.clear(),
+                                              icon: Icon(Icons.close)),
                                       border: InputBorder.none,
                                       errorText: app.sNumber,
                                       errorStyle: GoogleFonts.roboto(
-                                        fontSize:
-                                            16,
-                                        color: Colors
-                                            .red,
+                                        fontSize: 16,
+                                        color: Colors.red,
                                       ),
                                       fillColor: Color(0xfff3f3f4),
                                       filled: true),
-                                  keyboardType:
-                                      TextInputType
-                                          .phone,
-                                  controller:
-                                      phoneNumberController,
+                                  keyboardType: TextInputType.phone,
+                                  controller: phoneNumberController,
                                 ),
                                 // SizedBox(
                                 //   height: 15,
                                 // ),
                                 Text(
                                   "Password",
-                                  style:
-                                      Text_Style
-                                          .text,
+                                  style: Text_Style.text,
                                 ),
                                 SizedBox(
                                   height: 5,
                                 ),
                                 TextField(
-                                  decoration:
-                                      InputDecoration(
-                                          prefixIcon:
-                                              Icon(Icons
-                                                  .password),
-                                          border: InputBorder
-                                              .none,
-                                          suffixIcon:
-                                              IconButton(
-                                            icon: isPassword
-                                                ? Icon(Icons.visibility_off)
-                                                : Icon(Icons.visibility),
-                                            onPressed: () =>
-                                                setState(() => isPassword = !isPassword),
-                                          ),
-                                          fillColor:
-                                              Color(
-                                                  0xfff3f3f4),
-                                          errorText:
-                                              sPass,
-                                          errorStyle:
-                                              GoogleFonts
-                                                  .roboto(
-                                            fontSize:
-                                                16,
-                                            color:
-                                                Colors.red,
-                                          ),
-                                          filled:
-                                              true),
-                                  obscureText:
-                                      isPassword,
-                                  keyboardType:
-                                      TextInputType
-                                          .visiblePassword,
-                                  controller:
-                                      passwordController,
+                                  decoration: InputDecoration(
+                                      prefixIcon: Icon(Icons.vpn_key),
+                                      border: InputBorder.none,
+                                      suffixIcon: IconButton(
+                                        icon: isPassword
+                                            ? Icon(Icons.visibility_off)
+                                            : Icon(Icons.visibility),
+                                        onPressed: () => setState(
+                                            () => isPassword = !isPassword),
+                                      ),
+                                      fillColor: Color(0xfff3f3f4),
+                                      errorText: sPass,
+                                      errorStyle: GoogleFonts.roboto(
+                                        fontSize: 16,
+                                        color: Colors.red,
+                                      ),
+                                      filled: true),
+                                  obscureText: isPassword,
+                                  keyboardType: TextInputType.visiblePassword,
+                                  controller: passwordController,
                                 )
                               ],
                             ),
@@ -374,61 +298,43 @@ class _SignUpPageState extends State<SignUpPage> {
                         height: 10,
                       ),
                       RichText(
-                        textAlign:
-                            TextAlign.center,
+                        textAlign: TextAlign.center,
                         text: TextSpan(
-                          style:
-                              GoogleFonts.roboto(
-                                  fontSize: 15,
-                                  color: Palette
-                                      .WHITE),
+                          style: GoogleFonts.roboto(
+                              fontSize: 15, color: Palette.WHITE),
                           children: <TextSpan>[
                             TextSpan(
-                              text:
-                                  'By signing up you agree to our ',
+                              text: 'By signing up you agree to our ',
                             ),
                             TextSpan(
-                                text:
-                                    'Terms of Service',
-                                style: GoogleFonts
-                                    .roboto(
-                                  color:
-                                      Colors.blue,
+                                text: 'Terms of Service',
+                                style: GoogleFonts.roboto(
+                                  color: Colors.blue,
                                   fontSize: 15,
                                 ),
-                                recognizer:
-                                    TapGestureRecognizer()
-                                      ..onTap =
-                                          () {
-                                        print(
-                                            'Terms of Service"');
-                                        urllauncher(
-                                            "https://econoapps.com/term-of-service");
-                                      }),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    print('Terms of Service"');
+                                    urllauncher(
+                                        "https://econoapps.com/term-of-service");
+                                  }),
                             TextSpan(
-                              text:
-                                  ' and that you have read our ',
+                              text: ' and that you have read our ',
                             ),
                             TextSpan(
-                                text:
-                                    'Privacy Policy',
-                                style: GoogleFonts
-                                    .roboto(
-                                  color:
-                                      Colors.blue,
+                                text: 'Privacy Policy',
+                                style: GoogleFonts.roboto(
+                                  color: Colors.blue,
                                   fontSize: 15,
                                   // fontStyle:
                                   //     FontStyle.italic,
                                 ),
-                                recognizer:
-                                    TapGestureRecognizer()
-                                      ..onTap =
-                                          () {
-                                        print(
-                                            'Privacy Policy');
-                                        urllauncher(
-                                            "https://econoapps.com/privacy-and-policy");
-                                      }),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    print('Privacy Policy');
+                                    urllauncher(
+                                        "https://econoapps.com/privacy-and-policy");
+                                  }),
                           ],
                         ),
                       ),
@@ -449,16 +355,13 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget returnOTPScreen() {
-    CollectionReference users =
-        _firestore.collection('users');
-    var phoneNumber = '+855 ' +
-        phoneNumberController.text.toString();
+    CollectionReference users = _firestore.collection('users');
+    var phoneNumber = '+855 ' + phoneNumberController.text.toString();
     Random random = new Random();
     int randomNumber = random.nextInt(8);
 
     UserModel userModel = UserModel(
-      phoneNumber:
-          phoneNumberController.text.trim(),
+      phoneNumber: phoneNumberController.text.trim(),
       userName: "@" + nameController.text.trim(),
       bio: 'Edit profile to update bio',
       displayName: nameController.text.trim(),
@@ -466,8 +369,7 @@ class _SignUpPageState extends State<SignUpPage> {
       isVerified: false,
       password: passwordController.text.trim(),
     );
-    return Consumer<App>(
-        builder: (context, user, child) {
+    return Consumer<App>(builder: (context, user, child) {
       return Scaffold(
         key: _scaffoldKey,
         appBar: new AppBar(
@@ -475,221 +377,187 @@ class _SignUpPageState extends State<SignUpPage> {
           backgroundColor: Palette.PrimaryColor,
         ),
         body: Consumer<App>(
-            builder:
-                (context, App, child) =>
-                    (ListView(children: [
-                      Form(
-                        key: _formKeyOTP,
-                        child: Column(
-                          crossAxisAlignment:
-                              CrossAxisAlignment
-                                  .center,
-                          children: [
-                            Container(
+            builder: (context, App, child) => (ListView(children: [
+                  Form(
+                    key: _formKeyOTP,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                            child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 10.0),
+                                child: Text(
+                                    !App.isLoading
+                                        ? "Enter OTP from SMS"
+                                        : "Sending OTP code SMS",
+                                    style: Text_Style.Normal,
+                                    textAlign: TextAlign.center))),
+                        !App.isLoading
+                            ? Container(
                                 child: Padding(
-                                    padding: const EdgeInsets
-                                            .symmetric(
-                                        vertical:
-                                            10.0,
-                                        horizontal:
-                                            10.0),
-                                    child: Text(
-                                        !App.isLoading
-                                            ? "Enter OTP from SMS"
-                                            : "Sending OTP code SMS",
-                                        style: Text_Style
-                                            .Normal,
-                                        textAlign:
-                                            TextAlign
-                                                .center))),
-                            !App.isLoading
-                                ? Container(
-                                    child:
-                                        Padding(
-                                    padding: const EdgeInsets
-                                            .symmetric(
-                                        vertical:
-                                            10.0,
-                                        horizontal:
-                                            10.0),
-                                    child:
-                                        TextFormField(
-                                      enabled: !App
-                                          .isLoading,
-                                      controller:
-                                          otpController,
-                                      keyboardType:
-                                          TextInputType
-                                              .number,
-                                      inputFormatters: <
-                                          TextInputFormatter>[
-                                        FilteringTextInputFormatter
-                                            .digitsOnly
-                                      ],
-                                      initialValue:
-                                          null,
-                                      autofocus:
-                                          true,
-                                      decoration: InputDecoration(
-                                          labelText:
-                                              'OTP',
-                                          labelStyle:
-                                              TextStyle(color: Palette.BLACK)),
-                                      validator:
-                                          (value) {
-                                        if (value!
-                                            .isEmpty) {
-                                          return 'Please enter OTP';
-                                        }
-                                      },
-                                    ),
-                                  ))
-                                : Container(),
-                            !App.isLoading
-                                ? Container(
-                                    margin: EdgeInsets
-                                        .only(
-                                            top:
-                                                40,
-                                            bottom:
-                                                5),
-                                    child:
-                                        Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal:
-                                                    10.0),
-                                            child:
-                                                new ElevatedButton(
-                                              onPressed:
-                                                  () async {
-                                                try {
-                                                  await _auth.signInWithCredential(PhoneAuthProvider.credential(verificationId: App.VerificationCode, smsCode: otpController.text.trim())).then((user) async => {
-                                                        //sign in was success
-                                                        // ignore: unnecessary_null_comparison
-                                                        if (user != null)
-                                                          {
-                                                            //store registration details in firestore database
-                                                            await users.doc(_auth.currentUser!.uid).set(userModel.toJson(), SetOptions(merge: true)).then((value) => {
-                                                                  App.Loading(false),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 10.0),
+                                child: TextFormField(
+                                  enabled: !App.isLoading,
+                                  controller: otpController,
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
+                                  initialValue: null,
+                                  autofocus: true,
+                                  decoration: InputDecoration(
+                                      labelText: 'OTP',
+                                      labelStyle:
+                                          TextStyle(color: Palette.BLACK)),
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return 'Please enter OTP';
+                                    }
+                                  },
+                                ),
+                              ))
+                            : Container(),
+                        !App.isLoading
+                            ? Container(
+                                margin: EdgeInsets.only(top: 40, bottom: 5),
+                                child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0),
+                                    child: new ElevatedButton(
+                                      onPressed: () async {
+                                        try {
+                                          await _auth
+                                              .signInWithCredential(
+                                                  PhoneAuthProvider.credential(
+                                                      verificationId:
+                                                          App.VerificationCode,
+                                                      smsCode: otpController
+                                                          .text
+                                                          .trim()))
+                                              .then((user) async => {
+                                                    //sign in was success
+                                                    // ignore: unnecessary_null_comparison
+                                                    if (user != null)
+                                                      {
+                                                        //store registration details in firestore database
+                                                        await users
+                                                            .doc(_auth
+                                                                .currentUser!
+                                                                .uid)
+                                                            .set(
+                                                                userModel
+                                                                    .toJson(),
+                                                                SetOptions(
+                                                                    merge:
+                                                                        true))
+                                                            .then((value) => {
+                                                                  App.Loading(
+                                                                      false),
                                                                 }),
 
-                                                            App.Loading(false),
+                                                        App.Loading(false),
 
-                                                            Navigator.pushAndRemoveUntil(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                builder: (BuildContext context) => homeScreen(),
-                                                              ),
-                                                              (route) => false,
-                                                            )
-                                                          }
-                                                      });
-                                                } catch (e) {
-                                                  App.Loading(false);
-                                                }
-                                              },
-                                              child:
-                                                  new Container(
-                                                padding: const EdgeInsets.symmetric(
-                                                  vertical: 15.0,
-                                                  horizontal: 10,
-                                                ),
-                                                child: new Row(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    new Expanded(
-                                                      child: Text(
-                                                        "Submit",
-                                                        // ignore: unnecessary_null_comparison
-                                                        textAlign: TextAlign.center,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            )))
-                                : Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment
-                                            .start,
-                                    children: <
-                                        Widget>[
-                                        Row(
+                                                        Navigator
+                                                            .pushAndRemoveUntil(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (BuildContext
+                                                                    context) =>
+                                                                homeScreen(),
+                                                          ),
+                                                          (route) => false,
+                                                        )
+                                                      }
+                                                  });
+                                        } catch (e) {
+                                          App.Loading(false);
+                                        }
+                                      },
+                                      child: new Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0,
+                                          horizontal: 10,
+                                        ),
+                                        child: new Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
                                           children: <Widget>[
-                                            CircularProgressIndicator(
-                                              backgroundColor:
-                                                  Palette.PrimaryColor,
-                                            )
-                                          ]
-                                              .where((c) =>
-                                                  // ignore: unnecessary_null_comparison
-                                                  c != null)
-                                              .toList(),
+                                            new Expanded(
+                                              child: Text(
+                                                "Submit",
+                                                // ignore: unnecessary_null_comparison
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )))
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        CircularProgressIndicator(
+                                          backgroundColor: Palette.PrimaryColor,
                                         )
-                                      ]),
-                            isResend
-                                ? Container(
-                                    color: Palette
-                                        .PrimaryColor,
-                                    margin: EdgeInsets
-                                        .only(
-                                            top:
-                                                40,
-                                            bottom:
-                                                5),
-                                    child: Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                        child: new ElevatedButton(
-                                          onPressed:
-                                              () async {
-                                            // setState(() {
-                                            //   isResend =
-                                            //       false;
-                                            //   isLoading =
-                                            //       true;
-                                            // });
-                                            App.Loading(
-                                                false);
-                                            await Auth().signUp(
-                                                userModel,
-                                                context,
-                                                phoneNumber);
-                                          },
-                                          child:
-                                              new Container(
-                                            color:
-                                                Palette.PrimaryColor,
-                                            padding:
-                                                const EdgeInsets.symmetric(
-                                              vertical:
-                                                  15.0,
-                                              horizontal:
-                                                  15.0,
+                                      ]
+                                          .where((c) =>
+                                              // ignore: unnecessary_null_comparison
+                                              c != null)
+                                          .toList(),
+                                    )
+                                  ]),
+                        isResend
+                            ? Container(
+                                color: Palette.PrimaryColor,
+                                margin: EdgeInsets.only(top: 40, bottom: 5),
+                                child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0),
+                                    child: new ElevatedButton(
+                                      onPressed: () async {
+                                        // setState(() {
+                                        //   isResend =
+                                        //       false;
+                                        //   isLoading =
+                                        //       true;
+                                        // });
+                                        App.Loading(false);
+                                        await Auth().signUp(
+                                            userModel, context, phoneNumber);
+                                      },
+                                      child: new Container(
+                                        color: Palette.PrimaryColor,
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0,
+                                          horizontal: 15.0,
+                                        ),
+                                        child: new Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            new Expanded(
+                                              child: Text(
+                                                "Resend Code",
+                                                textAlign: TextAlign.center,
+                                              ),
                                             ),
-                                            child:
-                                                new Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: <Widget>[
-                                                new Expanded(
-                                                  child: Text(
-                                                    "Resend Code",
-                                                    textAlign: TextAlign.center,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        )))
-                                : Column()
-                          ],
-                        ),
-                      )
-                    ]))),
+                                          ],
+                                        ),
+                                      ),
+                                    )))
+                            : Column()
+                      ],
+                    ),
+                  )
+                ]))),
       );
     });
   }
@@ -700,15 +568,12 @@ class _SignUpPageState extends State<SignUpPage> {
     Apps.OTPScreen(true);
     var username = nameController.text.trim();
     // ignore: non_constant_identifier_names
-    var Number =
-        phoneNumberController.text.trim();
+    var Number = phoneNumberController.text.trim();
     var pass = passwordController.text.trim();
-    var phoneNumber = '+855 ' +
-        phoneNumberController.text.trim();
+    var phoneNumber = '+855 ' + phoneNumberController.text.trim();
 
     UserModel userModel = UserModel(
-      phoneNumber:
-          phoneNumberController.text.trim(),
+      phoneNumber: phoneNumberController.text.trim(),
       userName: "@" + nameController.text.trim(),
       bio: 'Edit profile to update bio',
       displayName: nameController.text.trim(),
@@ -723,8 +588,7 @@ class _SignUpPageState extends State<SignUpPage> {
         .then((result) {
       if (result.docs.length > 0) {
         setState(() {
-          sNumber =
-              "Phonenumber is already registered.";
+          sNumber = "Phonenumber is already registered.";
         });
       } else {
         Apps.Register(false);
@@ -743,8 +607,7 @@ class _SignUpPageState extends State<SignUpPage> {
         .get()
         .then((result) {
       if (result.docs.length > 0) {
-        sUsername =
-            "Username is already taken. Please choose another name";
+        sUsername = "Username is already taken. Please choose another name";
       } else {
         Apps.Register(false);
         Apps.OTPScreen(true);
