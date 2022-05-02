@@ -15,14 +15,12 @@ import 'package:provider/provider.dart';
 // ignore: camel_case_types
 
 class profile_sidebar extends StatelessWidget {
-  const profile_sidebar({Key? key})
-      : super(key: key);
+  const profile_sidebar({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Auth _user = Auth();
     getUser(context);
-    return Consumer<usermodel>(
-        builder: (context, usermodel, child) {
+    return Consumer<usermodel>(builder: (context, usermodel, child) {
       return Drawer(
         child: Material(
           color: Palette.WHITE,
@@ -32,96 +30,68 @@ class profile_sidebar extends StatelessWidget {
                 height: 30,
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(
-                        horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
-                  crossAxisAlignment:
-                      CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment
-                              .spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
                           width: 42,
                           height: 42,
-                          decoration:
-                              BoxDecoration(
+                          decoration: BoxDecoration(
                             color: Palette.BLACK,
-                            shape:
-                                BoxShape.circle,
+                            shape: BoxShape.circle,
                           ),
                           child: ClipRRect(
-                            borderRadius:
-                                BorderRadius
-                                    .circular(
+                            borderRadius: BorderRadius.circular(
                               42 / 2,
                             ),
-                            child:
-                                CachedNetworkImage(
-                              imageUrl:
-                                  dummyProfile,
-                              placeholder: (context,
-                                      url) =>
+                            child: CachedNetworkImage(
+                              imageUrl: dummyProfile,
+                              placeholder: (context, url) =>
                                   CircularProgressIndicator(),
-                              errorWidget:
-                                  (context, url,
-                                          error) =>
-                                      Icon(Icons
-                                          .error),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
                               fit: BoxFit.cover,
                             ),
                           ),
                         ),
                         IconButton(
                             onPressed: () {
-                              Navigator.of(
-                                      context)
-                                  .pop();
+                              Navigator.of(context).pop();
                             },
-                            icon:
-                                Icon(Icons.close))
+                            icon: Icon(Icons.close))
                       ],
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment
-                              .spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           children: [
                             Text(
-                              usermodel
-                                  .displayName!,
+                              usermodel.displayName!,
                               style: TextStyle(
-                                  color: Palette
-                                      .BLACK,
-                                  fontWeight:
-                                      FontWeight
-                                          .bold,
+                                  color: Palette.BLACK,
+                                  fontWeight: FontWeight.bold,
                                   fontSize: 18),
                             ),
                             Text(
                               usermodel.userName!,
                               style: TextStyle(
-                                  color:
-                                      Colors.grey,
+                                  color: Colors.grey,
                                   fontSize: 14,
-                                  fontWeight:
-                                      FontWeight
-                                          .normal),
+                                  fontWeight: FontWeight.normal),
                             ),
                           ],
                         ),
                         IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons
-                                .arrow_drop_down)),
+                            icon: Icon(Icons.arrow_drop_down)),
                       ],
                     ),
                     SizedBox(
@@ -132,12 +102,9 @@ class profile_sidebar extends StatelessWidget {
                         Text(
                           "5" + " Fans",
                           style: TextStyle(
-                              color:
-                                  Palette.BLACK,
+                              color: Palette.BLACK,
                               fontSize: 14,
-                              fontWeight:
-                                  FontWeight
-                                      .normal),
+                              fontWeight: FontWeight.normal),
                         ),
                         SizedBox(
                           width: 5,
@@ -145,12 +112,9 @@ class profile_sidebar extends StatelessWidget {
                         Text(
                           "20" + " Following",
                           style: TextStyle(
-                              color:
-                                  Palette.BLACK,
+                              color: Palette.BLACK,
                               fontSize: 14,
-                              fontWeight:
-                                  FontWeight
-                                      .normal),
+                              fontWeight: FontWeight.normal),
                         )
                       ],
                     )
@@ -168,8 +132,7 @@ class profile_sidebar extends StatelessWidget {
               buildMenuItem(
                 "My Profile",
                 Icons.account_circle,
-                onClicked: () =>
-                    selectItem(context, 0),
+                onClicked: () => selectItem(context, 0),
               ),
               SizedBox(
                 height: 5,
@@ -177,8 +140,7 @@ class profile_sidebar extends StatelessWidget {
               buildMenuItem(
                 "Settings",
                 Icons.settings,
-                onClicked: () =>
-                    selectItem(context, 1),
+                onClicked: () => selectItem(context, 1),
               ),
               Divider(
                 height: 10,
@@ -188,14 +150,12 @@ class profile_sidebar extends StatelessWidget {
               buildMenuItem(
                 "Your Cards",
                 Icons.credit_card,
-                onClicked: () =>
-                    selectItem(context, 2),
+                onClicked: () => selectItem(context, 2),
               ),
               buildMenuItem(
                 "Your Banks",
                 Icons.account_balance,
-                onClicked: () =>
-                    selectItem(context, 3),
+                onClicked: () => selectItem(context, 3),
               ),
               Divider(
                 height: 10,
@@ -205,14 +165,12 @@ class profile_sidebar extends StatelessWidget {
               buildMenuItem(
                 "Help and Support",
                 Icons.help,
-                onClicked: () =>
-                    selectItem(context, 4),
+                onClicked: () => selectItem(context, 4),
               ),
               buildMenuItem(
                 "Darkmode",
-                Icons.nightlight,
-                onClicked: () =>
-                    selectItem(context, 5),
+                Icons.nightlife,
+                onClicked: () => selectItem(context, 5),
               ),
               buildMenuItem(
                 "English",
@@ -224,8 +182,7 @@ class profile_sidebar extends StatelessWidget {
                       color: Palette.BLACK,
                       size: 22,
                     )),
-                onClicked: () =>
-                    selectItem(context, 6),
+                onClicked: () => selectItem(context, 6),
               ),
               Divider(
                 height: 10,
@@ -235,8 +192,7 @@ class profile_sidebar extends StatelessWidget {
               buildMenuItem(
                 "Logout",
                 Icons.logout,
-                onClicked: () =>
-                    selectItem(context, 7),
+                onClicked: () => selectItem(context, 7),
               ),
             ],
           ),
@@ -246,18 +202,12 @@ class profile_sidebar extends StatelessWidget {
   }
 
   getUser(BuildContext context) async {
-    App app =
-        Provider.of<App>(context, listen: false);
-    usermodel user = Provider.of<usermodel>(
-        context,
-        listen: false);
-    var collection = FirebaseFirestore.instance
-        .collection('users');
-    var docSnapshot =
-        await collection.doc(app.docid_num).get();
+    App app = Provider.of<App>(context, listen: false);
+    usermodel user = Provider.of<usermodel>(context, listen: false);
+    var collection = FirebaseFirestore.instance.collection('users');
+    var docSnapshot = await collection.doc(app.docid_num).get();
     if (docSnapshot.exists) {
-      Map<String, dynamic>? data =
-          docSnapshot.data();
+      Map<String, dynamic>? data = docSnapshot.data();
 
       user.getUsername(data?['userName']);
       user.getDisplayName(data?['displayName']);
@@ -267,8 +217,7 @@ class profile_sidebar extends StatelessWidget {
   }
 
   Widget buildMenuItem(String text, IconData icon,
-      {IconButton? dropdown,
-      VoidCallback? onClicked}) {
+      {IconButton? dropdown, VoidCallback? onClicked}) {
     final color = Palette.BLACK;
     final hoverColor = Colors.black12;
 
@@ -291,25 +240,20 @@ class profile_sidebar extends StatelessWidget {
 selectItem(BuildContext context, int i) {
   switch (i) {
     case 0:
-      Navigator.of(context).push(
-          MaterialPageRoute(
-              builder: (context) =>
-                  my_profile()));
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => my_profile()));
       break;
     case 1:
-      Navigator.of(context).push(
-          MaterialPageRoute(
-              builder: (context) => setting()));
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => setting()));
       break;
     case 2:
-      Navigator.of(context).push(
-          MaterialPageRoute(
-              builder: (context) => payment()));
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => payment()));
       break;
     case 3:
-      Navigator.of(context).push(
-          MaterialPageRoute(
-              builder: (context) => payment()));
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => payment()));
       break;
     case 4:
       print("Support");
