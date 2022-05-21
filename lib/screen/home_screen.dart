@@ -5,10 +5,13 @@ import 'package:myfan/screen/pages/explore.dart';
 import 'package:myfan/screen/pages/feeds.dart';
 import 'package:myfan/screen/pages/message.dart';
 import 'package:myfan/screen/pages/notification.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:myfan/services/app.dart';
 import 'package:myfan/widgets/bottomappbar.dart';
 import 'package:provider/provider.dart';
+
+import '../main.dart';
 
 var index = 3;
 var dummyImage =
@@ -18,13 +21,12 @@ var dummyProfile =
 String Caivy =
     "https://cdn.myanimelist.net/images/userimages/7597522.jpg?t=1638014400";
 
-final FirebaseFirestore _firestore =
-    FirebaseFirestore.instance;
+final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 PageController pageController = PageController();
 
-CollectionReference<Map<String, dynamic>>
-    collection = _firestore.collection('user');
+CollectionReference<Map<String, dynamic>> collection =
+    _firestore.collection('user');
 String username = "";
 String atUsername = "";
 
@@ -33,8 +35,7 @@ class homeScreen extends StatefulWidget {
   homeScreen();
 
   @override
-  _homeScreenState createState() =>
-      _homeScreenState();
+  _homeScreenState createState() => _homeScreenState();
 }
 
 // ignore: camel_case_types
@@ -44,6 +45,47 @@ class _homeScreenState extends State<homeScreen> {
   @override
   void initState() {
     super.initState();
+    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    //   RemoteNotification? notification = message.notification;
+    //   AndroidNotification? android = message.notification?.android;
+    //   if (notification != null && android != null) {
+    //     flutterLocalNotificationsPlugin.show(
+    //         notification.hashCode,
+    //         notification.title,
+    //         notification.body,
+    //         NotificationDetails(
+    //           android: AndroidNotificationDetails(
+    //             channel.id,
+    //             channel.name,
+    //             channel.description,
+    //             color: Colors.blue,
+    //             playSound: true,
+    //             icon: '@mipmap/ic_launcher',
+    //           ),
+    //         ));
+    //   }
+    // });
+
+    // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    //   print('A new onMessageOpenedApp event was published!');
+    //   RemoteNotification? notification = message.notification;
+    //   AndroidNotification? android = message.notification?.android;
+    //   if (notification != null && android != null) {
+    //     showDialog(
+    //         context: context,
+    //         builder: (_) {
+    //           return AlertDialog(
+    //             title: Text(notification.title!),
+    //             content: SingleChildScrollView(
+    //               child: Column(
+    //                 crossAxisAlignment: CrossAxisAlignment.start,
+    //                 children: [Text(notification.body!)],
+    //               ),
+    //             ),
+    //           );
+    //         });
+    //   }
+    // });
   }
 
   @override
