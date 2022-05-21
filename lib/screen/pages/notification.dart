@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myfan/config/global.dart';
-import 'package:myfan/models/notification_model.dart';
+import 'package:myfan/models/notification_management.dart';
 import 'package:myfan/screen/home_screen.dart';
 import 'package:myfan/services/noti.dart';
 import 'package:myfan/services/usermodel.dart';
