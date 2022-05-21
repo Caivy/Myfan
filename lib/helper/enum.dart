@@ -16,9 +16,8 @@ enum SortUser {
 enum NotificationType {
   NOT_DETERMINED,
   Message,
-  Tweet,
-  Reply,
-  Retweet,
+  Comment,
+  Share,
   Follow,
   Mention,
   Like

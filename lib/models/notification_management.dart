@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:myfan/config/global.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:myfan/helper/enum.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart';
 
@@ -31,6 +32,52 @@ Widget user_notification(
 }
 
 class SendNotification {
+  Future<void> messageNotificationClassifier(NotificationType notificationTypes,
+      {String textMsg = "",
+      required String connectionToken,
+      required String currAccountUserName}) async {
+    switch (notificationTypes) {
+      case NotificationType.NOT_DETERMINED:
+        break;
+      case NotificationType.Message:
+        await sendNotification(
+            token: connectionToken,
+            title: "$currAccountUserName Send a Message",
+            body: textMsg);
+        break;
+      case NotificationType.Comment:
+        await sendNotification(
+            token: connectionToken,
+            title: "$currAccountUserName Comment on your messages",
+            body: "");
+        break;
+      case NotificationType.Share:
+        await sendNotification(
+            token: connectionToken,
+            title: "$currAccountUserName Share your post",
+            body: "");
+        break;
+      case NotificationType.Follow:
+        await sendNotification(
+            token: connectionToken,
+            title: "$currAccountUserName has followed you",
+            body: "");
+        break;
+      case NotificationType.Mention:
+        await sendNotification(
+            token: connectionToken,
+            title: "$currAccountUserName mention you",
+            body: "");
+        break;
+      case NotificationType.Like:
+        await sendNotification(
+            token: connectionToken,
+            title: "$currAccountUserName Like your post",
+            body: "");
+        break;
+    }
+  }
+
   Future<int> sendNotification(
       {required String token,
       required String title,
