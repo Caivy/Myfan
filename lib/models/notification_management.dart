@@ -49,7 +49,7 @@ class SendNotification {
         await sendNotification(
             token: connectionToken,
             title: "$currAccountUserName Comment on your messages",
-            body: "");
+            body: textMsg);
         break;
       case NotificationType.Share:
         await sendNotification(
@@ -61,19 +61,19 @@ class SendNotification {
         await sendNotification(
             token: connectionToken,
             title: "$currAccountUserName has followed you",
-            body: "");
+            body: textMsg);
         break;
       case NotificationType.Mention:
         await sendNotification(
             token: connectionToken,
             title: "$currAccountUserName mention you",
-            body: "");
+            body: textMsg);
         break;
       case NotificationType.Like:
         await sendNotification(
             token: connectionToken,
             title: "$currAccountUserName Like your post",
-            body: "");
+            body: textMsg);
         break;
     }
   }

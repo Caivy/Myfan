@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:myfan/config/global.dart';
+import 'package:myfan/helper/enum.dart';
+import 'package:myfan/models/notification_management.dart';
 import 'package:myfan/screen/profile_sidebar.dart';
 import 'package:myfan/services/app.dart';
 import 'package:myfan/services/post.dart';
 
 import 'package:provider/provider.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import '../home_screen.dart';
 
@@ -23,12 +26,10 @@ class feed extends StatefulWidget {
 }
 
 class _feedState extends State<feed> {
-  final GlobalKey<ScaffoldState> _scaffoldKey =
-      GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    final height =
-        MediaQuery.of(context).size.height;
+    final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     double avatarDia = 44;
     return Scaffold(
@@ -42,12 +43,10 @@ class _feedState extends State<feed> {
             Expanded(
               flex: 5,
               child: Padding(
-                padding: const EdgeInsets.only(
-                    left: 15.0),
+                padding: const EdgeInsets.only(left: 15.0),
                 child: GestureDetector(
                   onTap: () {
-                    _scaffoldKey.currentState!
-                        .openDrawer();
+                    _scaffoldKey.currentState!.openDrawer();
                   },
                   child: Container(
                     width: avatarDia,
@@ -57,18 +56,14 @@ class _feedState extends State<feed> {
                       shape: BoxShape.circle,
                     ),
                     child: ClipRRect(
-                      borderRadius:
-                          BorderRadius.circular(
+                      borderRadius: BorderRadius.circular(
                         avatarDia / 2,
                       ),
                       child: CachedNetworkImage(
                         imageUrl: Caivy,
-                        placeholder: (context,
-                                url) =>
+                        placeholder: (context, url) =>
                             CircularProgressIndicator(),
-                        errorWidget:
-                            (context, url, error) =>
-                                Icon(Icons.error),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -79,8 +74,7 @@ class _feedState extends State<feed> {
           ],
         ),
         title: Row(
-          mainAxisAlignment:
-              MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(children: [
               SizedBox(width: 8),
@@ -93,8 +87,7 @@ class _feedState extends State<feed> {
               ),
             ]),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: .10),
+              padding: const EdgeInsets.symmetric(horizontal: .10),
               child: IconButton(
                 icon: Icon(Icons.search_outlined),
                 color: Palette.BLACK,
@@ -116,14 +109,12 @@ class _feedState extends State<feed> {
     const double avatarDia = 48;
     _getData();
     return Row(
-      mainAxisAlignment:
-          MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: 15, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               child: Container(
                 width: avatarDia,
                 height: avatarDia,
@@ -132,17 +123,13 @@ class _feedState extends State<feed> {
                   shape: BoxShape.circle,
                 ),
                 child: ClipRRect(
-                  borderRadius:
-                      BorderRadius.circular(
+                  borderRadius: BorderRadius.circular(
                     avatarDia / 2,
                   ),
                   child: CachedNetworkImage(
                     imageUrl: dummyProfile,
-                    placeholder: (context, url) =>
-                        CircularProgressIndicator(),
-                    errorWidget:
-                        (context, url, error) =>
-                            Icon(Icons.error),
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -170,8 +157,7 @@ class _feedState extends State<feed> {
                     style: GoogleFonts.roboto(
                         color: Palette.BLACK,
                         fontSize: 16,
-                        fontWeight:
-                            FontWeight.normal),
+                        fontWeight: FontWeight.normal),
                   ),
                 ),
               ],
@@ -179,14 +165,11 @@ class _feedState extends State<feed> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: IconButton(
-            padding:
-                EdgeInsets.symmetric(horizontal: 5),
+            padding: EdgeInsets.symmetric(horizontal: 5),
             iconSize: 30,
-            icon:
-                Icon(LineIcons.horizontalEllipsis),
+            icon: Icon(LineIcons.horizontalEllipsis),
             onPressed: () {},
           ),
         )
@@ -206,8 +189,7 @@ class _feedState extends State<feed> {
 
   Widget _PostCaption() {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: 15, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
       child: Text(
         "Yo this is a testing caption for posts",
         style: Text_Style.Normal,
@@ -216,6 +198,8 @@ class _feedState extends State<feed> {
   }
 
   Widget _PostEng() {
+    String fcmToken = FirebaseMessaging.instance.getToken() as String;
+    App app = Provider.of<App>(context, listen: false);
     return Consumer<Post>(
       builder: (context, post, child) => Column(
         children: [
@@ -224,17 +208,20 @@ class _feedState extends State<feed> {
               SizedBox(
                 width: 10,
               ),
-              Text(post.heart.toString(),
-                  style: Text_Style.Normal),
+              Text(post.heart.toString(), style: Text_Style.Normal),
               IconButton(
                 iconSize: 27,
                 icon: Icon(
                   LineIcons.heartAlt,
-                  color: is_heart
-                      ? Palette.BLACK
-                      : Colors.red,
+                  color: is_heart ? Palette.BLACK : Colors.red,
                 ),
                 onPressed: () {
+                  _getData();
+                  var sendNotification = SendNotification();
+                  sendNotification.messageNotificationClassifier(
+                      NotificationType.Like,
+                      connectionToken: fcmToken,
+                      currAccountUserName: app.usernmae);
                   is_heart = false;
                   print("Hearted");
                   post.Heart(1);
@@ -243,8 +230,7 @@ class _feedState extends State<feed> {
               SizedBox(
                 width: 10,
               ),
-              Text(post.comment.toString(),
-                  style: Text_Style.Normal),
+              Text(post.comment.toString(), style: Text_Style.Normal),
               IconButton(
                 iconSize: 26,
                 icon: Icon(Icons.mode_comment),
@@ -272,8 +258,7 @@ class _feedState extends State<feed> {
       left: true,
       right: true,
       child: Column(
-        crossAxisAlignment:
-            CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _postAuthorRow(),
           SizedBox(
@@ -297,25 +282,20 @@ class _feedState extends State<feed> {
 
   Widget _postListView() {
     return Consumer<Post>(
-      builder: (context, post, child) =>
-          ListView.builder(
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                return _postView();
-              }),
+      builder: (context, post, child) => ListView.builder(
+          itemCount: 3,
+          itemBuilder: (context, index) {
+            return _postView();
+          }),
     );
   }
 
   Future _getData() async {
-    App app =
-        Provider.of<App>(context, listen: false);
-    var collection = FirebaseFirestore.instance
-        .collection('users');
-    var docSnapshot =
-        await collection.doc(app.docid_num).get();
+    App app = Provider.of<App>(context, listen: false);
+    var collection = FirebaseFirestore.instance.collection('users');
+    var docSnapshot = await collection.doc(app.docid_num).get();
     if (docSnapshot.exists) {
-      Map<String, dynamic>? data =
-          docSnapshot.data();
+      Map<String, dynamic>? data = docSnapshot.data();
       setState(() {
         username = data?['displayName'];
         atUsername = data?['userName'];
