@@ -4,8 +4,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 class ForegroundNotificationManagement {
   AndroidNotificationChannel channel = AndroidNotificationChannel(
       'high_importance_channel', // id
-      'High Importance Notifications', // title
-      'This channel is used for important notifications.', // description
+      'High Importance Notifications', // title // description
       importance: Importance.high,
       playSound: true);
 
@@ -45,7 +44,6 @@ class ForegroundNotificationManagement {
         android: AndroidNotificationDetails(
           channel.id,
           channel.name,
-          channel.description,
           color: Colors.blue,
           playSound: true,
           icon: '@mipmap/ic_launcher',
@@ -56,7 +54,6 @@ class ForegroundNotificationManagement {
         android: AndroidNotificationDetails(
           channel.id,
           channel.name,
-          channel.description,
           color: Colors.blue,
           playSound: true,
           icon: '@mipmap/ic_launcher',
